@@ -60,7 +60,7 @@ p{margin:0 0 1em}
 @keyframes viewIn{from{opacity:0;transform:translateY(8px)}}
 
 /* Gateway (home) */
-.gateway{min-height:calc(100svh - 60px - 53px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:56px;padding:64px var(--gutter);text-align:center}
+.gateway{min-height:calc(100svh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:56px;padding:64px var(--gutter);text-align:center}
 .eyebrow{font:500 11px/1 var(--mono);letter-spacing:.32em;text-transform:uppercase;color:var(--accent)}
 .gateway-name{margin-top:-28px;font:500 12px/1.6 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .gateway-name strong{display:block;font:600 clamp(26px,3.4vw,36px)/1.1 var(--head);letter-spacing:-.03em;text-transform:none;color:var(--ink);margin-bottom:8px}
@@ -83,7 +83,8 @@ p{margin:0 0 1em}
 .btn-line{border:1px solid var(--line);padding:13px 19px}
 
 /* Approach layout */
-.page-intro{padding:88px 0 40px}
+.page-intro{padding-top:88px;padding-bottom:40px}
+#approach{border-top:1px solid var(--line)}
 .page-intro h1{font-size:clamp(40px,5.6vw,68px);max-width:15ch;margin-bottom:40px}
 .split{display:grid;grid-template-columns:220px 1fr;gap:32px 56px}
 .label{font:400 11px/1.6 var(--mono);letter-spacing:.06em;color:var(--muted)}
@@ -335,7 +336,6 @@ p{margin:0 0 1em}
     <a class="brand" href="#home" aria-label="Jason Grant, home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Jason Grant</span></a>
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a class="nav-link tracker" href="#home" data-route="home">Home</a>
-      <a class="nav-link tracker" href="#approach" data-route="approach">Approach</a>
       <a class="nav-link tracker" href="#work" data-route="work">Work</a>
       <a class="nav-link tracker" href="#blog" data-route="blog">Blog</a>
       <a class="nav-link tracker" href="index.html">Version A</a>
@@ -348,8 +348,8 @@ p{margin:0 0 1em}
 <main id="main">
 
 <!-- ============ HOME (gateway) ============ -->
-<section class="view" id="home" data-view="home" aria-label="Home">
-  <div class="gateway">
+<div class="view" id="home" data-view="home">
+  <section class="gateway" aria-label="Welcome">
     <div class="eyebrow">Portfolio · Version B</div>
     <div class="mark" aria-hidden="true"><div class="glow"></div><div class="sun-well"><div class="sun"></div></div></div>
     <p class="gateway-name"><strong>Jason Grant</strong>Web developer · MarTech specialist · Agentic AI workflows</p>
@@ -358,11 +358,10 @@ p{margin:0 0 1em}
       <a class="btn" href="#work"><span class="swap"><span class="col"><span class="t">Selected work</span><span class="t">Selected work</span></span></span><span class="arr">→</span></a>
       <a class="btn" href="#blog"><span class="swap"><span class="col"><span class="t">Read the blog</span><span class="t">Read the blog</span></span></span><span class="arr">→</span></a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ APPROACH (main content) ============ -->
-<div class="view" id="approach" data-view="approach">
+<!-- ============ HOMEPAGE CONTENT ============ -->
+<div id="approach">
   <section class="wrap page-intro" aria-label="Introduction">
     <h1 class="reveal">Web builds that ship faster and convert better.</h1>
     <div class="split">
@@ -550,6 +549,7 @@ p{margin:0 0 1em}
     </div>
   </section>
 </div>
+</div>
 
 <!-- ============ BLOG INDEX ============ -->
 <section class="view" id="blog" data-view="blog" aria-labelledby="blog-h">
@@ -628,12 +628,13 @@ branch protection), stop and report it.</span></code></pre>
           <tr><td><a href="https://github.com/jasong3012/web-development-portfolio/pull/1" target="_blank" rel="noopener noreferrer">#1</a></td><td>First version of the landing page, built from the template and my old portfolio</td></tr>
           <tr><td><a href="https://github.com/jasong3012/web-development-portfolio/pull/2" target="_blank" rel="noopener noreferrer">#2</a></td><td><code>CLAUDE.md</code> with project notes and the auto-merge workflow</td></tr>
           <tr><td><a href="https://github.com/jasong3012/web-development-portfolio/pull/3" target="_blank" rel="noopener noreferrer">#3</a></td><td>Restyle to a neon visual reference (Version A)</td></tr>
-          <tr><td>#4</td><td>This page: an editorial Version B, with home, approach and blog views</td></tr>
+          <tr><td><a href="https://github.com/jasong3012/web-development-portfolio/pull/4" target="_blank" rel="noopener noreferrer">#4</a></td><td>An editorial Version B, with home, approach and blog views</td></tr>
+          <tr><td>#5</td><td>Approach content moved onto the homepage, under the gateway, for SEO</td></tr>
         </tbody>
       </table></div>
 
       <h2 id="p-ab">Iterating: an A/B experiment</h2>
-      <p>With the loop in place, design iterations became cheap. <a href="index.html">Version A</a> is a bold, neon landing page. Version B, the page you're reading, is a calm editorial layout: a minimal gateway, a long-form approach page and a blog. Both use the same content and images, so the comparison is about presentation alone.</p>
+      <p>With the loop in place, design iterations became cheap. <a href="index.html">Version A</a> is a bold, neon landing page. Version B, the page you're reading, is a calm editorial layout: a minimal gateway that opens onto a long-form homepage, plus a blog. Both use the same content and images, so the comparison is about presentation alone.</p>
 
       <h2 id="p-takeaways">Takeaways</h2>
       <ul>
@@ -739,14 +740,19 @@ branch protection), stop and report it.</span></code></pre>
     var changed=!view.classList.contains('is-active');
     views.forEach(function(v){v.classList.toggle('is-active',v===view)});
     var key=view.dataset.view;
-    var active=key==='post'?'blog':(key==='approach'?(id==='work'?'work':(id==='contact'?'contact':'approach')):key);
-    navLinks.forEach(function(a){a.classList.toggle('is-active',a.dataset.route===active)});
-    if(target===view){window.scrollTo(0,0)}
+    setActive(key==='post'?'blog':(key==='home'&&(id==='work'||id==='contact')?id:key));
+    if(target===view){window.scrollTo({top:0,behavior:changed?'auto':'smooth'})}
     else{requestAnimationFrame(function(){target.scrollIntoView({behavior:changed?'auto':'smooth'})})}
     if(changed)observeReveals(view);
     document.title=key==='post'?'Building this portfolio with an AI agent — Jason Grant':key==='blog'?'Blog — Jason Grant':'Jason Grant — Portfolio (Version B)';
   }
+  function setActive(r){navLinks.forEach(function(a){a.classList.toggle('is-active',a.dataset.route===r)})}
   window.addEventListener('hashchange',route);
+  /* While scrolling the homepage, highlight Home / Work / Contact */
+  if('IntersectionObserver' in window){
+    var spy=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting&&document.getElementById('home').classList.contains('is-active')){setActive(en.target.dataset.spy)}})},{rootMargin:'-45% 0px -50% 0px'});
+    [['home','.gateway'],['home','#approach'],['work','#work'],['work','#more-work'],['home','#workflow'],['home','#capabilities'],['home','#stack'],['home','#faq'],['contact','#contact']].forEach(function(x){var el=document.querySelector(x[1]);if(el){el.dataset.spy=x[0];spy.observe(el)}});
+  }
 
   /* Reveal on scroll */
   var revObs='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-visible');revObs.unobserve(en.target)}})},{rootMargin:'0px 0px -6% 0px'}):null;
