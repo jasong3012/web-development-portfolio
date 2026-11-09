@@ -85,6 +85,17 @@ p{margin:0 0 1em}
 .venn-tip::after{content:"";position:absolute;left:50%;top:100%;margin-left:-4px;border:4px solid transparent;border-top-color:var(--bg)}
 .venn-core:hover .venn-tip,.venn-core:focus-visible .venn-tip{opacity:1;transform:translate(-50%,0) scale(.74)}
 @keyframes fadeIn{to{opacity:1}}
+@media (min-width:1024px){
+  /* Venn at 1.5x on desktop */
+  .venn{width:min(930px,90vw)}
+  .venn-label{font-size:16.5px}
+  .venn-label .v-ic svg{width:42px}
+  .venn-core{width:16.5px;height:16.5px;margin:-8.25px 0 0 -8.25px;box-shadow:0 0 0 1.5px rgba(255,255,255,.5),0 0 0 9px rgba(249,244,245,.18)}
+  .venn-core::before{inset:-24px}
+  .venn-core:hover,.venn-core:focus-visible{box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 0 0 13.5px rgba(249,244,245,.22)}
+  .venn-tip{font-size:16.5px;padding:9px 16.5px;bottom:calc(100% + 21px)}
+  .venn-tip::after{margin-left:-6px;border-width:6px}
+}
 .sun{position:absolute;inset:0;border-radius:999px 999px 0 0;background:radial-gradient(70% 90% at 50% 18%,rgba(255,255,255,.12),transparent 60%),linear-gradient(180deg,var(--sun-top),var(--sun-bot));animation:rise 1.8s var(--ease) both}
 @keyframes rise{from{transform:translateY(100%)}to{transform:none}}
 .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 56px}
