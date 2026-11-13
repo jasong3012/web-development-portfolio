@@ -14,10 +14,15 @@ the HTML, so the pages show their content on first paint with no layout shift
 and the text is crawlable. The header, footer, SVG gradient defs, favicon and
 detail dialog are copied from experiment-version.html.
 
+It also stamps ?v=<content hash> on the shared site.css / core.js URLs in every
+Version B page (including experiment-version.html) so returning visitors never
+run a new page against a stale cached file.
+
 Requires Python 3 and Node.js. Re-run after changing any of the above:
 
     python3 scripts/build-project-pages.py
 """
+import hashlib
 import html
 import json
 import os
@@ -29,6 +34,21 @@ SITE = "https://jasong3012.github.io/web-development-portfolio"
 OUT = os.path.join(ROOT, "experiment-version", "projects")
 UP = "../../"  # from experiment-version/projects/ back to the site root
 CORE = os.path.join(ROOT, "assets", "experiment", "core.js")
+CSS = os.path.join(ROOT, "assets", "experiment", "site.css")
+HOME = os.path.join(ROOT, "experiment-version.html")
+
+
+def version(path):
+    """Short content hash, so browsers never pair a new page with a stale cached file."""
+    return hashlib.sha1(open(path, "rb").read()).hexdigest()[:10]
+
+
+V_CORE, V_CSS = version(CORE), version(CSS)
+# Stamp the homepage's references too (it is hand-edited, not generated).
+_home = open(HOME, encoding="utf-8").read()
+_home = re.sub(r'assets/experiment/site\.css(\?v=\w+)?"', 'assets/experiment/site.css?v=%s"' % V_CSS, _home)
+_home = re.sub(r'assets/experiment/core\.js(\?v=\w+)?"', 'assets/experiment/core.js?v=%s"' % V_CORE, _home)
+open(HOME, "w", encoding="utf-8").write(_home)
 
 home = open(os.path.join(ROOT, "experiment-version.html"), encoding="utf-8").read()
 esc = lambda t: html.escape(t, quote=True)
@@ -117,8 +137,8 @@ def page(slug_href, title, desc, canonical, back_href, back_text, h1, label_html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {FONTS}
-<link rel="stylesheet" href="{UP}assets/experiment/site.css">
-<link rel="preload" href="{UP}assets/experiment/core.js" as="script">
+<link rel="stylesheet" href="{UP}assets/experiment/site.css?v={V_CSS}">
+<link rel="preload" href="{UP}assets/experiment/core.js?v={V_CORE}" as="script">
 {inline_css}
 </head>
 <body>
@@ -150,7 +170,7 @@ def page(slug_href, title, desc, canonical, back_href, back_text, h1, label_html
 
 {footer}
 {dialog if with_dialog else ""}
-<script src="{UP}assets/experiment/core.js"></script>
+<script src="{UP}assets/experiment/core.js?v={V_CORE}"></script>
 {script}
 </body>
 </html>
