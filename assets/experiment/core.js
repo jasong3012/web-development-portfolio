@@ -7,7 +7,7 @@
   function thumb(src){return src.replace(/\.webp$/,'-card.webp')}
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   var PROJECTS=[
-    {name:'Electrolux (Sweden)',kicker:'Enterprise · Ecommerce · EU',featured:true,url:'https://www.electrolux.se/discover/saphirmatt-induction-hobs/',img:BASE+'assets/images/elx-eu-web-dev-mockup.webp',
+    {name:'Electrolux (Sweden)',kicker:'Enterprise · Ecommerce · EU',url:'https://www.electrolux.se/discover/saphirmatt-induction-hobs/',img:BASE+'assets/images/elx-eu-web-dev-mockup.webp',
      summary:'A product-discovery landing page for the SaphirMatt induction hob range on Electrolux\'s Swedish ecommerce site, with full-width video storytelling and an enterprise personalization and analytics stack.',
      features:['Full-width layout','Minimal','Videos','Ecommerce','Blog'],integrations:['Contentsquare','Microsoft Clarity','Facebook Pixel','TikTok Pixel','Instana'],plugins:['Dynamic Yield','Genesys Cloud','Qualtrics'],fonts:['Noto Sans']},
     {name:'Electrolux (Taiwan)',kicker:'Enterprise · Ecommerce · APAC',url:'https://www.electrolux.com.tw/blog/wet-cleaning-range/',img:BASE+'assets/images/elx-apac-web-dev-mockup.webp',
@@ -31,9 +31,9 @@
   ];
   function card(p,i,inTabs){
     var tags=p.features.slice(0,4).map(function(f){return '<span class="tag">'+esc(f)+'</span>'}).join('');
-    return '<button class="work-card'+(inTabs?'':' reveal')+(p.featured&&!inTabs?' is-featured':'')+'" type="button" data-project="'+i+'">'+
+    return '<button class="work-card" type="button" data-project="'+i+'">'+
       '<div class="work-visual"><img src="'+thumb(p.img)+'" alt="'+esc(p.name)+' website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div>'+
-      '<div class="work-body"><span class="work-fig"><b>FIG. 2.'+(i+1)+'</b> · '+esc(p.kicker)+'</span>'+(p.prototype?'<span class="badge">Prototype</span>':'')+
+      '<div class="work-body"><span class="work-fig"><b>FIG. 0.'+(i+1)+'</b> · '+esc(p.kicker)+'</span>'+(p.prototype?'<span class="badge">Prototype</span>':'')+
       '<h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="tags">'+tags+'</div>'+
       '<span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button>';
   }
@@ -122,7 +122,7 @@
   function openProject(i){
     var p=PROJECTS[i],img=document.getElementById('dialog-image');resetExtras();
     visual.classList.remove('is-photo');img.src=p.img;img.alt=p.name+' website shown on desktop and mobile';
-    document.getElementById('dialog-kicker').textContent='FIG. 2.'+(i+1)+' · '+p.kicker;
+    document.getElementById('dialog-kicker').textContent='FIG. 0.'+(i+1)+' · '+p.kicker;
     document.getElementById('dialog-title').textContent=p.name;
     document.getElementById('dialog-text').textContent=p.summary;
     var s=document.getElementById('dialog-specs');s.hidden=false;
