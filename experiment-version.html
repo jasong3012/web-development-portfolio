@@ -447,7 +447,7 @@ branch protection), stop and report it.</span></code></pre>
     setActive(key==='post'?'blog':(key==='home'&&(id==='work'||id==='contact')?id:key));
     if(target===view){window.scrollTo({top:0,behavior:changed?'auto':'smooth'})}
     else{requestAnimationFrame(function(){target.scrollIntoView({behavior:changed?'auto':'smooth'})})}
-    if(changed)observeReveals(view);
+    observeReveals(view);
     document.title=key==='post'?'Building this portfolio with an AI agent — Jason Grant':key==='blog'?'Blog — Jason Grant':'Jason Grant — Portfolio (Version B)';
   }
   function setActive(r){navLinks.forEach(function(a){a.classList.toggle('is-active',a.dataset.route===r)})}
