@@ -83,6 +83,17 @@ p{margin:0 0 1em}
 .jg-acc{fill:var(--accent)}
 .brand-name{font:600 15px/1 var(--head);letter-spacing:-.01em;color:var(--ink)}
 .main-nav{display:flex;align-items:center;gap:28px}
+.nav-item{position:relative;display:flex}
+.subnav{position:absolute;top:calc(100% + 16px);left:50%;z-index:40;min-width:240px;display:flex;flex-direction:column;padding:8px 0;background:var(--bg);border:1px solid var(--line);box-shadow:0 22px 44px -24px rgba(20,16,40,.35);opacity:0;visibility:hidden;transform:translate(-50%,6px);transition:opacity .2s var(--ease),transform .25s var(--ease),visibility .2s}
+.subnav::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.has-sub:hover .subnav,.has-sub:focus-within .subnav{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.subnav a{padding:10px 20px;font:500 11px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s,background-color .2s}
+.subnav a:hover,.subnav a:focus-visible,.subnav a[aria-current="page"]{color:var(--accent);background:var(--panel)}
+.subnav .sub-all{border-bottom:1px solid var(--line-soft);margin-bottom:4px;padding-bottom:12px}
+a.tab{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.tab[aria-current="page"]{color:var(--accent);background:var(--panel);border-bottom-color:var(--accent)}
+.disc-back{margin-bottom:28px}
+.tab-open{margin-top:24px}
 .nav-link{position:relative;text-decoration:none;color:var(--muted);transition:color .25s}
 .nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .nav-link:hover,.nav-link.is-active{color:var(--accent)}
@@ -415,6 +426,11 @@ p{margin:0 0 1em}
   .main-nav.is-open{display:flex}
   .main-nav .nav-link,.main-nav .nav-soon{padding:12px 0}
   .main-nav .nav-link::after{bottom:6px;right:auto;width:24px}
+  .nav-item{flex-direction:column;align-items:flex-start;width:100%}
+  .subnav{position:static;min-width:0;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;padding:0 0 6px 14px;background:none;border-left:1px solid var(--line)}
+  .subnav::before{display:none}
+  .subnav a{padding:9px 6px;font-size:10.5px}
+  .subnav .sub-all{border-bottom:0;margin:0;padding-bottom:9px}
 }
 @media (max-width:640px){
   :root{--gutter:18px}
@@ -445,7 +461,7 @@ p{margin:0 0 1em}
     <div class="header-right">
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a class="nav-link tracker" href="#home" data-route="home">Home</a>
-      <a class="nav-link tracker" href="#work" data-route="work">Work</a>
+      <div class="nav-item has-sub"><a class="nav-link tracker" href="#work" data-route="work">Work</a><div class="subnav" aria-label="Work by discipline"><a class="sub-all" href="#work">All selected work</a><a href="#work-web-development">Web development</a><a href="#work-web-analytics">Web analytics</a><a href="#work-seo-performance">SEO Performance</a><a href="#work-automated-workflows">Automated Workflows</a><a href="#work-ai-chatbots">AI Chatbots</a><a href="#work-ai-content-creation">AI Content Creation</a><a href="#work-creative-assets">Creative Assets</a><a href="#work-browser-games">Browser Games</a></div></div>
       <a class="nav-link tracker" href="#blog" data-route="blog">Blog</a>
       <a class="nav-link tracker" href="index.html">Version A</a>
       <a class="nav-link tracker" href="#contact" data-route="contact">Contact</a>
@@ -671,6 +687,136 @@ p{margin:0 0 1em}
   </section>
 </div>
 </div>
+
+<!-- ============ DISCIPLINE PAGES (work by discipline) ============ -->
+<section class="view disc-page" id="work-web-development" data-view="discipline" data-title="Web development — Jason Grant" aria-labelledby="dh-web-development">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-web-development">Web development.</h1>
+    <div class="split">
+      <div class="label"><b>01</b> — work by discipline</div>
+      <div class="lede"><p>Live, non-confidential sites across enterprise and open-source CMS platforms, from enterprise ecommerce to SEO-led service pages.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 01</b> · web development</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development" aria-current="page">Web development</a><a class="tab" href="#work-web-analytics">Web analytics</a><a class="tab" href="#work-seo-performance">SEO Performance</a><a class="tab" href="#work-automated-workflows">Automated Workflows</a><a class="tab" href="#work-ai-chatbots">AI Chatbots</a><a class="tab" href="#work-ai-content-creation">AI Content Creation</a><a class="tab" href="#work-creative-assets">Creative Assets</a><a class="tab" href="#work-browser-games">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="web-development"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 01</b> — Web development. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
+<section class="view disc-page" id="work-web-analytics" data-view="discipline" data-title="Web analytics — Jason Grant" aria-labelledby="dh-web-analytics">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-web-analytics">Web analytics.</h1>
+    <div class="split">
+      <div class="label"><b>02</b> — work by discipline</div>
+      <div class="lede"><p>Custom-built, automated dashboards that integrate GA4 and Google Search Console to reveal traffic sources, user behaviour and key events, so website improvements are backed by data.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 02</b> · web analytics</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development">Web development</a><a class="tab" href="#work-web-analytics" aria-current="page">Web analytics</a><a class="tab" href="#work-seo-performance">SEO Performance</a><a class="tab" href="#work-automated-workflows">Automated Workflows</a><a class="tab" href="#work-ai-chatbots">AI Chatbots</a><a class="tab" href="#work-ai-content-creation">AI Content Creation</a><a class="tab" href="#work-creative-assets">Creative Assets</a><a class="tab" href="#work-browser-games">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="web-analytics"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 02</b> — Web analytics. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
+<section class="view disc-page" id="work-seo-performance" data-view="discipline" data-title="SEO Performance — Jason Grant" aria-labelledby="dh-seo-performance">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-seo-performance">SEO Performance.</h1>
+    <div class="split">
+      <div class="label"><b>03</b> — work by discipline</div>
+      <div class="lede"><p>On-page and off-page SEO strategies, with high-quality website enhancements that help businesses climb the search results and grow organic visibility.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 03</b> · seo performance</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development">Web development</a><a class="tab" href="#work-web-analytics">Web analytics</a><a class="tab" href="#work-seo-performance" aria-current="page">SEO Performance</a><a class="tab" href="#work-automated-workflows">Automated Workflows</a><a class="tab" href="#work-ai-chatbots">AI Chatbots</a><a class="tab" href="#work-ai-content-creation">AI Content Creation</a><a class="tab" href="#work-creative-assets">Creative Assets</a><a class="tab" href="#work-browser-games">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="seo-performance"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 03</b> — SEO Performance. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
+<section class="view disc-page" id="work-automated-workflows" data-view="discipline" data-title="Automated Workflows — Jason Grant" aria-labelledby="dh-automated-workflows">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-automated-workflows">Automated Workflows.</h1>
+    <div class="split">
+      <div class="label"><b>04</b> — work by discipline</div>
+      <div class="lede"><p>Low-code workflow automations with n8n and Make.com that connect APIs, handle webhooks and integrate with platforms like Airtable, Supabase and Pipedrive, cutting repetitive work so teams move faster.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 04</b> · automated workflows</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development">Web development</a><a class="tab" href="#work-web-analytics">Web analytics</a><a class="tab" href="#work-seo-performance">SEO Performance</a><a class="tab" href="#work-automated-workflows" aria-current="page">Automated Workflows</a><a class="tab" href="#work-ai-chatbots">AI Chatbots</a><a class="tab" href="#work-ai-content-creation">AI Content Creation</a><a class="tab" href="#work-creative-assets">Creative Assets</a><a class="tab" href="#work-browser-games">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="automated-workflows"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 04</b> — Automated Workflows. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
+<section class="view disc-page" id="work-ai-chatbots" data-view="discipline" data-title="AI Chatbots — Jason Grant" aria-labelledby="dh-ai-chatbots">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-ai-chatbots">AI Chatbots.</h1>
+    <div class="split">
+      <div class="label"><b>05</b> — work by discipline</div>
+      <div class="lede"><p>Conversational AI chatbots and voice agents. Case studies are on the way.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 05</b> · ai chatbots</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development">Web development</a><a class="tab" href="#work-web-analytics">Web analytics</a><a class="tab" href="#work-seo-performance">SEO Performance</a><a class="tab" href="#work-automated-workflows">Automated Workflows</a><a class="tab" href="#work-ai-chatbots" aria-current="page">AI Chatbots</a><a class="tab" href="#work-ai-content-creation">AI Content Creation</a><a class="tab" href="#work-creative-assets">Creative Assets</a><a class="tab" href="#work-browser-games">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="ai-chatbots"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 05</b> — AI Chatbots. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
+<section class="view disc-page" id="work-ai-content-creation" data-view="discipline" data-title="AI Content Creation — Jason Grant" aria-labelledby="dh-ai-content-creation">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-ai-content-creation">AI Content Creation.</h1>
+    <div class="split">
+      <div class="label"><b>06</b> — work by discipline</div>
+      <div class="lede"><p>AI-powered visual storytelling for social media: short videos and image carousels made with prompt engineering and a creative eye, built to educate, entertain and inspire.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 06</b> · ai content creation</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development">Web development</a><a class="tab" href="#work-web-analytics">Web analytics</a><a class="tab" href="#work-seo-performance">SEO Performance</a><a class="tab" href="#work-automated-workflows">Automated Workflows</a><a class="tab" href="#work-ai-chatbots">AI Chatbots</a><a class="tab" href="#work-ai-content-creation" aria-current="page">AI Content Creation</a><a class="tab" href="#work-creative-assets">Creative Assets</a><a class="tab" href="#work-browser-games">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="ai-content-creation"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 06</b> — AI Content Creation. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
+<section class="view disc-page" id="work-creative-assets" data-view="discipline" data-title="Creative Assets — Jason Grant" aria-labelledby="dh-creative-assets">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-creative-assets">Creative Assets.</h1>
+    <div class="split">
+      <div class="label"><b>07</b> — work by discipline</div>
+      <div class="lede"><p>Visual and written content across social media, email marketing automation and video, plus full-length articles published on the web.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 07</b> · creative assets</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development">Web development</a><a class="tab" href="#work-web-analytics">Web analytics</a><a class="tab" href="#work-seo-performance">SEO Performance</a><a class="tab" href="#work-automated-workflows">Automated Workflows</a><a class="tab" href="#work-ai-chatbots">AI Chatbots</a><a class="tab" href="#work-ai-content-creation">AI Content Creation</a><a class="tab" href="#work-creative-assets" aria-current="page">Creative Assets</a><a class="tab" href="#work-browser-games">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="creative-assets"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 07</b> — Creative Assets. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
+<section class="view disc-page" id="work-browser-games" data-view="discipline" data-title="Browser Games — Jason Grant" aria-labelledby="dh-browser-games">
+  <div class="wrap page-intro">
+    <a class="text-link disc-back" href="#work">← All selected work</a>
+    <h1 id="dh-browser-games">Browser Games.</h1>
+    <div class="split">
+      <div class="label"><b>08</b> — work by discipline</div>
+      <div class="lede"><p>Small games that run right in the browser. Projects coming soon.</p></div>
+    </div>
+    <div class="figure">
+      <div class="figure-bar"><span><b>FIG. 08</b> · browser games</span><span data-disc-count></span></div>
+      <nav class="tabs" aria-label="Work by discipline"><a class="tab" href="#work-web-development">Web development</a><a class="tab" href="#work-web-analytics">Web analytics</a><a class="tab" href="#work-seo-performance">SEO Performance</a><a class="tab" href="#work-automated-workflows">Automated Workflows</a><a class="tab" href="#work-ai-chatbots">AI Chatbots</a><a class="tab" href="#work-ai-content-creation">AI Content Creation</a><a class="tab" href="#work-creative-assets">Creative Assets</a><a class="tab" href="#work-browser-games" aria-current="page">Browser Games</a></nav>
+      <div class="tab-panel"><div class="work-grid" data-disc="browser-games"></div><div class="tab-foot" hidden></div></div>
+      <p class="caption"><b>Fig. 08</b> — Browser Games. Select a project to see the details.</p>
+    </div>
+  </div>
+</section>
 
 <!-- ============ BLOG INDEX ============ -->
 <section class="view" id="blog" data-view="blog" aria-labelledby="blog-h">
@@ -903,25 +1049,39 @@ branch protection), stop and report it.</span></code></pre>
   var tabFoot=document.createElement('div');tabFoot.className='tab-foot';tabPanel.appendChild(tabFoot);
   tabList.innerHTML=TABS.map(function(t,i){return '<button class="tab" type="button" role="tab" id="tab-'+t.id+'" aria-controls="work-tabpanel" aria-selected="'+(i===0)+'" tabindex="'+(i===0?0:-1)+'">'+esc(t.label)+'</button>'}).join('');
   var tabs=[].slice.call(tabList.querySelectorAll('.tab'));
+  function renderTab(T,n,gridEl,footEl){
+    var count;
+    if(T.projects){gridEl.innerHTML=PROJECTS.map(function(p,i){return card(p,i,true)}).join('');count=PROJECTS.length+' projects'}
+    else if(T.items){gridEl.innerHTML=T.items.map(function(it,k){return itemCard(it,k+1,n,k)}).join('');count=T.items.length+(T.items.length===1?' project':' projects')}
+    else{gridEl.innerHTML=T.placeholders.map(function(ph,k){return phCard(ph,k+1)}).join('');count='coming soon'}
+    footEl.hidden=!T.foot;footEl.innerHTML=T.foot?'<p>'+esc(T.foot.title)+'</p><ul class="dialog-links">'+linkList(T.foot.links)+'</ul>':'';
+    return count;
+  }
+  var tabOpen=document.createElement('a');tabOpen.className='text-link tab-open';tabPanel.appendChild(tabOpen);
   function selectTab(n,focus){
     var T=TABS[n];
     tabs.forEach(function(b,i){b.setAttribute('aria-selected',String(i===n));b.tabIndex=i===n?0:-1});
     tabPanel.setAttribute('aria-labelledby',tabs[n].id);
     tabIntro.textContent=T.intro||'';tabIntro.hidden=!T.intro;
-    if(T.projects){tabGrid.innerHTML=PROJECTS.map(function(p,i){return card(p,i,true)}).join('');tabCount.textContent=PROJECTS.length+' projects'}
-    else if(T.items){tabGrid.innerHTML=T.items.map(function(it,k){return itemCard(it,k+1,n,k)}).join('');tabCount.textContent=T.items.length+(T.items.length===1?' project':' projects')}
-    else{tabGrid.innerHTML=T.placeholders.map(function(ph,k){return phCard(ph,k+1)}).join('');tabCount.textContent='coming soon'}
-    tabFoot.hidden=!T.foot;tabFoot.innerHTML=T.foot?'<p>'+esc(T.foot.title)+'</p><ul class="dialog-links">'+linkList(T.foot.links)+'</ul>':'';
+    tabCount.textContent=renderTab(T,n,tabGrid,tabFoot);
+    tabOpen.href='#work-'+T.id;tabOpen.textContent='Open the '+T.label+' page →';
     tabGrid.style.animation='none';void tabGrid.offsetWidth;tabGrid.style.animation='';
     if(focus){tabs[n].focus();tabs[n].scrollIntoView({block:'nearest',inline:'nearest'})}
   }
+  function gridClick(e){
+    var c=e.target.closest('[data-project]');if(c){openProject(+c.dataset.project);return}
+    var d=e.target.closest('[data-item]');if(d){var q=d.dataset.item.split(':');openItem(+q[0],+q[1])}}
+  /* Dedicated discipline pages reuse the same renderer */
+  [].forEach.call(document.querySelectorAll('[data-disc]'),function(g){
+    var n=TABS.findIndex(function(t){return t.id===g.dataset.disc});if(n<0)return;
+    var page=g.closest('.disc-page');page.querySelector('[data-disc-count]').textContent=renderTab(TABS[n],n,g,g.parentNode.querySelector('.tab-foot'));
+    g.addEventListener('click',gridClick);
+  });
   tabList.addEventListener('click',function(e){var b=e.target.closest('.tab');if(b)selectTab(tabs.indexOf(b),false)});
   tabList.addEventListener('keydown',function(e){var n=tabs.indexOf(document.activeElement);if(n<0)return;
     var k=e.key,to=k==='ArrowRight'?(n+1)%tabs.length:k==='ArrowLeft'?(n-1+tabs.length)%tabs.length:k==='Home'?0:k==='End'?tabs.length-1:-1;
     if(to>-1){e.preventDefault();selectTab(to,true)}});
-  tabGrid.addEventListener('click',function(e){
-    var c=e.target.closest('[data-project]');if(c){openProject(+c.dataset.project);return}
-    var d=e.target.closest('[data-item]');if(d){var q=d.dataset.item.split(':');openItem(+q[0],+q[1])}});
+  tabGrid.addEventListener('click',gridClick);
   selectTab(0,false);
   var gal=document.getElementById('gallery');
   gal.innerHTML=GALLERY.map(function(g,i){
@@ -941,11 +1101,12 @@ branch protection), stop and report it.</span></code></pre>
     var changed=!view.classList.contains('is-active');
     views.forEach(function(v){v.classList.toggle('is-active',v===view)});
     var key=view.dataset.view;
-    setActive(key==='post'?'blog':(key==='home'&&(id==='work'||id==='contact')?id:key));
+    setActive(key==='post'?'blog':key==='discipline'?'work':(key==='home'&&(id==='work'||id==='contact')?id:key));
+    [].forEach.call(document.querySelectorAll('.subnav a'),function(a){if(a.getAttribute('href')==='#'+view.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
     if(target===view){window.scrollTo({top:0,behavior:changed?'auto':'smooth'})}
     else{requestAnimationFrame(function(){target.scrollIntoView({behavior:changed?'auto':'smooth'})})}
     if(changed)observeReveals(view);
-    document.title=key==='post'?'Building this portfolio with an AI agent — Jason Grant':key==='blog'?'Blog — Jason Grant':'Jason Grant — Portfolio (Version B)';
+    document.title=key==='discipline'?view.dataset.title:key==='post'?'Building this portfolio with an AI agent — Jason Grant':key==='blog'?'Blog — Jason Grant':'Jason Grant — Portfolio (Version B)';
   }
   function setActive(r){navLinks.forEach(function(a){a.classList.toggle('is-active',a.dataset.route===r)})}
   window.addEventListener('hashchange',route);
