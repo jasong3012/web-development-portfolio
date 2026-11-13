@@ -84,7 +84,7 @@ a.tab{display:inline-flex;align-items:center;justify-content:center;text-decorat
 .proj-side a:hover{color:var(--ink);background:var(--panel)}
 .proj-side a[aria-current="page"]{color:var(--accent);border-left-color:var(--accent);background:var(--panel)}
 @media (max-width:960px){.proj-layout{grid-template-columns:1fr}.proj-side{position:static}}
-.tab-open{margin-top:24px}
+.tab-cta{display:flex;justify-content:center;margin-top:28px}
 .nav-link{position:relative;text-decoration:none;color:var(--muted);transition:color .25s}
 .nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .nav-link:hover,.nav-link.is-active{color:var(--accent)}
@@ -368,7 +368,6 @@ a.work-card{text-decoration:none}
 .dialog-links a{display:flex;justify-content:space-between;gap:16px;padding:12px 0;text-decoration:none;color:var(--ink);font-size:14px}
 .dialog-links a:hover{color:var(--accent)}
 .dialog-links a span:last-child{font-family:var(--mono);color:var(--accent);flex-shrink:0}
-.tab-intro{margin:0 0 22px;max-width:70ch;color:var(--muted);font-size:14.5px}
 .tab-foot{margin-top:26px;border-top:1px solid var(--line);padding-top:16px}
 .tab-foot p{font:400 10.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
 .tab-foot .dialog-links{margin:0}

@@ -87,12 +87,13 @@
     return '<button class="work-card" type="button" data-item="'+t+':'+k+'">'+vis+'<div class="work-body"><span class="work-fig"><b>FIG. 0.'+n+'</b> · '+esc(it.kicker)+more+'</span><h3>'+esc(it.name)+'</h3><p>'+esc(it.summary)+'</p><div class="tags">'+tags+'</div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button>';
   }
   function phCard(ph,n){return '<div class="work-card is-placeholder"><div class="work-visual">Coming soon</div><div class="work-body"><span class="work-fig"><b>FIG. 0.'+n+'</b> · '+esc(ph.kicker)+'</span><h3>'+esc(ph.name)+'</h3><p>Coming soon.</p></div></div>'}
-  function renderTab(T,n,gridEl,footEl){
-    var count;
-    if(T.projects){gridEl.innerHTML=PROJECTS.map(function(p,i){return card(p,i,true)}).join('');count=PROJECTS.length+' projects'}
-    else if(T.items){gridEl.innerHTML=T.items.map(function(it,k){return itemCard(it,k+1,n,k)}).join('');count=T.items.length+(T.items.length===1?' project':' projects')}
-    else{gridEl.innerHTML=T.placeholders.map(function(ph,k){return phCard(ph,k+1)}).join('');count='coming soon'}
-    footEl.hidden=!T.foot;footEl.innerHTML=T.foot?'<p>'+esc(T.foot.title)+'</p><ul class="dialog-links">'+linkList(T.foot.links)+'</ul>':'';
+  /* limit (optional) caps how many cards render, e.g. the homepage preview; footEl is optional */
+  function renderTab(T,n,gridEl,footEl,limit){
+    var count,cap=function(a){return limit?a.slice(0,limit):a};
+    if(T.projects){gridEl.innerHTML=cap(PROJECTS).map(function(p,i){return card(p,i,true)}).join('');count=PROJECTS.length+' projects'}
+    else if(T.items){gridEl.innerHTML=cap(T.items).map(function(it,k){return itemCard(it,k+1,n,k)}).join('');count=T.items.length+(T.items.length===1?' project':' projects')}
+    else{gridEl.innerHTML=cap(T.placeholders).map(function(ph,k){return phCard(ph,k+1)}).join('');count='coming soon'}
+    if(footEl){footEl.hidden=!T.foot;footEl.innerHTML=T.foot?'<p>'+esc(T.foot.title)+'</p><ul class="dialog-links">'+linkList(T.foot.links)+'</ul>':''}
     return count;
   }
   function gridClick(e){
