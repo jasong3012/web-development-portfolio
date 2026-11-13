@@ -67,6 +67,15 @@ p{margin:0 0 1em}
 .mark{position:relative;width:min(560px,82vw);aspect-ratio:2/1}
 .mark .glow{position:absolute;left:-6%;right:-6%;bottom:0;height:116%;border-radius:999px 999px 0 0;background:radial-gradient(60% 70% at 50% 100%,rgba(184,102,79,.16),transparent 70%);filter:blur(10px)}
 .sun-well{position:absolute;inset:0;overflow:hidden}
+.mark .glyph{position:absolute;inset:0;width:100%;height:100%;animation:fadeUp 1s var(--ease) 1.2s both}
+.mark .glyph path{fill:none;stroke:var(--bg);stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
+.mark .glyph .spark{fill:var(--bg);stroke:none;transform-box:fill-box;transform-origin:center;animation:spark 4.5s ease-in-out 2.2s infinite}
+.mark .orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.mark .orbit .track{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:2 7;animation:fadeUp 1s var(--ease) 1.6s both}
+.mark .orbit .agent{transform-box:view-box;transform-origin:280px 280px;transform:rotate(90deg);animation:orbit 9s cubic-bezier(.45,.05,.55,.95) 2s infinite both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes spark{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.8) rotate(45deg)}}
+@keyframes orbit{0%{transform:rotate(0);opacity:0}8%{opacity:1}92%{opacity:1}100%{transform:rotate(180deg);opacity:0}}
 .sun{position:absolute;inset:0;border-radius:999px 999px 0 0;background:radial-gradient(70% 90% at 50% 18%,rgba(255,255,255,.12),transparent 60%),linear-gradient(180deg,var(--sun-top),var(--sun-bot));animation:rise 1.8s var(--ease) both}
 @keyframes rise{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
 .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 56px}
@@ -355,7 +364,20 @@ p{margin:0 0 1em}
 <div class="view" id="home" data-view="home">
   <section class="gateway" aria-label="Welcome">
     <div class="eyebrow">Portfolio · Version B</div>
-    <div class="mark" aria-hidden="true"><div class="glow"></div><div class="sun-well"><div class="sun"></div></div></div>
+    <div class="mark" role="img" aria-label="Agentic AI-assisted web development: code brackets around an AI spark, with an agent orbiting the work">
+      <div class="glow"></div>
+      <svg class="orbit" viewBox="0 0 560 280" aria-hidden="true" focusable="false">
+        <path class="track" d="M-20 280A300 300 0 0 1 580 280"/>
+        <g class="agent"><circle cx="-20" cy="280" r="11" fill="#a24f3b" opacity=".16"/><circle cx="-20" cy="280" r="5" fill="#a24f3b"/></g>
+      </svg>
+      <div class="sun-well"><div class="sun">
+        <svg class="glyph" viewBox="0 0 560 280" aria-hidden="true" focusable="false">
+          <path d="M214 142 166 188 214 234"/>
+          <path d="M346 142 394 188 346 234"/>
+          <path class="spark" d="M280 146C284 174 292 182 320 188 292 194 284 202 280 230 276 202 268 194 240 188 268 182 276 174 280 146Z"/>
+        </svg>
+      </div></div>
+    </div>
     <p class="gateway-name"><strong>Jason Grant</strong>Web developer · MarTech specialist · Agentic AI workflows</p>
     <div class="cta">
       <a class="btn" href="#approach"><span class="swap"><span class="col"><span class="t">Approach</span><span class="t">Approach</span></span></span><span class="arr">→</span></a>
