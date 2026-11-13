@@ -1,233 +1,195 @@
 #!/usr/bin/env python3
 """Generate the Version B project landing pages.
 
-Writes experiment-version/projects/<slug>.html for every entry in the TABS
-data in assets/experiment/core.js. GitHub Pages serves them without the
-.html extension, e.g. /experiment-version/projects/seo-performance.
+Writes, from the TABS / PROJECTS data in assets/experiment/core.js:
+  experiment-version/projects/<slug>.html   one page per discipline
+  experiment-version/projects/index.html    the "All projects" page
+  experiment-version/index.html             redirect to the homepage
 
-The header, footer, SVG gradient defs, favicon and detail dialog are copied
-from experiment-version.html, so re-run this after changing those:
+GitHub Pages serves the pages without the .html extension, e.g.
+/experiment-version/projects/seo-performance.
+
+Project cards are rendered here (by running core.js in Node) and written into
+the HTML, so the pages show their content on first paint with no layout shift
+and the text is crawlable. The header, footer, SVG gradient defs, favicon and
+detail dialog are copied from experiment-version.html.
+
+Requires Python 3 and Node.js. Re-run after changing any of the above:
 
     python3 scripts/build-project-pages.py
 """
 import html
+import json
 import os
 import re
+import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://jasong3012.github.io/web-development-portfolio"
 OUT = os.path.join(ROOT, "experiment-version", "projects")
 UP = "../../"  # from experiment-version/projects/ back to the site root
+CORE = os.path.join(ROOT, "assets", "experiment", "core.js")
 
 home = open(os.path.join(ROOT, "experiment-version.html"), encoding="utf-8").read()
-core = open(os.path.join(ROOT, "assets", "experiment", "core.js"), encoding="utf-8").read()
+esc = lambda t: html.escape(t, quote=True)
+
+# ---------------------------------------------------------------- render cards
+# core.js only touches the DOM when elements exist, so a tiny stub is enough.
+NODE_RENDER = r"""
+const fs=require('fs'),vm=require('vm');
+const nul=()=>null;
+const document={documentElement:{getAttribute:a=>a==='data-base'?process.argv[2]:null,setAttribute(){},removeAttribute(){}},
+  getElementById:nul,querySelector:nul,querySelectorAll:()=>[],addEventListener(){}};
+const ctx={document,window:{},localStorage:{getItem:nul,setItem(){}}};vm.createContext(ctx);
+vm.runInContext(fs.readFileSync(process.argv[1],'utf8'),ctx);
+const J=ctx.window.JG,out={tabs:[],total:0};
+J.TABS.forEach((T,n)=>{const g={innerHTML:''},f={innerHTML:'',hidden:true};const count=J.renderTab(T,n,g,f);
+  out.tabs.push({id:T.id,label:T.label,intro:T.intro||'',count,n:J.counts(T),grid:g.innerHTML,foot:f.innerHTML,footHidden:f.hidden,category:J.categoryCard(T,n)});out.total+=J.counts(T)});
+process.stdout.write(JSON.stringify(out));
+"""
+data = json.loads(subprocess.run(["node", "-e", NODE_RENDER, CORE, UP], check=True, capture_output=True, text=True).stdout)
+tabs = data["tabs"]
+for t in tabs:
+    if t["id"] == "web-development":
+        t["intro"] = ("Live, non-confidential sites across enterprise and open-source CMS platforms, "
+                      "from enterprise ecommerce to SEO-led service pages.")
 
 
-def between(src, start, end, include_end=True):
+# --------------------------------------------------------------- shared chrome
+def between(src, start, end):
     a = src.index(start)
-    b = src.index(end, a) + (len(end) if include_end else 0)
-    return src[a:b]
+    return src[a:src.index(end, a) + len(end)]
 
 
-def js_str(t):
-    return t.replace("\\u2019", "’").replace("\\'", "'")
-
-
-# Discipline list: id (slug), label and intro, straight from the shared data.
-tabs = []
-for slug, label, intro in re.findall(
-        r"\{id:'([a-z-]+)',label:'([^']+)'(?:,projects:true|,intro:'((?:[^'\\]|\\.)*)')", core):
-    if not intro:
-        intro = ("Live, non-confidential sites across enterprise and open-source CMS platforms, "
-                 "from enterprise ecommerce to SEO-led service pages.")
-    tabs.append((slug, js_str(label), js_str(intro)))
-assert tabs, "no TABS found in core.js"
-
-
-def relink(fragment, current=None):
+def relink(fragment):
     """Point homepage-relative links at the right place from a project page."""
     fragment = fragment.replace('href="experiment-version/projects/"', 'href="./"')
     fragment = re.sub(r'href="experiment-version/projects/([a-z-]+)"', r'href="\1"', fragment)
     fragment = fragment.replace('href="index.html"', 'href="%sindex.html"' % UP)
     fragment = re.sub(r'href="#(home)?"', 'href="%sexperiment-version.html"' % UP, fragment)
     fragment = re.sub(r'href="#([a-z][\w-]*)"', r'href="%sexperiment-version.html#\1"' % UP, fragment)
-    if current:
-        fragment = fragment.replace('<a href="%s">' % current, '<a href="%s" aria-current="page">' % current)
     return fragment
 
 
-head_bits = {
-    "favicon": re.search(r'<link rel="icon"[^>]*>', home).group(0),
-    "inline_css": re.search(r"<style>/\* gradient fills.*?</style>", home, re.S).group(0),
-    "theme_script": re.search(r"<script>/\* apply a saved theme.*?</script>", home, re.S).group(0),
-}
+favicon = re.search(r'<link rel="icon"[^>]*>', home).group(0)
+inline_css = re.search(r"<style>/\* gradient fills.*?</style>", home, re.S).group(0)
+theme_script = re.search(r"<script>/\* apply a saved theme.*?</script>", home, re.S).group(0)
 defs = between(home, '<svg width="0" height="0" style="position:absolute"', "</svg>")
-header = between(home, '<header class="site-header" id="top">', "</header>")
-footer = between(home, '<footer class="site-footer">', "</footer>")
+header = relink(between(home, '<header class="site-header" id="top">', "</header>"))
+header = header.replace('class="nav-link tracker" href="./" data-route="work"',
+                        'class="nav-link tracker is-active" href="./" data-route="work"')
+footer = relink(between(home, '<footer class="site-footer">', "</footer>"))
 dialog = between(home, '<dialog class="detail-dialog"', "</dialog>")
+FONTS = re.search(r'<link href="https://fonts.googleapis.com/css2[^"]*" rel="stylesheet">', home).group(0)
 
-os.makedirs(OUT, exist_ok=True)
-esc = lambda t: html.escape(t, quote=True)
 
-for n, (slug, label, intro) in enumerate(tabs, 1):
-    nn = "%02d" % n
-    tab_links = "".join(
-        '<a class="tab" href="%s"%s>%s</a>' % (s, ' aria-current="page"' if s == slug else "", esc(l))
-        for s, l, _ in tabs)
-    hdr = relink(header, current=slug)
-    # Projects is the active top-level item on these pages.
-    hdr = hdr.replace('class="nav-link tracker" href="./" data-route="work"',
-                      'class="nav-link tracker is-active" href="./" data-route="work"')
-    hdr = re.sub(r'class="nav-link tracker( is-active)?" href="%sexperiment-version.html" data-route="home"' % re.escape(UP),
-                 'class="nav-link tracker" href="%sexperiment-version.html" data-route="home"' % UP, hdr)
-    page = f"""<!doctype html>
+def mark_current(fragment, href):
+    return fragment.replace('<a href="%s">' % href, '<a href="%s" aria-current="page">' % href) \
+                   .replace('<a class="sub-all" href="%s">' % href, '<a class="sub-all" href="%s" aria-current="page">' % href)
+
+
+def sidebar(current):
+    rows = ['<li><a href="./"%s>All projects<span>%d</span></a></li>' % (' aria-current="page"' if current == "./" else "", data["total"])]
+    for t in tabs:
+        rows.append('<li><a href="%s"%s>%s<span>%s</span></a></li>' % (
+            t["id"], ' aria-current="page"' if current == t["id"] else "", esc(t["label"]), t["n"] or "soon"))
+    return ('<aside class="proj-side" aria-label="Project categories"><p class="side-title">Projects</p>'
+            '<ul>%s</ul></aside>' % "".join(rows))
+
+
+def page(slug_href, title, desc, canonical, back_href, back_text, h1, label_html, intro, fig, fig_count,
+         panel_html, caption, script, with_dialog=True):
+    return f"""<!doctype html>
 <html lang="en" data-base="{UP}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#F9F4F5">
-{head_bits['favicon']}
-{head_bits['theme_script']}
-<title>{esc(label)} Projects — Jason Grant</title>
-<meta name="description" content="{esc(intro)}">
-<link rel="canonical" href="{SITE}/experiment-version/projects/{slug}">
-<meta property="og:title" content="{esc(label)} Projects — Jason Grant">
-<meta property="og:description" content="{esc(intro)}">
+{favicon}
+{theme_script}
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(desc)}">
+<link rel="canonical" href="{canonical}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{SITE}/experiment-version/projects/{slug}">
+<meta property="og:url" content="{canonical}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+{FONTS}
 <link rel="stylesheet" href="{UP}assets/experiment/site.css">
-{head_bits['inline_css']}
+<link rel="preload" href="{UP}assets/experiment/core.js" as="script">
+{inline_css}
 </head>
 <body>
 {defs}
 <a class="skip-link" href="#main">Skip to content</a>
 
-{hdr}
+{mark_current(header, slug_href)}
 
 <main id="main">
 <section class="disc-page" aria-labelledby="dh">
   <div class="wrap page-intro">
-    <a class="text-link disc-back" href="./">← All projects</a>
-    <h1 id="dh">{esc(label)}.</h1>
+    <a class="text-link disc-back" href="{back_href}">{back_text}</a>
+    <h1 id="dh">{esc(h1)}.</h1>
     <div class="split">
-      <div class="label"><b>{nn}</b> — projects by discipline</div>
+      <div class="label">{label_html}</div>
       <div class="lede"><p>{esc(intro)}</p></div>
     </div>
-    <div class="figure">
-      <div class="figure-bar"><span><b>FIG. {nn}</b> · {esc(label.lower())}</span><span id="disc-count"></span></div>
-      <nav class="tabs" aria-label="Projects by discipline">{tab_links}</nav>
-      <div class="tab-panel"><div class="work-grid" id="disc-grid"></div><div class="tab-foot" id="disc-foot" hidden></div></div>
-      <p class="caption"><b>Fig. {nn}</b> — {esc(label)}. Select a project to see the details.</p>
+    <div class="proj-layout">
+      <div class="figure">
+        <div class="figure-bar"><span>{fig}</span><span>{fig_count}</span></div>
+        <div class="tab-panel">{panel_html}</div>
+        <p class="caption">{caption}</p>
+      </div>
+      {sidebar(slug_href)}
     </div>
   </div>
 </section>
 </main>
 
-{relink(footer)}
-
-{dialog}
-
+{footer}
+{dialog if with_dialog else ""}
 <script src="{UP}assets/experiment/core.js"></script>
-<script>
-(function(){{
-  var J=window.JG,n=J.TABS.findIndex(function(t){{return t.id==='{slug}'}}),grid=document.getElementById('disc-grid');
-  document.getElementById('disc-count').textContent=J.renderTab(J.TABS[n],n,grid,document.getElementById('disc-foot'));
-  grid.addEventListener('click',J.gridClick);
-}})();
-</script>
+{script}
 </body>
 </html>
 """
+
+
+os.makedirs(OUT, exist_ok=True)
+for n, t in enumerate(tabs, 1):
+    nn = "%02d" % n
+    slug, label, intro = t["id"], t["label"], t["intro"]
+    panel = '<div class="work-grid" id="disc-grid">%s</div><div class="tab-foot"%s>%s</div>' % (
+        t["grid"], " hidden" if t["footHidden"] else "", t["foot"])
+    script = "<script>document.getElementById('disc-grid').addEventListener('click',JG.gridClick)</script>"
+    html_out = page(slug, "%s Projects — Jason Grant" % label, intro, "%s/experiment-version/projects/%s" % (SITE, slug),
+                    "./", "← All projects", label, "<b>%s</b> — projects by discipline" % nn, intro,
+                    "<b>FIG. %s</b> · %s" % (nn, esc(label.lower())), esc(t["count"]), panel,
+                    "<b>Fig. %s</b> — %s. Select a project to see the details." % (nn, esc(label)), script)
     with open(os.path.join(OUT, slug + ".html"), "w", encoding="utf-8") as f:
-        f.write(page)
+        f.write(html_out)
     print("wrote experiment-version/projects/%s.html" % slug)
 
-# All projects landing page at /experiment-version/projects/
-tab_links = "".join('<a class="tab" href="%s">%s</a>' % (sl, esc(l)) for sl, l, _ in tabs)
 intro_all = ("Every project, grouped by discipline: web development, analytics, SEO, automation, "
              "AI chatbots, AI content, creative assets and games.")
-hdr = relink(header)
-hdr = hdr.replace('class="nav-link tracker" href="./" data-route="work"', 'class="nav-link tracker is-active" href="./" data-route="work"')
-hdr = hdr.replace('<a class="sub-all" href="./">', '<a class="sub-all" href="./" aria-current="page">')
-index_page = f"""<!doctype html>
-<html lang="en" data-base="{UP}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#F9F4F5">
-{head_bits['favicon']}
-{head_bits['theme_script']}
-<title>Projects — Jason Grant</title>
-<meta name="description" content="{esc(intro_all)}">
-<link rel="canonical" href="{SITE}/experiment-version/projects/">
-<meta property="og:title" content="Projects — Jason Grant">
-<meta property="og:description" content="{esc(intro_all)}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{SITE}/experiment-version/projects/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{UP}assets/experiment/site.css">
-{head_bits['inline_css']}
-</head>
-<body>
-{defs}
-<a class="skip-link" href="#main">Skip to content</a>
-
-{hdr}
-
-<main id="main">
-<section class="disc-page" aria-labelledby="dh">
-  <div class="wrap page-intro">
-    <a class="text-link disc-back" href="{UP}experiment-version.html">← Home</a>
-    <h1 id="dh">Projects.</h1>
-    <div class="split">
-      <div class="label"><b>00</b> — all projects</div>
-      <div class="lede"><p>{esc(intro_all)}</p></div>
-    </div>
-    <div class="figure">
-      <div class="figure-bar"><span><b>FIG. 00</b> · projects by discipline</span><span id="disc-count"></span></div>
-      <nav class="tabs" aria-label="Projects by discipline">{tab_links}</nav>
-      <div class="tab-panel"><div class="work-grid" id="cat-grid"></div></div>
-      <p class="caption"><b>Fig. 00</b> — Projects by discipline. Select a category to open its page.</p>
-    </div>
-  </div>
-</section>
-</main>
-
-{relink(footer)}
-
-<script src="{UP}assets/experiment/core.js"></script>
-<script>
-(function(){{
-  var J=window.JG,esc=J.esc,total=0;
-  document.getElementById('cat-grid').innerHTML=J.TABS.map(function(T,i){{
-    var n=T.projects?J.PROJECTS.length:T.items?T.items.length:0;total+=n;
-    var cover=T.projects?J.PROJECTS[0].img:(T.items&&T.items[0].imgs?T.items[0].imgs[0]:null);
-    var vis=cover?'<div class="work-visual"><img src="'+cover+'" alt="" loading="lazy" decoding="async"></div>':'<div class="work-visual poster"><i>'+(n?'Projects':'Coming soon')+'</i><b>'+esc(T.label)+'</b></div>';
-    var intro=T.intro||'Live, non-confidential sites across enterprise and open-source CMS platforms.';
-    return '<a class="work-card" href="'+T.id+'">'+vis+'<div class="work-body"><span class="work-fig"><b>FIG. 0'+(i+1)+'</b> · '+(n?n+(n===1?' project':' projects'):'coming soon')+'</span><h3>'+esc(T.label)+'</h3><p>'+esc(intro)+'</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a>';
-  }}).join('');
-  document.getElementById('disc-count').textContent=J.TABS.length+' categories · '+total+' projects';
-}})();
-</script>
-</body>
-</html>
-"""
+panel = '<div class="work-grid" id="cat-grid">%s</div>' % "".join(t["category"] for t in tabs)
+index_html = page("./", "Projects — Jason Grant", intro_all, "%s/experiment-version/projects/" % SITE,
+                  "%sexperiment-version.html" % UP, "← Home", "Projects", "<b>00</b> — all projects", intro_all,
+                  "<b>FIG. 00</b> · projects by discipline", "%d categories · %d projects" % (len(tabs), data["total"]),
+                  panel, "<b>Fig. 00</b> — Projects by discipline. Select a category to open its page.", "", with_dialog=False)
 with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
-    f.write(index_page)
+    f.write(index_html)
 print("wrote experiment-version/projects/index.html")
 
 # The bare /experiment-version/ folder falls back to the homepage instead of a 404.
-redirect = """<!doctype html>
+to = "../experiment-version.html"
+with open(os.path.join(ROOT, "experiment-version", "index.html"), "w", encoding="utf-8") as f:
+    f.write(f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Redirecting…</title>
 <meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="{to}">
-<script>location.replace({to!r})</script></head>
+<script>location.replace('{to}')</script></head>
 <body><p><a href="{to}">Continue to Jason Grant's portfolio</a></p></body></html>
-"""
-with open(os.path.join(ROOT, "experiment-version", "index.html"), "w", encoding="utf-8") as f:
-    f.write(redirect.format(to="../experiment-version.html"))
+""")
 print("wrote folder redirect")

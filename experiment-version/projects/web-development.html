@@ -15,8 +15,9 @@
 <meta property="og:url" content="https://jasong3012.github.io/web-development-portfolio/experiment-version/projects/web-development">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/experiment/site.css">
+<link rel="preload" href="../../assets/experiment/core.js" as="script">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -49,11 +50,13 @@
       <div class="label"><b>01</b> — projects by discipline</div>
       <div class="lede"><p>Live, non-confidential sites across enterprise and open-source CMS platforms, from enterprise ecommerce to SEO-led service pages.</p></div>
     </div>
-    <div class="figure">
-      <div class="figure-bar"><span><b>FIG. 01</b> · web development</span><span id="disc-count"></span></div>
-      <nav class="tabs" aria-label="Projects by discipline"><a class="tab" href="web-development" aria-current="page">Web development</a><a class="tab" href="web-analytics">Web analytics</a><a class="tab" href="seo-performance">SEO Performance</a><a class="tab" href="automation">Automated Workflows</a><a class="tab" href="chatbot-development">AI Chatbots</a><a class="tab" href="ai-content-creation">AI Content Creation</a><a class="tab" href="creative-assets">Creative Assets</a><a class="tab" href="games">Browser Games</a></nav>
-      <div class="tab-panel"><div class="work-grid" id="disc-grid"></div><div class="tab-foot" id="disc-foot" hidden></div></div>
-      <p class="caption"><b>Fig. 01</b> — Web development. Select a project to see the details.</p>
+    <div class="proj-layout">
+      <div class="figure">
+        <div class="figure-bar"><span><b>FIG. 01</b> · web development</span><span>7 projects</span></div>
+        <div class="tab-panel"><div class="work-grid" id="disc-grid"><button class="work-card" type="button" data-project="0"><div class="work-visual"><img src="../../assets/images/elx-eu-web-dev-mockup-card.webp" alt="Electrolux (Sweden) website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 2.1</b> · Enterprise · Ecommerce · EU</span><h3>Electrolux (Sweden)</h3><p>A product-discovery landing page for the SaphirMatt induction hob range on Electrolux&#39;s Swedish ecommerce site, with full-width video storytelling and an enterprise personalization and analytics stack.</p><div class="tags"><span class="tag">Full-width layout</span><span class="tag">Minimal</span><span class="tag">Videos</span><span class="tag">Ecommerce</span></div><span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-project="1"><div class="work-visual"><img src="../../assets/images/elx-apac-web-dev-mockup-card.webp" alt="Electrolux (Taiwan) website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 2.2</b> · Enterprise · Ecommerce · APAC</span><h3>Electrolux (Taiwan)</h3><p>A wet-cleaning range content page for Electrolux Taiwan, built on the same enterprise platform and localized for the APAC market.</p><div class="tags"><span class="tag">Full-width layout</span><span class="tag">Minimal</span><span class="tag">Videos</span><span class="tag">Ecommerce</span></div><span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-project="2"><div class="work-visual"><img src="../../assets/images/sps-web-dev-mockup-card.webp" alt="Seven Peaks Software website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 2.3</b> · B2B · Software consultancy</span><h3>Seven Peaks Software</h3><p>The corporate site for a Bangkok software consultancy, with lead-capture forms connected to the CRM, product analytics and automated document generation.</p><div class="tags"><span class="tag">Full-width layout</span><span class="tag">Minimal</span><span class="tag">Sliders</span><span class="tag">Icons</span></div><span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-project="3"><div class="work-visual"><img src="../../assets/images/mph-web-dev-mockup-card.webp" alt="Morphosis website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 2.4</b> · Agency · SEO services</span><h3>Morphosis</h3><p>An SEO services page for a Bangkok digital agency, built on a headless CMS and optimized for search and conversion rate, with internationalization and redirect management.</p><div class="tags"><span class="tag">Whitespace</span><span class="tag">Minimal</span><span class="tag">SEO-optimized</span><span class="tag">Conversion-rate optimized</span></div><span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-project="4"><div class="work-visual"><img src="../../assets/images/upp-web-dev-mockup-card.webp" alt="UpPass website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 2.5</b> · SaaS · Identity verification</span><h3>UpPass</h3><p>An SEO-focused blog for an identity-verification SaaS, optimized for email sign-ups, with embedded video and consent management.</p><div class="tags"><span class="tag">Whitespace</span><span class="tag">YouTube embeds</span><span class="tag">SEO-optimized</span><span class="tag">Email sign-up optimized</span></div><span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-project="5"><div class="work-visual"><img src="../../assets/images/clinic-web-dev-mockup-card.webp" alt="Vincent Clinic website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 2.6</b> · Healthcare · Clinic</span><h3>Vincent Clinic</h3><p>A website for a medical and aesthetics clinic, combining animated sliders and video with SEO and performance tuning through WP Rocket and priority hints.</p><div class="tags"><span class="tag">Full-width layout</span><span class="tag">Sliders</span><span class="tag">Animations</span><span class="tag">Videos</span></div><span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-project="6"><div class="work-visual"><img src="../../assets/images/solarhash-web-dev-mockup-card.webp" alt="Solar Hash website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 2.7</b> · Web3 · Prototype</span><span class="badge">Prototype</span><h3>Solar Hash</h3><p>A prototype landing page for a Web3 project, with animated sections, sliders and Web3 wallet integration.</p><div class="tags"><span class="tag">Full-width layout</span><span class="tag">Sliders</span><span class="tag">Animations</span><span class="tag">Minimal</span></div><span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button></div><div class="tab-foot" hidden></div></div>
+        <p class="caption"><b>Fig. 01</b> — Web development. Select a project to see the details.</p>
+      </div>
+      <aside class="proj-side" aria-label="Project categories"><p class="side-title">Projects</p><ul><li><a href="./">All projects<span>28</span></a></li><li><a href="web-development" aria-current="page">Web development<span>7</span></a></li><li><a href="web-analytics">Web analytics<span>3</span></a></li><li><a href="seo-performance">SEO Performance<span>6</span></a></li><li><a href="automation">Automated Workflows<span>5</span></a></li><li><a href="chatbot-development">AI Chatbots<span>soon</span></a></li><li><a href="ai-content-creation">AI Content Creation<span>3</span></a></li><li><a href="creative-assets">Creative Assets<span>4</span></a></li><li><a href="games">Browser Games<span>soon</span></a></li></ul></aside>
     </div>
   </div>
 </section>
@@ -70,7 +73,6 @@
     </div>
   </div>
 </footer>
-
 <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="dialog-title">
   <button class="dialog-close" id="dialog-close" type="button" aria-label="Close details">×</button>
   <div class="dialog-visual" id="dialog-visual"><img id="dialog-image" alt="" width="1440" height="800" decoding="async"></div>
@@ -87,14 +89,7 @@
     </div>
   </div>
 </dialog>
-
 <script src="../../assets/experiment/core.js"></script>
-<script>
-(function(){
-  var J=window.JG,n=J.TABS.findIndex(function(t){return t.id==='web-development'}),grid=document.getElementById('disc-grid');
-  document.getElementById('disc-count').textContent=J.renderTab(J.TABS[n],n,grid,document.getElementById('disc-foot'));
-  grid.addEventListener('click',J.gridClick);
-})();
-</script>
+<script>document.getElementById('disc-grid').addEventListener('click',JG.gridClick)</script>
 </body>
 </html>

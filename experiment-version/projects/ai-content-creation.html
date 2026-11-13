@@ -15,8 +15,9 @@
 <meta property="og:url" content="https://jasong3012.github.io/web-development-portfolio/experiment-version/projects/ai-content-creation">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/experiment/site.css">
+<link rel="preload" href="../../assets/experiment/core.js" as="script">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -49,11 +50,13 @@
       <div class="label"><b>06</b> — projects by discipline</div>
       <div class="lede"><p>AI-powered visual storytelling for social media: short videos and image carousels made with prompt engineering and a creative eye, built to educate, entertain and inspire.</p></div>
     </div>
-    <div class="figure">
-      <div class="figure-bar"><span><b>FIG. 06</b> · ai content creation</span><span id="disc-count"></span></div>
-      <nav class="tabs" aria-label="Projects by discipline"><a class="tab" href="web-development">Web development</a><a class="tab" href="web-analytics">Web analytics</a><a class="tab" href="seo-performance">SEO Performance</a><a class="tab" href="automation">Automated Workflows</a><a class="tab" href="chatbot-development">AI Chatbots</a><a class="tab" href="ai-content-creation" aria-current="page">AI Content Creation</a><a class="tab" href="creative-assets">Creative Assets</a><a class="tab" href="games">Browser Games</a></nav>
-      <div class="tab-panel"><div class="work-grid" id="disc-grid"></div><div class="tab-foot" id="disc-foot" hidden></div></div>
-      <p class="caption"><b>Fig. 06</b> — AI Content Creation. Select a project to see the details.</p>
+    <div class="proj-layout">
+      <div class="figure">
+        <div class="figure-bar"><span><b>FIG. 06</b> · ai content creation</span><span>3 projects</span></div>
+        <div class="tab-panel"><div class="work-grid" id="disc-grid"><button class="work-card" type="button" data-item="5:0"><div class="work-visual"><img src="../../assets/images/disciplines/ghostdiffusion-home-card.webp" alt="Stable Diffusion + Flux Portfolio" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 0.1</b> · ComfyUI · Stable Diffusion · Flux</span><h3>Stable Diffusion + Flux Portfolio</h3><p>Ghost Diffusion: a showcase of AI-generated visuals and the ComfyUI workflows behind them.</p><div class="tags"><span class="tag">ComfyUI</span><span class="tag">Stable Diffusion</span><span class="tag">Flux</span></div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-item="5:1"><div class="work-visual poster"><span class="play" aria-hidden="true"></span><i>TikTok series · @maker.jason</i><b>Mentality Fuel</b></div><div class="work-body"><span class="work-fig"><b>FIG. 0.2</b> · TikTok series · @maker.jason</span><h3>Mentality Fuel</h3><p>Bold ideas, brought to life through animated visual storytelling.</p><div class="tags"><span class="tag">TikTok</span><span class="tag">AI video</span><span class="tag">Carousels</span></div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-item="5:2"><div class="work-visual poster"><span class="play" aria-hidden="true"></span><i>TikTok series · @era.eyes</i><b>Historic POVs</b></div><div class="work-body"><span class="work-fig"><b>FIG. 0.3</b> · TikTok series · @era.eyes</span><h3>Historic POVs</h3><p>Immersive historical experiences you won’t find in textbooks.</p><div class="tags"><span class="tag">TikTok</span><span class="tag">AI video</span><span class="tag">Storytelling</span></div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button></div><div class="tab-foot" hidden></div></div>
+        <p class="caption"><b>Fig. 06</b> — AI Content Creation. Select a project to see the details.</p>
+      </div>
+      <aside class="proj-side" aria-label="Project categories"><p class="side-title">Projects</p><ul><li><a href="./">All projects<span>28</span></a></li><li><a href="web-development">Web development<span>7</span></a></li><li><a href="web-analytics">Web analytics<span>3</span></a></li><li><a href="seo-performance">SEO Performance<span>6</span></a></li><li><a href="automation">Automated Workflows<span>5</span></a></li><li><a href="chatbot-development">AI Chatbots<span>soon</span></a></li><li><a href="ai-content-creation" aria-current="page">AI Content Creation<span>3</span></a></li><li><a href="creative-assets">Creative Assets<span>4</span></a></li><li><a href="games">Browser Games<span>soon</span></a></li></ul></aside>
     </div>
   </div>
 </section>
@@ -70,7 +73,6 @@
     </div>
   </div>
 </footer>
-
 <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="dialog-title">
   <button class="dialog-close" id="dialog-close" type="button" aria-label="Close details">×</button>
   <div class="dialog-visual" id="dialog-visual"><img id="dialog-image" alt="" width="1440" height="800" decoding="async"></div>
@@ -87,14 +89,7 @@
     </div>
   </div>
 </dialog>
-
 <script src="../../assets/experiment/core.js"></script>
-<script>
-(function(){
-  var J=window.JG,n=J.TABS.findIndex(function(t){return t.id==='ai-content-creation'}),grid=document.getElementById('disc-grid');
-  document.getElementById('disc-count').textContent=J.renderTab(J.TABS[n],n,grid,document.getElementById('disc-foot'));
-  grid.addEventListener('click',J.gridClick);
-})();
-</script>
+<script>document.getElementById('disc-grid').addEventListener('click',JG.gridClick)</script>
 </body>
 </html>

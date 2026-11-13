@@ -15,8 +15,9 @@
 <meta property="og:url" content="https://jasong3012.github.io/web-development-portfolio/experiment-version/projects/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/experiment/site.css">
+<link rel="preload" href="../../assets/experiment/core.js" as="script">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -49,11 +50,13 @@
       <div class="label"><b>00</b> — all projects</div>
       <div class="lede"><p>Every project, grouped by discipline: web development, analytics, SEO, automation, AI chatbots, AI content, creative assets and games.</p></div>
     </div>
-    <div class="figure">
-      <div class="figure-bar"><span><b>FIG. 00</b> · projects by discipline</span><span id="disc-count"></span></div>
-      <nav class="tabs" aria-label="Projects by discipline"><a class="tab" href="web-development">Web development</a><a class="tab" href="web-analytics">Web analytics</a><a class="tab" href="seo-performance">SEO Performance</a><a class="tab" href="automation">Automated Workflows</a><a class="tab" href="chatbot-development">AI Chatbots</a><a class="tab" href="ai-content-creation">AI Content Creation</a><a class="tab" href="creative-assets">Creative Assets</a><a class="tab" href="games">Browser Games</a></nav>
-      <div class="tab-panel"><div class="work-grid" id="cat-grid"></div></div>
-      <p class="caption"><b>Fig. 00</b> — Projects by discipline. Select a category to open its page.</p>
+    <div class="proj-layout">
+      <div class="figure">
+        <div class="figure-bar"><span><b>FIG. 00</b> · projects by discipline</span><span>8 categories · 28 projects</span></div>
+        <div class="tab-panel"><div class="work-grid" id="cat-grid"><a class="work-card" href="web-development"><div class="work-visual"><img src="../../assets/images/elx-eu-web-dev-mockup-card.webp" alt="" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 01</b> · 7 projects</span><h3>Web development</h3><p>Live, non-confidential sites across enterprise and open-source CMS platforms.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a><a class="work-card" href="web-analytics"><div class="work-visual"><img src="../../assets/images/disciplines/looker-dashboard-ekyc-tech-client-web-analytics-edited-card.webp" alt="" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 02</b> · 3 projects</span><h3>Web analytics</h3><p>Custom-built, automated dashboards that integrate GA4 and Google Search Console to reveal traffic sources, user behaviour and key events, so website improvements are backed by data.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a><a class="work-card" href="seo-performance"><div class="work-visual"><img src="../../assets/images/disciplines/seo-for-software-house-card.webp" alt="" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 03</b> · 6 projects</span><h3>SEO Performance</h3><p>On-page and off-page SEO strategies, with high-quality website enhancements that help businesses climb the search results and grow organic visibility.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a><a class="work-card" href="automation"><div class="work-visual"><img src="../../assets/images/disciplines/makedotcom-web-text-parser-for-email-outreach-card.webp" alt="" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 04</b> · 5 projects</span><h3>Automated Workflows</h3><p>Low-code workflow automations with n8n and Make.com that connect APIs, handle webhooks and integrate with platforms like Airtable, Supabase and Pipedrive, cutting repetitive work so teams move faster.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a><a class="work-card" href="chatbot-development"><div class="work-visual poster"><i>Coming soon</i><b>AI Chatbots</b></div><div class="work-body"><span class="work-fig"><b>FIG. 05</b> · coming soon</span><h3>AI Chatbots</h3><p>Conversational AI chatbots and voice agents. Case studies are on the way.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a><a class="work-card" href="ai-content-creation"><div class="work-visual"><img src="../../assets/images/disciplines/ghostdiffusion-home-card.webp" alt="" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 06</b> · 3 projects</span><h3>AI Content Creation</h3><p>AI-powered visual storytelling for social media: short videos and image carousels made with prompt engineering and a creative eye, built to educate, entertain and inspire.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a><a class="work-card" href="creative-assets"><div class="work-visual"><img src="../../assets/images/disciplines/software-company-social-media-posts-card.webp" alt="" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 07</b> · 4 projects</span><h3>Creative Assets</h3><p>Visual and written content across social media, email marketing automation and video, plus full-length articles published on the web.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a><a class="work-card" href="games"><div class="work-visual poster"><i>Coming soon</i><b>Browser Games</b></div><div class="work-body"><span class="work-fig"><b>FIG. 08</b> · coming soon</span><h3>Browser Games</h3><p>Small games that run right in the browser. Projects coming soon.</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a></div></div>
+        <p class="caption"><b>Fig. 00</b> — Projects by discipline. Select a category to open its page.</p>
+      </div>
+      <aside class="proj-side" aria-label="Project categories"><p class="side-title">Projects</p><ul><li><a href="./" aria-current="page">All projects<span>28</span></a></li><li><a href="web-development">Web development<span>7</span></a></li><li><a href="web-analytics">Web analytics<span>3</span></a></li><li><a href="seo-performance">SEO Performance<span>6</span></a></li><li><a href="automation">Automated Workflows<span>5</span></a></li><li><a href="chatbot-development">AI Chatbots<span>soon</span></a></li><li><a href="ai-content-creation">AI Content Creation<span>3</span></a></li><li><a href="creative-assets">Creative Assets<span>4</span></a></li><li><a href="games">Browser Games<span>soon</span></a></li></ul></aside>
     </div>
   </div>
 </section>
@@ -72,18 +75,6 @@
 </footer>
 
 <script src="../../assets/experiment/core.js"></script>
-<script>
-(function(){
-  var J=window.JG,esc=J.esc,total=0;
-  document.getElementById('cat-grid').innerHTML=J.TABS.map(function(T,i){
-    var n=T.projects?J.PROJECTS.length:T.items?T.items.length:0;total+=n;
-    var cover=T.projects?J.PROJECTS[0].img:(T.items&&T.items[0].imgs?T.items[0].imgs[0]:null);
-    var vis=cover?'<div class="work-visual"><img src="'+cover+'" alt="" loading="lazy" decoding="async"></div>':'<div class="work-visual poster"><i>'+(n?'Projects':'Coming soon')+'</i><b>'+esc(T.label)+'</b></div>';
-    var intro=T.intro||'Live, non-confidential sites across enterprise and open-source CMS platforms.';
-    return '<a class="work-card" href="'+T.id+'">'+vis+'<div class="work-body"><span class="work-fig"><b>FIG. 0'+(i+1)+'</b> · '+(n?n+(n===1?' project':' projects'):'coming soon')+'</span><h3>'+esc(T.label)+'</h3><p>'+esc(intro)+'</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a>';
-  }).join('');
-  document.getElementById('disc-count').textContent=J.TABS.length+' categories · '+total+' projects';
-})();
-</script>
+
 </body>
 </html>

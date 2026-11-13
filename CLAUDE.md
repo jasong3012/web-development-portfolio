@@ -7,7 +7,8 @@ Jason Grant's AI-assisted web development portfolio, published with GitHub Pages
 - Images live in `assets/images/` as WebP. Convert new PNG/JPG images to WebP before committing.
 - Project cards are generated from the `PROJECTS` array in the inline script in `index.html`. Add or edit work there.
 - `experiment-version.html` is Version B (the A/B experiment). It shares `assets/experiment/site.css` (styles) and `assets/experiment/core.js` (project data in `PROJECTS`/`TABS`, card rendering, detail dialog, menu, theme) with the project pages. Keep the two `url(#...)` gradient fill rules inline in each page; they break in an external stylesheet.
-- Version B project landing pages live at `experiment-version/projects/<slug>.html` (served as `/experiment-version/projects/<slug>` on GitHub Pages). They are generated: after changing the Version B header, footer, dialog or the `TABS` labels/intros, run `python3 scripts/build-project-pages.py` and commit the output.
+- Version B project landing pages live at `experiment-version/projects/<slug>.html` (served as `/experiment-version/projects/<slug>` on GitHub Pages). They are generated (cards are rendered into the HTML by running `core.js` in Node, which avoids layout shift): after changing the Version B header, footer, dialog, `PROJECTS` or `TABS`, run `python3 scripts/build-project-pages.py` (needs Python 3 and Node) and commit the output. Landing pages use a right-hand category sidebar; the tabbed FIG. 00 is homepage-only.
+- Version B grids load `<name>-card.webp` covers (max 720px wide, static first frame) and the detail dialog loads the full `<name>.webp`. When adding a Version B image, create its `-card.webp` too.
 - Only state facts Jason has provided (old portfolio: https://jasong3012.github.io/portfolio/). Do not invent metrics, clients or testimonials.
 
 ## Before committing
