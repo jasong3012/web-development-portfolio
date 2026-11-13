@@ -24,6 +24,7 @@
   --sun-top:#C2B8FF;--sun-bot:#6A5AE8;
   --code-bg:#12141B;--code-text:#E8EAF2;--code-dim:#7A8299;
   --orbit:#CFC8DC;--banner-a:#F2EEF4;--banner-b:#E9E4EE;--backdrop:rgba(27,24,21,.45);
+  --toggle-track:#FFFFFF;--knob:#7C6CFF;--knob-ic:#FFFFFF;
   --wrap:1200px;--gutter:28px;
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --head:"Inter Tight","Inter",system-ui,sans-serif;
@@ -39,15 +40,18 @@
   --sun-top:#8F80FF;--sun-bot:#4B3BC9;
   --code-bg:#07090D;--code-text:#E8EAF2;--code-dim:#6B7286;
   --orbit:#3A4260;--banner-a:#141824;--banner-b:#0F121B;--backdrop:rgba(4,5,9,.72);
+  --toggle-track:#141824;--knob:#A99BFF;--knob-ic:#0B0D12;
 }
 body{transition:background-color .35s var(--ease),color .35s var(--ease)}
 .header-right{display:flex;align-items:center;gap:22px}
-.theme-toggle{position:relative;width:34px;height:34px;display:grid;place-items:center;padding:0;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:color .25s,border-color .25s}
-.theme-toggle:hover,.theme-toggle:focus-visible{color:var(--accent);border-color:var(--accent-strong)}
-.theme-toggle svg{grid-area:1/1;width:18px;height:18px;transition:opacity .35s var(--ease),transform .5s var(--ease)}
-.theme-toggle .i-sun{opacity:0;transform:rotate(-90deg) scale(.6)}
-:root[data-theme="dark"] .theme-toggle .i-moon{opacity:0;transform:rotate(90deg) scale(.6)}
-:root[data-theme="dark"] .theme-toggle .i-sun{opacity:1;transform:none}
+.theme-toggle{position:relative;flex-shrink:0;width:54px;height:28px;padding:0;border:1px solid var(--line);border-radius:999px;background:var(--toggle-track);cursor:pointer;transition:background-color .35s var(--ease),border-color .25s}
+.theme-toggle:hover,.theme-toggle:focus-visible{border-color:var(--accent-strong)}
+.theme-toggle .knob{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--knob);color:var(--knob-ic);box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .45s var(--ease),background-color .35s var(--ease),color .35s}
+.theme-toggle .knob svg{grid-area:1/1;width:14px;height:14px;stroke-width:2;transition:opacity .35s var(--ease),transform .5s var(--ease)}
+.theme-toggle .i-moon{opacity:0;transform:rotate(-90deg) scale(.5)}
+:root[data-theme="dark"] .theme-toggle .knob{transform:translateX(26px)}
+:root[data-theme="dark"] .theme-toggle .i-sun{opacity:0;transform:rotate(90deg) scale(.5)}
+:root[data-theme="dark"] .theme-toggle .i-moon{opacity:1;transform:none}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -379,7 +383,7 @@ p{margin:0 0 1em}
       <a class="nav-link tracker" href="index.html">Version A</a>
       <a class="nav-link tracker" href="#contact" data-route="contact">Contact</a>
     </nav>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Switch to dark theme"><svg class="i-moon" aria-hidden="true" focusable="false" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none"><path d="M3 11.5066C3 16.7497 7.25034 21 12.4934 21C16.2209 21 19.4466 18.8518 21 15.7259C12.4934 15.7259 8.27411 11.5066 8.27411 3C5.14821 4.55344 3 7.77915 3 11.5066Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="i-sun" aria-hidden="true" focusable="false" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none"><path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme" title="Switch to dark theme"><span class="knob" aria-hidden="true"><svg class="i-moon" aria-hidden="true" focusable="false" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none"><path d="M3 11.5066C3 16.7497 7.25034 21 12.4934 21C16.2209 21 19.4466 18.8518 21 15.7259C12.4934 15.7259 8.27411 11.5066 8.27411 3C5.14821 4.55344 3 7.77915 3 11.5066Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="i-sun" aria-hidden="true" focusable="false" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none"><path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
     <button class="menu-toggle tracker" type="button" aria-expanded="false" aria-controls="main-nav">menu →</button>
     </div>
   </div>
@@ -886,8 +890,7 @@ branch protection), stop and report it.</span></code></pre>
     var btn=document.getElementById('theme-toggle'),root=document.documentElement,meta=document.querySelector('meta[name="theme-color"]');
     function apply(dark,save){
       if(dark)root.setAttribute('data-theme','dark');else root.removeAttribute('data-theme');
-      var label=dark?'Switch to light theme':'Switch to dark theme';
-      btn.setAttribute('aria-label',label);btn.title=label;btn.setAttribute('aria-pressed',String(dark));
+      btn.title=dark?'Switch to light theme':'Switch to dark theme';btn.setAttribute('aria-checked',String(dark));
       if(meta)meta.setAttribute('content',dark?'#0B0D12':'#F9F4F5');
       if(save){try{localStorage.setItem('jg-theme',dark?'dark':'light')}catch(e){}}
     }
