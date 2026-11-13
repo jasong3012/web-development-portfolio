@@ -6,10 +6,12 @@ Jason Grant's AI-assisted web development portfolio, published with GitHub Pages
 - `index.html` is a self-contained static page: CSS and JS are inline and there is no build step or package manager.
 - Images live in `assets/images/` as WebP. Convert new PNG/JPG images to WebP before committing.
 - Project cards are generated from the `PROJECTS` array in the inline script in `index.html`. Add or edit work there.
+- `experiment-version.html` is Version B (the A/B experiment). It shares `assets/experiment/site.css` (styles) and `assets/experiment/core.js` (project data in `PROJECTS`/`TABS`, card rendering, detail dialog, menu, theme) with the project pages. Keep the two `url(#...)` gradient fill rules inline in each page; they break in an external stylesheet.
+- Version B project landing pages live at `experiment-version/projects/<slug>.html` (served as `/experiment-version/projects/<slug>` on GitHub Pages). They are generated: after changing the Version B header, footer, dialog or the `TABS` labels/intros, run `python3 scripts/build-project-pages.py` and commit the output.
 - Only state facts Jason has provided (old portfolio: https://jasong3012.github.io/portfolio/). Do not invent metrics, clients or testimonials.
 
 ## Before committing
-- Open `index.html` in headless Chromium at 1440px and 390px widths. Check for no console errors and no horizontal scroll.
+- Open the changed page(s) in headless Chromium at 1440px and 390px widths. Check for no console errors and no horizontal scroll.
 
 ## Git workflow (owner's standing instruction)
 For every change Jason requests:
