@@ -366,18 +366,18 @@ branch protection), stop and report it.</span></code></pre>
 
   /* FIG. 00 tabs: work by discipline. Content from jasong3012.github.io/portfolio discipline pages. */
   var tabList=document.getElementById('work-tabs'),tabPanel=document.getElementById('work-tabpanel'),tabGrid=document.getElementById('tab-grid'),tabCount=document.getElementById('tab-count');
-  var tabIntro=document.createElement('p');tabIntro.className='tab-intro';tabPanel.insertBefore(tabIntro,tabGrid);
-  var tabFoot=document.createElement('div');tabFoot.className='tab-foot';tabPanel.appendChild(tabFoot);
   tabList.innerHTML=TABS.map(function(t,i){return '<button class="tab" type="button" role="tab" id="tab-'+t.id+'" aria-controls="work-tabpanel" aria-selected="'+(i===0)+'" tabindex="'+(i===0?0:-1)+'">'+esc(t.label)+'</button>'}).join('');
   var tabs=[].slice.call(tabList.querySelectorAll('.tab'));
-  var tabOpen=document.createElement('a');tabOpen.className='text-link tab-open';tabPanel.appendChild(tabOpen);
+  /* homepage preview: two projects per tab, then a button to the category's landing page */
+  var tabCta=document.createElement('div');tabCta.className='tab-cta';
+  tabCta.innerHTML='<a class="btn btn-solid" href="experiment-version/projects/"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>';
+  tabPanel.appendChild(tabCta);var tabOpen=tabCta.firstChild;
   function selectTab(n,focus){
     var T=TABS[n];
     tabs.forEach(function(b,i){b.setAttribute('aria-selected',String(i===n));b.tabIndex=i===n?0:-1});
     tabPanel.setAttribute('aria-labelledby',tabs[n].id);
-    tabIntro.textContent=T.intro||'';tabIntro.hidden=!T.intro;
-    tabCount.textContent=renderTab(T,n,tabGrid,tabFoot);
-    tabOpen.href='experiment-version/projects/'+T.id;tabOpen.textContent='Open the '+T.label+' page →';
+    tabCount.textContent=renderTab(T,n,tabGrid,null,2);
+    tabOpen.href='experiment-version/projects/'+T.id;tabOpen.setAttribute('aria-label','See all '+T.label+' projects');
     tabGrid.style.animation='none';void tabGrid.offsetWidth;tabGrid.style.animation='';
     if(focus){tabs[n].focus();tabs[n].scrollIntoView({block:'nearest',inline:'nearest'})}
   }
