@@ -194,6 +194,7 @@ a.tab{display:inline-flex;align-items:center;justify-content:center;text-decorat
 
 /* Work */
 .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 24px}
+a.work-card{text-decoration:none}
 .work-card{display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 .work-card.is-featured{grid-column:1/-1;display:grid;grid-template-columns:1.3fr 1fr;gap:0}
 .work-visual{background:var(--panel);border:1px solid var(--line);aspect-ratio:1440/880;overflow:hidden;display:grid;place-items:center}

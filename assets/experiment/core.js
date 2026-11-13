@@ -128,10 +128,12 @@
     setVisit(p.url,'Visit live site');
     show();
   }
-  dlg.addEventListener('close',function(){document.body.style.overflow='';if(lastFocus)lastFocus.focus()});
-  dlg.addEventListener('click',function(e){if(e.target===dlg)close()});
-  document.getElementById('dialog-close').addEventListener('click',close);
-  document.getElementById('dialog-back').addEventListener('click',close);
+  if(dlg){ /* pages without project cards (e.g. the projects index) have no dialog */
+    dlg.addEventListener('close',function(){document.body.style.overflow='';if(lastFocus)lastFocus.focus()});
+    dlg.addEventListener('click',function(e){if(e.target===dlg)close()});
+    document.getElementById('dialog-close').addEventListener('click',close);
+    document.getElementById('dialog-back').addEventListener('click',close);
+  }
   /* Mobile menu */
   var toggle=document.querySelector('.menu-toggle'),nav=document.getElementById('main-nav');
   function setMenu(o){toggle.setAttribute('aria-expanded',String(o));nav.classList.toggle('is-open',o);toggle.textContent=o?'close ×':'menu →'}
