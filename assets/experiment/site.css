@@ -110,6 +110,11 @@ a.tab{display:inline-flex;align-items:center;justify-content:center;text-decorat
 @keyframes vennIn{from{transform:var(--from) scale(.92);opacity:0}to{transform:none;opacity:1}}
 .venn-label{position:absolute;top:50%;transform:translate(-50%,-50%);width:22%;text-align:center;font:500 clamp(8.5px,1.5vw,11px)/1.6 var(--mono);letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:fadeIn .9s var(--ease) 1.1s both}
 .venn-label .v-ic{display:block;width:fit-content;margin:0 auto .9em}
+/* Venn icon motion: terminal cursor blinks, email arrow slides out to the right and fades */
+.venn-label .v-cursor{animation:vCursor 1.05s steps(1) infinite}
+@keyframes vCursor{50%{opacity:0}}
+.venn-label .v-send{animation:vSend 1.8s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes vSend{0%{opacity:0;transform:translateX(-4px)}25%,45%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(5px)}}
 .venn-label .v-ic svg{display:block;width:clamp(18px,3.2vw,28px);height:auto}
 .venn-label.l{left:25.8%;color:#FFFFFF}
 .venn-label.r{left:74.2%;color:var(--ink)}
