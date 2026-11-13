@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#F9F4F5">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23A99BFF%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%235B4BE8%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20fill%3D%22url%28%23g%29%22%20x%3D%223%22%20y%3D%223%22%20width%3D%2258%22%20height%3D%2258%22%20rx%3D%2216%22%2F%3E%3Cpath%20fill%3D%22%23fff%22%20transform%3D%22translate%2811.16%2044.50%29%20scale%280.01678%29%22%20d%3D%22M528%2020Q390%2020%20270.5%20-29.0Q151%20-78%2079.0%20-180.0Q7%20-282%207%20-443V-454H366V-443Q366%20-385%20386.0%20-345.0Q406%20-305%20442.5%20-284.0Q479%20-263%20528%20-263Q580%20-263%20616.0%20-285.0Q652%20-307%20670.5%20-351.0Q689%20-395%20689%20-459V-1490H1044V-459Q1044%20-315%20981.0%20-207.0Q918%20-99%20802.0%20-39.5Q686%2020%20528%2020Z%22%2F%3E%3Cpath%20fill%3D%22%23fff%22%20transform%3D%22translate%2828.53%2044.50%29%20scale%280.01678%29%22%20d%3D%22M784%2020Q571%2020%20409.5%20-72.5Q248%20-165%20158.0%20-336.0Q68%20-507%2068%20-742Q68%20-986%20163.5%20-1158.0Q259%20-1330%20420.0%20-1420.0Q581%20-1510%20780%20-1510Q910%20-1510%201021.0%20-1473.0Q1132%20-1436%201218.5%20-1368.0Q1305%20-1300%201358.5%20-1207.0Q1412%20-1114%201426%20-1003H1062Q1050%20-1048%201026.0%20-1084.0Q1002%20-1120%20966.5%20-1144.5Q931%20-1169%20886.0%20-1182.0Q841%20-1195%20787%20-1195Q680%20-1195%20600.5%20-1142.5Q521%20-1090%20478.0%20-989.5Q435%20-889%20435%20-747Q435%20-604%20477.0%20-503.0Q519%20-402%20597.5%20-348.5Q676%20-295%20788%20-295Q887%20-295%20955.5%20-327.5Q1024%20-360%201060%20-420Q1093%20-477%201095%20-552H800V-814H1442V-618Q1442%20-418%201357.5%20-275.0Q1273%20-132%201124.5%20-56.0Q976%2020%20784%2020Z%22%2F%3E%3C%2Fsvg%3E">
 <script>/* apply a saved theme before first paint */(function(){try{if(localStorage.getItem('jg-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})();</script>
 <meta name="description" content="Jason Grant — web developer and MarTech specialist in Bangkok. Custom CMS builds, conversion-focused landing pages and agentic, AI-assisted delivery. Version B experiment.">
 <meta property="og:title" content="Jason Grant — Web Development Portfolio (Version B)">
@@ -71,7 +72,9 @@ p{margin:0 0 1em}
 .site-header{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand-mark{width:26px;height:13px;border-radius:13px 13px 0 0;background:linear-gradient(180deg,var(--sun-top),var(--sun-bot))}
+.brand-logo{display:block;width:30px;height:30px;flex-shrink:0}
+.jg-fill{fill:url(#jg-grad)}
+.jg-cut{fill:var(--bg)}
 .brand-name{font:600 15px/1 var(--head);letter-spacing:-.01em;color:var(--ink)}
 .main-nav{display:flex;align-items:center;gap:28px}
 .nav-link{position:relative;text-decoration:none;color:var(--muted);transition:color .25s}
@@ -91,18 +94,15 @@ p{margin:0 0 1em}
 .eyebrow{font:500 11px/1 var(--mono);letter-spacing:.32em;text-transform:uppercase;color:var(--accent)}
 .gateway-name{margin-top:-28px;font:500 12px/1.6 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .gateway-name strong{display:block;font:600 clamp(26px,3.4vw,36px)/1.1 var(--head);letter-spacing:-.03em;text-transform:none;color:var(--ink);margin-bottom:8px}
-.mark{position:relative;width:min(560px,82vw);aspect-ratio:2/1}
-.mark .glow{position:absolute;left:-6%;right:-6%;bottom:0;height:116%;border-radius:999px 999px 0 0;background:radial-gradient(60% 70% at 50% 100%,rgba(124,108,255,.22),transparent 70%);filter:blur(10px)}
-.sun-well{position:absolute;inset:0;overflow:hidden}
-.mark .glyph{position:absolute;inset:0;width:100%;height:100%;animation:fadeUp 1s var(--ease) 1.2s both}
-.mark .glyph path{fill:none;stroke:var(--bg);stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
-.mark .glyph .spark{fill:var(--bg);stroke:none;transform-box:fill-box;transform-origin:center;animation:spark 4.5s ease-in-out 2.2s infinite}
+.mark{position:relative;width:min(320px,64vw);aspect-ratio:1}
+.mark .glow{position:absolute;inset:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(124,108,255,.26),transparent);filter:blur(14px);animation:fadeUp 1.4s var(--ease) .2s both}
+.mark .logo{position:absolute;inset:17%;width:66%;height:66%;filter:drop-shadow(0 18px 30px rgba(91,75,232,.28));animation:logoIn 1.6s var(--ease) both}
 .mark .orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.mark .orbit .track{fill:none;stroke:var(--orbit);stroke-width:1;stroke-dasharray:2 7;animation:fadeUp 1s var(--ease) 1.6s both}
-.mark .orbit .agent{transform-box:view-box;transform-origin:280px 280px;transform:rotate(90deg);animation:orbit 9s cubic-bezier(.45,.05,.55,.95) 2s infinite both}
+.mark .orbit .track{fill:none;stroke:var(--orbit);stroke-width:1.2;stroke-dasharray:2 7;animation:fadeUp 1s var(--ease) 1.2s both}
+.mark .orbit .agent{transform-box:view-box;transform-origin:200px 200px;animation:orbit 14s linear 1.6s infinite both}
+@keyframes logoIn{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes spark{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.8) rotate(45deg)}}
-@keyframes orbit{0%{transform:rotate(0);opacity:0}8%{opacity:1}92%{opacity:1}100%{transform:rotate(180deg);opacity:0}}
+@keyframes orbit{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .sun{position:absolute;inset:0;border-radius:999px 999px 0 0;background:radial-gradient(70% 90% at 50% 18%,rgba(255,255,255,.12),transparent 60%),linear-gradient(180deg,var(--sun-top),var(--sun-bot));animation:rise 1.8s var(--ease) both}
 @keyframes rise{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
 .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 56px}
@@ -370,11 +370,12 @@ p{margin:0 0 1em}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="jg-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sun-top)"/><stop offset="1" style="stop-color:var(--sun-bot)"/></linearGradient></defs></svg>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header" id="top">
   <div class="wrap header-inner">
-    <a class="brand" href="#home" aria-label="Jason Grant, home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Jason Grant</span></a>
+    <a class="brand" href="#home" aria-label="Jason Grant, home"><svg class="brand-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="jg-fill" x="3" y="3" width="58" height="58" rx="16"/><path class="jg-cut"  transform="translate(11.16 44.50) scale(0.01678)" d="M528 20Q390 20 270.5 -29.0Q151 -78 79.0 -180.0Q7 -282 7 -443V-454H366V-443Q366 -385 386.0 -345.0Q406 -305 442.5 -284.0Q479 -263 528 -263Q580 -263 616.0 -285.0Q652 -307 670.5 -351.0Q689 -395 689 -459V-1490H1044V-459Q1044 -315 981.0 -207.0Q918 -99 802.0 -39.5Q686 20 528 20Z"/><path class="jg-cut"  transform="translate(28.53 44.50) scale(0.01678)" d="M784 20Q571 20 409.5 -72.5Q248 -165 158.0 -336.0Q68 -507 68 -742Q68 -986 163.5 -1158.0Q259 -1330 420.0 -1420.0Q581 -1510 780 -1510Q910 -1510 1021.0 -1473.0Q1132 -1436 1218.5 -1368.0Q1305 -1300 1358.5 -1207.0Q1412 -1114 1426 -1003H1062Q1050 -1048 1026.0 -1084.0Q1002 -1120 966.5 -1144.5Q931 -1169 886.0 -1182.0Q841 -1195 787 -1195Q680 -1195 600.5 -1142.5Q521 -1090 478.0 -989.5Q435 -889 435 -747Q435 -604 477.0 -503.0Q519 -402 597.5 -348.5Q676 -295 788 -295Q887 -295 955.5 -327.5Q1024 -360 1060 -420Q1093 -477 1095 -552H800V-814H1442V-618Q1442 -418 1357.5 -275.0Q1273 -132 1124.5 -56.0Q976 20 784 20Z"/></svg><span class="brand-name">Jason Grant</span></a>
     <div class="header-right">
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a class="nav-link tracker" href="#home" data-route="home">Home</a>
@@ -395,19 +396,13 @@ p{margin:0 0 1em}
 <div class="view" id="home" data-view="home">
   <section class="gateway" aria-label="Welcome">
     <div class="eyebrow">Portfolio · Version B</div>
-    <div class="mark" role="img" aria-label="Agentic AI-assisted web development: code brackets around an AI spark, with an agent orbiting the work">
+    <div class="mark" role="img" aria-label="JG monogram logo, with an AI agent orbiting it">
       <div class="glow"></div>
-      <svg class="orbit" viewBox="0 0 560 280" aria-hidden="true" focusable="false">
-        <path class="track" d="M-20 280A300 300 0 0 1 580 280"/>
-        <g class="agent"><circle cx="-20" cy="280" r="11" style="fill:var(--teal)" opacity=".16"/><circle cx="-20" cy="280" r="5" style="fill:var(--teal)"/></g>
+      <svg class="orbit" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+        <circle class="track" cx="200" cy="200" r="186"/>
+        <g class="agent"><circle cx="200" cy="14" r="11" style="fill:var(--teal)" opacity=".16"/><circle cx="200" cy="14" r="5" style="fill:var(--teal)"/></g>
       </svg>
-      <div class="sun-well"><div class="sun">
-        <svg class="glyph" viewBox="0 0 560 280" aria-hidden="true" focusable="false">
-          <path d="M214 142 166 188 214 234"/>
-          <path d="M346 142 394 188 346 234"/>
-          <path class="spark" d="M280 146C284 174 292 182 320 188 292 194 284 202 280 230 276 202 268 194 240 188 268 182 276 174 280 146Z"/>
-        </svg>
-      </div></div>
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="jg-fill" x="3" y="3" width="58" height="58" rx="16"/><path class="jg-cut"  transform="translate(11.16 44.50) scale(0.01678)" d="M528 20Q390 20 270.5 -29.0Q151 -78 79.0 -180.0Q7 -282 7 -443V-454H366V-443Q366 -385 386.0 -345.0Q406 -305 442.5 -284.0Q479 -263 528 -263Q580 -263 616.0 -285.0Q652 -307 670.5 -351.0Q689 -395 689 -459V-1490H1044V-459Q1044 -315 981.0 -207.0Q918 -99 802.0 -39.5Q686 20 528 20Z"/><path class="jg-cut"  transform="translate(28.53 44.50) scale(0.01678)" d="M784 20Q571 20 409.5 -72.5Q248 -165 158.0 -336.0Q68 -507 68 -742Q68 -986 163.5 -1158.0Q259 -1330 420.0 -1420.0Q581 -1510 780 -1510Q910 -1510 1021.0 -1473.0Q1132 -1436 1218.5 -1368.0Q1305 -1300 1358.5 -1207.0Q1412 -1114 1426 -1003H1062Q1050 -1048 1026.0 -1084.0Q1002 -1120 966.5 -1144.5Q931 -1169 886.0 -1182.0Q841 -1195 787 -1195Q680 -1195 600.5 -1142.5Q521 -1090 478.0 -989.5Q435 -889 435 -747Q435 -604 477.0 -503.0Q519 -402 597.5 -348.5Q676 -295 788 -295Q887 -295 955.5 -327.5Q1024 -360 1060 -420Q1093 -477 1095 -552H800V-814H1442V-618Q1442 -418 1357.5 -275.0Q1273 -132 1124.5 -56.0Q976 20 784 20Z"/></svg>
     </div>
     <p class="gateway-name"><strong>Jason Grant</strong>Web developer · MarTech specialist · Agentic AI workflows</p>
     <div class="cta">
