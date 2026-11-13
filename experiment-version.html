@@ -76,7 +76,11 @@ p{margin:0 0 1em}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand-logo{display:block;width:30px;height:30px;flex-shrink:0}
 .jg-fill{fill:url(#jg-grad)}
-.jg-cut{fill:var(--bg)}
+
+.jg-term{fill:#12141B}
+:root[data-theme="dark"] .jg-term{fill:#1A1F2E;stroke:#262C3D;stroke-width:1.5}
+.jg-tfill{fill:url(#jg-term-grad)}
+.jg-acc{fill:#A99BFF}
 .brand-name{font:600 15px/1 var(--head);letter-spacing:-.01em;color:var(--ink)}
 .main-nav{display:flex;align-items:center;gap:28px}
 .nav-link{position:relative;text-decoration:none;color:var(--muted);transition:color .25s}
@@ -395,12 +399,12 @@ p{margin:0 0 1em}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="jg-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sun-top)"/><stop offset="1" style="stop-color:var(--sun-bot)"/></linearGradient></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="jg-term-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9C0FF"/><stop offset="1" stop-color="#8F80FF"/></linearGradient><linearGradient id="jg-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sun-top)"/><stop offset="1" style="stop-color:var(--sun-bot)"/></linearGradient></defs></svg>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header" id="top">
   <div class="wrap header-inner">
-    <a class="brand" href="#home" aria-label="Jason Grant, home"><svg class="brand-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="jg-fill" x="3" y="3" width="58" height="58" rx="16"/><path class="jg-cut"  transform="translate(11.16 44.50) scale(0.01678)" d="M528 20Q390 20 270.5 -29.0Q151 -78 79.0 -180.0Q7 -282 7 -443V-454H366V-443Q366 -385 386.0 -345.0Q406 -305 442.5 -284.0Q479 -263 528 -263Q580 -263 616.0 -285.0Q652 -307 670.5 -351.0Q689 -395 689 -459V-1490H1044V-459Q1044 -315 981.0 -207.0Q918 -99 802.0 -39.5Q686 20 528 20Z"/><path class="jg-cut"  transform="translate(28.53 44.50) scale(0.01678)" d="M784 20Q571 20 409.5 -72.5Q248 -165 158.0 -336.0Q68 -507 68 -742Q68 -986 163.5 -1158.0Q259 -1330 420.0 -1420.0Q581 -1510 780 -1510Q910 -1510 1021.0 -1473.0Q1132 -1436 1218.5 -1368.0Q1305 -1300 1358.5 -1207.0Q1412 -1114 1426 -1003H1062Q1050 -1048 1026.0 -1084.0Q1002 -1120 966.5 -1144.5Q931 -1169 886.0 -1182.0Q841 -1195 787 -1195Q680 -1195 600.5 -1142.5Q521 -1090 478.0 -989.5Q435 -889 435 -747Q435 -604 477.0 -503.0Q519 -402 597.5 -348.5Q676 -295 788 -295Q887 -295 955.5 -327.5Q1024 -360 1060 -420Q1093 -477 1095 -552H800V-814H1442V-618Q1442 -418 1357.5 -275.0Q1273 -132 1124.5 -56.0Q976 20 784 20Z"/></svg><span class="brand-name">Jason Grant</span></a>
+    <a class="brand" href="#home" aria-label="Jason Grant, home"><svg class="brand-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="jg-term" x="3" y="3" width="58" height="58" rx="16"/><path class="jg-tfill"  transform="translate(11.31 42.00) scale(0.02877)" d="M270 11Q155 11 87.5 -51.5Q20 -114 20 -220H170Q170 -174 197.0 -146.5Q224 -119 270 -119Q316 -119 343.0 -145.5Q370 -172 370 -218V-590H205V-730H520V-218Q520 -112 453.0 -50.5Q386 11 270 11Z"/><path class="jg-tfill"  transform="translate(26.75 42.00) scale(0.02877)" d="M305 10Q231 10 176.0 -17.5Q121 -45 90.5 -94.5Q60 -144 60 -210V-520Q60 -587 90.5 -636.0Q121 -685 176.0 -712.5Q231 -740 305 -740Q378 -740 432.5 -712.5Q487 -685 517.5 -636.0Q548 -587 548 -520H398Q398 -564 373.5 -587.0Q349 -610 304 -610Q259 -610 234.5 -587.0Q210 -564 210 -520V-210Q210 -167 234.5 -143.5Q259 -120 304 -120Q349 -120 373.5 -143.5Q398 -167 398 -210V-273H290V-400H548V-210Q548 -144 517.5 -94.5Q487 -45 432.5 -17.5Q378 10 305 10Z"/><rect class="jg-acc" x="44.11" y="38.80" width="8.00" height="3.2" rx="1"/></svg><span class="brand-name">Jason Grant</span></a>
     <div class="header-right">
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a class="nav-link tracker" href="#home" data-route="home">Home</a>
