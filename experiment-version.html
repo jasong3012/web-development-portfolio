@@ -166,6 +166,17 @@ p{margin:0 0 1em}
 .code-panel .c{color:var(--code-dim)}.code-panel .a{color:var(--accent)}.code-panel .ok{color:var(--teal)}
 .caption{margin-top:10px;font:400 11px/1.6 var(--mono);color:var(--muted);letter-spacing:.03em}
 .caption b{color:var(--accent);font-weight:500}
+.tabs{display:flex;border:1px solid var(--line);border-top:0;background:var(--bg);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;padding:15px 14px 13px;font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .2s,background-color .2s,border-color .2s}
+.tab+.tab{border-left:1px solid var(--line-soft)}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);background:var(--panel);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline-offset:-3px}
+.tab-panel{border:1px solid var(--line);border-top:0;padding:28px 24px 32px}
+.tab-panel:focus-visible{outline-offset:-3px}
+.tab-panel .work-grid{animation:tabIn .45s var(--ease)}
+@keyframes tabIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .spec-strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--panel);margin-top:28px}
 .spec-strip>div{padding:18px 20px}
 .spec-strip>div+div{border-left:1px solid var(--line)}
@@ -383,6 +394,7 @@ p{margin:0 0 1em}
 @media (max-width:640px){
   :root{--gutter:18px}
   .work-grid,.gallery,.three,.toolset,.panels,.spec-strip,.spec-list{grid-template-columns:1fr}
+  .tab-panel{padding:20px 16px 24px}
   .three>div+div,.toolset>div+div,.panels>.panel+.panel,.spec-strip>div+div{border-left:0;border-top:1px solid var(--line)}
   .loop-rows li{grid-template-columns:1fr;gap:4px}
   .post-row{grid-template-columns:1fr;gap:8px}
@@ -460,15 +472,12 @@ p{margin:0 0 1em}
       </div>
     </div>
     <div class="figure reveal">
-      <div class="figure-bar"><span><b>FIG. 00</b> · agent session</span><span>~/portfolio</span></div>
-      <pre class="code-panel" aria-label="Example agent session"><span class="a">$</span> claude "build a conversion-focused landing page"
-<span class="c">● Reading brief, brand tokens and CMS theme…</span>
-<span class="c">● Plan: hero → proof → features → CTA</span>
-<span class="ok">✓</span> Components scaffolded <span class="c">(6 files)</span>
-<span class="ok">✓</span> Responsive, a11y &amp; SEO checks passed
-<span class="ok">✓</span> GA4 + GTM events wired
-<span class="a">$</span> git push <span class="c"># reviewed by Jason</span></pre>
-      <p class="caption"><b>Fig. 00</b> — The shape of an agent-assisted build: the agent plans and executes, and I review every change before it ships.</p>
+      <div class="figure-bar"><span><b>FIG. 00</b> · work by discipline</span><span id="tab-count"></span></div>
+      <div class="tabs" role="tablist" aria-label="Work by discipline" id="work-tabs"></div>
+      <div class="tab-panel" role="tabpanel" id="work-tabpanel" tabindex="0">
+        <div class="work-grid" id="tab-grid"></div>
+      </div>
+      <p class="caption"><b>Fig. 00</b> — Work by discipline. Select a project to see its full stack.</p>
       <div class="spec-strip">
         <div><span>WordPress</span><strong>5+</strong><em>years in WordPress</em></div>
         <div><span>Platforms</span><strong>10+</strong><em>CMS &amp; web platforms</em></div>
@@ -800,15 +809,45 @@ branch protection), stop and report it.</span></code></pre>
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 
   /* Render work + gallery */
-  var grid=document.getElementById('work-grid');
-  grid.innerHTML=PROJECTS.map(function(p,i){
+  function card(p,i,inTabs){
     var tags=p.features.slice(0,4).map(function(f){return '<span class="tag">'+esc(f)+'</span>'}).join('');
-    return '<button class="work-card reveal'+(p.featured?' is-featured':'')+'" type="button" data-project="'+i+'">'+
+    return '<button class="work-card'+(inTabs?'':' reveal')+(p.featured&&!inTabs?' is-featured':'')+'" type="button" data-project="'+i+'">'+
       '<div class="work-visual"><img src="'+p.img+'" alt="'+esc(p.name)+' website shown on desktop and mobile" width="1440" height="800" loading="lazy" decoding="async"></div>'+
       '<div class="work-body"><span class="work-fig"><b>FIG. 2.'+(i+1)+'</b> · '+esc(p.kicker)+'</span>'+(p.prototype?'<span class="badge">Prototype</span>':'')+
       '<h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="tags">'+tags+'</div>'+
       '<span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button>';
-  }).join('');
+  }
+  var grid=document.getElementById('work-grid');
+  grid.innerHTML=PROJECTS.map(function(p,i){return card(p,i,false)}).join('');
+
+  /* FIG. 00 tabs: each discipline lists its projects (indexes into PROJECTS); all show the production builds for now */
+  var ALL=PROJECTS.map(function(_,i){return i});
+  var TABS=[
+    {id:'web-development',label:'Web development',items:ALL},
+    {id:'web-analytics',label:'Web analytics',items:ALL},
+    {id:'seo-performance',label:'SEO Performance',items:ALL},
+    {id:'automated-workflows',label:'Automated Workflows',items:ALL},
+    {id:'ai-chatbots',label:'AI Chatbots',items:ALL},
+    {id:'ai-content-creation',label:'AI Content Creation',items:ALL},
+    {id:'browser-games',label:'Browser Games',items:ALL}
+  ];
+  var tabList=document.getElementById('work-tabs'),tabPanel=document.getElementById('work-tabpanel'),tabGrid=document.getElementById('tab-grid'),tabCount=document.getElementById('tab-count');
+  tabList.innerHTML=TABS.map(function(t,i){return '<button class="tab" type="button" role="tab" id="tab-'+t.id+'" aria-controls="work-tabpanel" aria-selected="'+(i===0)+'" tabindex="'+(i===0?0:-1)+'">'+esc(t.label)+'</button>'}).join('');
+  var tabs=[].slice.call(tabList.querySelectorAll('.tab'));
+  function selectTab(n,focus){
+    tabs.forEach(function(b,i){b.setAttribute('aria-selected',String(i===n));b.tabIndex=i===n?0:-1});
+    tabPanel.setAttribute('aria-labelledby',tabs[n].id);
+    tabGrid.innerHTML=TABS[n].items.map(function(i){return card(PROJECTS[i],i,true)}).join('');
+    tabGrid.style.animation='none';void tabGrid.offsetWidth;tabGrid.style.animation='';
+    tabCount.textContent=TABS[n].items.length+' projects';
+    if(focus){tabs[n].focus();tabs[n].scrollIntoView({block:'nearest',inline:'nearest'})}
+  }
+  tabList.addEventListener('click',function(e){var b=e.target.closest('.tab');if(b)selectTab(tabs.indexOf(b),false)});
+  tabList.addEventListener('keydown',function(e){var n=tabs.indexOf(document.activeElement);if(n<0)return;
+    var k=e.key,to=k==='ArrowRight'?(n+1)%tabs.length:k==='ArrowLeft'?(n-1+tabs.length)%tabs.length:k==='Home'?0:k==='End'?tabs.length-1:-1;
+    if(to>-1){e.preventDefault();selectTab(to,true)}});
+  tabGrid.addEventListener('click',function(e){var c=e.target.closest('[data-project]');if(c)openProject(+c.dataset.project)});
+  selectTab(0,false);
   var gal=document.getElementById('gallery');
   gal.innerHTML=GALLERY.map(function(g,i){
     return '<button class="gallery-item reveal" type="button" data-gallery="'+i+'"><div class="g-img"><img src="'+g.src+'" alt="'+esc(g.alt)+'" width="2000" height="1545" loading="lazy" decoding="async"></div>'+
