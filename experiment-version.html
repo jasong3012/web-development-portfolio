@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/experiment/site.css">
+<link rel="stylesheet" href="assets/experiment/site.css?v=ad4ac5d89d">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -357,7 +357,7 @@ branch protection), stop and report it.</span></code></pre>
   </div>
 </dialog>
 
-<script src="assets/experiment/core.js"></script>
+<script src="assets/experiment/core.js?v=a4f6a1c555"></script>
 <script>
 (function(){
   'use strict';
@@ -418,7 +418,7 @@ branch protection), stop and report it.</span></code></pre>
 
   /* Reveal on scroll */
   var revObs='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-visible');revObs.unobserve(en.target)}})},{rootMargin:'0px 0px -6% 0px'}):null;
-  function observeReveals(scope){scope.querySelectorAll('.reveal:not(.is-visible)').forEach(function(el){revObs?revObs.observe(el):el.classList.add('is-visible')})}
+  function observeReveals(scope){if(revObs)document.documentElement.classList.add('reveal-on');scope.querySelectorAll('.reveal:not(.is-visible)').forEach(function(el){revObs?revObs.observe(el):el.classList.add('is-visible')})}
 
   /* TOC highlighting (article in-page links shouldn't change the route) */
   var toc=[].slice.call(document.querySelectorAll('.toc ol a'));

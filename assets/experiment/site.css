@@ -385,8 +385,9 @@ a.work-card{text-decoration:none}
 .work-card.is-placeholder .work-visual{background:transparent;border-style:dashed;font:500 11px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 
 /* Reveal */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.reveal.is-visible{opacity:1;transform:none}
+/* sections are visible by default; they are only hidden for the fade-in once the observer is armed (html.reveal-on), so a script error can never blank the page */
+.reveal{transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal-on .reveal:not(.is-visible){opacity:0;transform:translateY(16px)}
 
 /* Responsive */
 @media (max-width:960px){
@@ -428,5 +429,5 @@ a.work-card{text-decoration:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
+  .reveal-on .reveal:not(.is-visible){opacity:1;transform:none}
 }
