@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0B0D12">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#F9F4F5">
+<script>/* apply a saved theme before first paint */(function(){try{if(localStorage.getItem('jg-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})();</script>
 <meta name="description" content="Jason Grant — web developer and MarTech specialist in Bangkok. Custom CMS builds, conversion-focused landing pages and agentic, AI-assisted delivery. Version B experiment.">
 <meta property="og:title" content="Jason Grant — Web Development Portfolio (Version B)">
 <meta property="og:description" content="Custom CMS builds, conversion-focused landing pages, SEO, analytics and automation — shipped faster with agentic AI workflows.">
@@ -16,18 +16,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Midnight IDE palette */
-  --bg:#0B0D12;--panel:#141824;--panel-2:#1A1F2E;--line:#262C3D;--line-soft:#1C2130;
-  --ink:#E8EAF2;--text:#C9CDD9;--muted:#8E94A8;--dim:#7A8299;
-  --accent:#A99BFF;--accent-2:#5B4BE8;--accent-strong:#7C6CFF;--teal:#2DD4BF;
-  --sun-top:#8F80FF;--sun-bot:#4B3BC9;
-  --code-bg:#07090D;--code-text:#E8EAF2;--code-dim:#6B7286;
+  /* Light theme (default): warm white with #A99BFF purple */
+  color-scheme:light;
+  --bg:#F9F4F5;--panel:#F2EEF4;--panel-2:#E9E4EE;--line:#DCD6E2;--line-soft:#EAE5EE;
+  --ink:#0D0D0D;--text:#2A2724;--muted:#6F6962;--dim:#736D66;
+  --accent:#5B4BE8;--accent-2:#A99BFF;--accent-strong:#A99BFF;--teal:#0F9F8C;
+  --sun-top:#C2B8FF;--sun-bot:#6A5AE8;
+  --code-bg:#12141B;--code-text:#E8EAF2;--code-dim:#7A8299;
+  --orbit:#CFC8DC;--banner-a:#F2EEF4;--banner-b:#E9E4EE;--backdrop:rgba(27,24,21,.45);
+  --toggle-track:#FFFFFF;--knob:#7C6CFF;--knob-ic:#FFFFFF;
   --wrap:1200px;--gutter:28px;
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --head:"Inter Tight","Inter",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
+:root[data-theme="dark"]{
+  /* Midnight IDE (secondary theme) */
+  color-scheme:dark;
+  --bg:#0B0D12;--panel:#141824;--panel-2:#1A1F2E;--line:#262C3D;--line-soft:#1C2130;
+  --ink:#E8EAF2;--text:#C9CDD9;--muted:#8E94A8;--dim:#7A8299;
+  --accent:#A99BFF;--accent-2:#5B4BE8;--accent-strong:#7C6CFF;--teal:#2DD4BF;
+  --sun-top:#8F80FF;--sun-bot:#4B3BC9;
+  --code-bg:#07090D;--code-text:#E8EAF2;--code-dim:#6B7286;
+  --orbit:#3A4260;--banner-a:#141824;--banner-b:#0F121B;--backdrop:rgba(4,5,9,.72);
+  --toggle-track:#141824;--knob:#A99BFF;--knob-ic:#0B0D12;
+}
+body{transition:background-color .35s var(--ease),color .35s var(--ease)}
+.header-right{display:flex;align-items:center;gap:22px}
+.theme-toggle{position:relative;flex-shrink:0;width:54px;height:28px;padding:0;border:1px solid var(--line);border-radius:999px;background:var(--toggle-track);cursor:pointer;transition:background-color .35s var(--ease),border-color .25s}
+.theme-toggle:hover,.theme-toggle:focus-visible{border-color:var(--accent-strong)}
+.theme-toggle .knob{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--knob);color:var(--knob-ic);box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .45s var(--ease),background-color .35s var(--ease),color .35s}
+.theme-toggle .knob svg{grid-area:1/1;width:14px;height:14px;stroke-width:2;transition:opacity .35s var(--ease),transform .5s var(--ease)}
+.theme-toggle .i-moon{opacity:0;transform:rotate(-90deg) scale(.5)}
+:root[data-theme="dark"] .theme-toggle .knob{transform:translateX(26px)}
+:root[data-theme="dark"] .theme-toggle .i-sun{opacity:0;transform:rotate(90deg) scale(.5)}
+:root[data-theme="dark"] .theme-toggle .i-moon{opacity:1;transform:none}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -74,7 +98,7 @@ p{margin:0 0 1em}
 .mark .glyph path{fill:none;stroke:var(--bg);stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
 .mark .glyph .spark{fill:var(--bg);stroke:none;transform-box:fill-box;transform-origin:center;animation:spark 4.5s ease-in-out 2.2s infinite}
 .mark .orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.mark .orbit .track{fill:none;stroke:#3A4260;stroke-width:1;stroke-dasharray:2 7;animation:fadeUp 1s var(--ease) 1.6s both}
+.mark .orbit .track{fill:none;stroke:var(--orbit);stroke-width:1;stroke-dasharray:2 7;animation:fadeUp 1s var(--ease) 1.6s both}
 .mark .orbit .agent{transform-box:view-box;transform-origin:280px 280px;transform:rotate(90deg);animation:orbit 9s cubic-bezier(.45,.05,.55,.95) 2s infinite both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes spark{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.8) rotate(45deg)}}
@@ -254,7 +278,7 @@ p{margin:0 0 1em}
 .article{max-width:720px;min-width:0}
 .split>*,.contact-grid>*{min-width:0}
 .table-scroll{overflow-x:auto}
-.article-hero{position:relative;aspect-ratio:3/1;background:linear-gradient(180deg,#141824,#0F121B);border:1px solid var(--line);overflow:hidden;margin-bottom:32px}
+.article-hero{position:relative;aspect-ratio:3/1;background:linear-gradient(180deg,var(--banner-a),var(--banner-b));border:1px solid var(--line);overflow:hidden;margin-bottom:32px}
 .article-hero .sun{inset:auto 0 0;left:50%;width:42%;aspect-ratio:2/1;height:auto;transform:translateX(-50%);animation:none}
 .article-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line)}
 .article h1{font-size:clamp(32px,4.2vw,48px);margin-bottom:16px}
@@ -285,7 +309,7 @@ p{margin:0 0 1em}
 
 /* Dialog */
 .detail-dialog{width:min(920px,calc(100vw - 32px));max-height:calc(100svh - 32px);padding:0;border:1px solid var(--line);background:var(--bg);color:var(--text);overflow:auto}
-.detail-dialog::backdrop{background:rgba(4,5,9,.72)}
+.detail-dialog::backdrop{background:var(--backdrop)}
 .detail-dialog[open]{animation:viewIn .35s var(--ease)}
 .dialog-close{position:absolute;top:10px;right:10px;z-index:2;width:36px;height:36px;border:1px solid var(--line);background:var(--bg);font:400 18px/1 var(--mono);cursor:pointer;color:var(--ink)}
 .dialog-visual{background:var(--panel);border-bottom:1px solid var(--line)}
@@ -351,6 +375,7 @@ p{margin:0 0 1em}
 <header class="site-header" id="top">
   <div class="wrap header-inner">
     <a class="brand" href="#home" aria-label="Jason Grant, home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Jason Grant</span></a>
+    <div class="header-right">
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a class="nav-link tracker" href="#home" data-route="home">Home</a>
       <a class="nav-link tracker" href="#work" data-route="work">Work</a>
@@ -358,7 +383,9 @@ p{margin:0 0 1em}
       <a class="nav-link tracker" href="index.html">Version A</a>
       <a class="nav-link tracker" href="#contact" data-route="contact">Contact</a>
     </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme" title="Switch to dark theme"><span class="knob" aria-hidden="true"><svg class="i-moon" aria-hidden="true" focusable="false" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none"><path d="M3 11.5066C3 16.7497 7.25034 21 12.4934 21C16.2209 21 19.4466 18.8518 21 15.7259C12.4934 15.7259 8.27411 11.5066 8.27411 3C5.14821 4.55344 3 7.77915 3 11.5066Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="i-sun" aria-hidden="true" focusable="false" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none"><path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
     <button class="menu-toggle tracker" type="button" aria-expanded="false" aria-controls="main-nav">menu →</button>
+    </div>
   </div>
 </header>
 
@@ -372,7 +399,7 @@ p{margin:0 0 1em}
       <div class="glow"></div>
       <svg class="orbit" viewBox="0 0 560 280" aria-hidden="true" focusable="false">
         <path class="track" d="M-20 280A300 300 0 0 1 580 280"/>
-        <g class="agent"><circle cx="-20" cy="280" r="11" fill="#2DD4BF" opacity=".16"/><circle cx="-20" cy="280" r="5" fill="#2DD4BF"/></g>
+        <g class="agent"><circle cx="-20" cy="280" r="11" style="fill:var(--teal)" opacity=".16"/><circle cx="-20" cy="280" r="5" style="fill:var(--teal)"/></g>
       </svg>
       <div class="sun-well"><div class="sun">
         <svg class="glyph" viewBox="0 0 560 280" aria-hidden="true" focusable="false">
@@ -857,6 +884,19 @@ branch protection), stop and report it.</span></code></pre>
       .finally(function(){b.disabled=false});
   });
 
+
+  /* Theme toggle: light is the default, dark (Midnight IDE) is optional and remembered */
+  (function(){
+    var btn=document.getElementById('theme-toggle'),root=document.documentElement,meta=document.querySelector('meta[name="theme-color"]');
+    function apply(dark,save){
+      if(dark)root.setAttribute('data-theme','dark');else root.removeAttribute('data-theme');
+      btn.title=dark?'Switch to light theme':'Switch to dark theme';btn.setAttribute('aria-checked',String(dark));
+      if(meta)meta.setAttribute('content',dark?'#0B0D12':'#F9F4F5');
+      if(save){try{localStorage.setItem('jg-theme',dark?'dark':'light')}catch(e){}}
+    }
+    apply(root.getAttribute('data-theme')==='dark',false);
+    btn.addEventListener('click',function(){apply(root.getAttribute('data-theme')!=='dark',true)});
+  })();
 
   document.getElementById('year').textContent=new Date().getFullYear();
   route();
