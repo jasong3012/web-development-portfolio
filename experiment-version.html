@@ -64,21 +64,11 @@ p{margin:0 0 1em}
 .eyebrow{font:500 11px/1 var(--mono);letter-spacing:.32em;text-transform:uppercase;color:var(--accent)}
 .gateway-name{margin-top:-28px;font:500 12px/1.6 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .gateway-name strong{display:block;font:600 clamp(26px,3.4vw,36px)/1.1 var(--head);letter-spacing:-.03em;text-transform:none;color:var(--ink);margin-bottom:8px}
-/* Pixel merge animation (gateway) */
-.pixel-hero{position:relative;width:min(620px,92vw);margin:0}
-.pixel-hero canvas{display:block;width:100%;aspect-ratio:72/30;image-rendering:pixelated}
-.px-labels{position:relative;height:3.4em;margin-top:6px;font:500 clamp(8.5px,1.5vw,11px)/1.5 var(--mono);letter-spacing:.2em;text-transform:uppercase}
-.px-label{position:absolute;top:0;transform:translateX(-50%);width:30%;text-align:center;color:var(--ink);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.px-label i{display:inline-block;width:.75em;height:.75em;margin-right:.7em;vertical-align:-.02em}
-.px-label.l{left:19.4%}.px-label.l i{background:#a24f3b}
-.px-label.r{left:80.6%}.px-label.r i{background:#d6bfa9}
-@media (min-width:1024px){
-  /* 1.5x on desktop */
-  .pixel-hero{width:min(930px,90vw)}
-  .px-labels{font-size:16.5px}
-}
+.mark{position:relative;width:min(560px,82vw);aspect-ratio:2/1}
+.mark .glow{position:absolute;left:-6%;right:-6%;bottom:0;height:116%;border-radius:999px 999px 0 0;background:radial-gradient(60% 70% at 50% 100%,rgba(184,102,79,.16),transparent 70%);filter:blur(10px)}
+.sun-well{position:absolute;inset:0;overflow:hidden}
 .sun{position:absolute;inset:0;border-radius:999px 999px 0 0;background:radial-gradient(70% 90% at 50% 18%,rgba(255,255,255,.12),transparent 60%),linear-gradient(180deg,var(--sun-top),var(--sun-bot));animation:rise 1.8s var(--ease) both}
-@keyframes rise{from{transform:translateY(100%)}to{transform:none}}
+@keyframes rise{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
 .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 56px}
 .btn{display:inline-flex;align-items:center;gap:14px;text-decoration:none;font:500 12px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink);padding:6px 0;background:none;border:0;cursor:pointer}
 .btn .swap{display:inline-block;height:1.2em;overflow:hidden}
@@ -365,13 +355,7 @@ p{margin:0 0 1em}
 <div class="view" id="home" data-view="home">
   <section class="gateway" aria-label="Welcome">
     <div class="eyebrow">Portfolio · Version B</div>
-    <figure class="pixel-hero" id="pixel-hero" aria-label="Animation: lines of code being typed (web development) and live email, SEO and social media metrics (marketing) merge into one simple landing page">
-      <canvas id="px-canvas" aria-hidden="true"></canvas>
-      <div class="px-labels">
-        <span class="px-label l"><i aria-hidden="true"></i>Agentic Web Development</span>
-        <span class="px-label r"><i aria-hidden="true"></i>MarTech and Automation</span>
-      </div>
-    </figure>
+    <div class="mark" aria-hidden="true"><div class="glow"></div><div class="sun-well"><div class="sun"></div></div></div>
     <p class="gateway-name"><strong>Jason Grant</strong>Web developer · MarTech specialist · Agentic AI workflows</p>
     <div class="cta">
       <a class="btn" href="#approach"><span class="swap"><span class="col"><span class="t">Approach</span><span class="t">Approach</span></span></span><span class="arr">→</span></a>
@@ -848,128 +832,6 @@ branch protection), stop and report it.</span></code></pre>
   });
 
 
-  /* ---------- Gateway pixel animation: code + marketing metrics merge into a landing page ---------- */
-  (function(){
-    var fig=document.getElementById('pixel-hero'),cv=document.getElementById('px-canvas');
-    if(!fig||!cv||!cv.getContext)return;
-    var ctx=cv.getContext('2d'),COLS=72,ROWS=30;
-    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function hex(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
-    function mix(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t]}
-    var C={kw:hex('#8c4131'),id:hex('#c27a62'),str:hex('#d6bfa9'),pun:hex('#6f2f22'),com:hex('#e6d5c4'),
-      webT:hex('#c27a62'),webB:hex('#8c4131'),sandT:hex('#e6d5c4'),sandB:hex('#c9ab92'),icon:hex('#b98f75'),hot:hex('#c27a62'),
-      deep:hex('#6f2f22'),dot:hex('#f6ece3'),soft:hex('#e8d9cc'),ink:hex('#2a2724'),flash:hex('#e59a7e')};
-    var GRID='rgba(162,79,59,.07)';
-    function grad(top,bot,y0,y1){return function(y){return mix(top,bot,Math.max(0,Math.min(1,(y-y0)/(y1-y0))))}}
-
-    /* ---- LEFT: lines of code, typed token by token ---- */
-    var KIND={k:C.kw,i:C.id,s:C.str,p:C.pun,c:C.com};
-    var CODE=[ /* [indent, tokens "kind+width"] */
-      [0,'k5 i6 p1 p1'],[2,'k3 i4 p1 s7 p1'],[2,'k2 p1 i3 p1 i4 p1'],[4,'i5 p1 i3 p1 s6 p1'],
-      [4,'k4 i7 p1'],[2,'p1 k4 p1'],[4,'c11'],[2,'k6 i3 p2 i5'],[0,'p1']];
-    var code=[],order=0;
-    CODE.forEach(function(ln,li){var x=2+ln[0],y=6+li*2;
-      ln[1].split(' ').forEach(function(tok){var col=KIND[tok[0]],w=+tok.slice(1);
-        for(var k=0;k<w;k++){code.push({x:x+k,y:y,c:col,ord:order++})}x+=w+1})});
-    var TYPE_START=150,TYPE_STEP=Math.floor(2500/order);
-
-    /* ---- RIGHT: email, SEO and social icons with live metric bars ---- */
-    function bitmap(rows,ox,oy,col,out){rows.forEach(function(r,y){for(var x=0;x<r.length;x++)if(r[x]==='#')out.push({x:ox+x,y:oy+y,c:col,kind:'icon'})})}
-    var mkt=[],bars=[];
-    bitmap(['#######','##...##','#.#.#.#','#..#..#','#######'],47,6,C.icon,mkt);               /* email */
-    bitmap(['.###..','#...#.','#...#.','.###..','....#.','.....#'],47,12,C.icon,mkt);       /* SEO */
-    bitmap(['.##.##.','#######','#######','.#####.','..###..','...#...'],47,19,C.icon,mkt);/* social */
-    var MET=[[10,[2,3,2,4,3,5]],[17,[1,2,2,3,4,6]],[24,[3,2,4,3,5,4]]];
-    MET.forEach(function(m,mi){var bot=m[0];m[1].forEach(function(h,bi){var x=57+bi*2;bars.push({x:x,top:bot-h+1,bot:bot});
-      for(var lv=0;lv<h;lv++){var y=bot-lv;mkt.push({x:x,y:y,c:lv===h-1?C.hot:grad(C.sandT,C.sandB,bot-5,bot)(y),kind:'bar',rt:900+mi*260+bi*90+lv*70})}})});
-
-    /* ---- MERGED: a simple landing page ---- */
-    var page={},pageM={},ox=21,oy=4,W=30,H=22,fg=grad(C.webT,C.webB,oy,oy+H);
-    function put(m,x,y,c){m[x+','+y]=c}
-    for(var x=ox;x<ox+W;x++){for(var y=oy;y<oy+3;y++)put(page,x,y,fg(y));put(page,x,oy+H-1,fg(oy+H-1))}
-    for(y=oy;y<oy+H;y++){put(page,ox,y,fg(y));put(page,ox+W-1,y,fg(y))}
-    [2,4,6].forEach(function(d){put(page,ox+d,oy+1,C.dot)});
-    for(x=ox+3;x<ox+6;x++)put(page,x,oy+5,C.deep);                                   /* logo */
-    [17,20,23].forEach(function(nx){put(page,ox+nx,oy+5,C.id);put(page,ox+nx+1,oy+5,C.id)}); /* nav */
-    for(x=ox+3;x<ox+16;x++){put(page,x,oy+8,C.kw);put(page,x,oy+9,C.kw)}               /* headline */
-    for(x=ox+3;x<ox+13;x++)put(page,x,oy+11,C.kw);
-    for(x=ox+3;x<ox+15;x++)put(page,x,oy+13,C.str);                                   /* subtext */
-    var CTA={x0:ox+3,x1:ox+9,y0:oy+15,y1:oy+16};
-    for(x=CTA.x0;x<=CTA.x1;x++)for(y=CTA.y0;y<=CTA.y1;y++)put(pageM,x,y,C.deep);        /* call to action */
-    var ig=grad(C.sandT,C.sandB,oy+8,oy+16);
-    for(x=ox+17;x<ox+27;x++)for(y=oy+8;y<oy+17;y++)put(pageM,x,y,ig(y));               /* hero image */
-    [3,11,19].forEach(function(cx){for(x=ox+cx;x<ox+cx+7;x++){put(pageM,x,oy+18,C.hot);put(pageM,x,oy+19,C.soft);put(pageM,x,oy+20,C.soft)}}); /* feature cards */
-
-    function list(m){return Object.keys(m).map(function(k){var a=k.split(',');return {x:+a[0],y:+a[1],c:m[k]}})}
-    function byAngle(arr){var cx=0,cy=0;arr.forEach(function(p){cx+=p.x;cy+=p.y});cx/=arr.length;cy/=arr.length;
-      return arr.slice().sort(function(a,b){return Math.atan2(a.y-cy,a.x-cx)-Math.atan2(b.y-cy,b.x-cx)})}
-    var parts=[];
-    function pair(src,dst){src=byAngle(src);dst=byAngle(dst);
-      dst.forEach(function(d,i){var s=src[Math.floor(i*src.length/dst.length)],a=Math.random()*Math.PI*2,r=5+Math.random()*9;
-        parts.push({s:s,sx:s.x,sy:s.y,sc:s.c,dx:d.x,dy:d.y,dc:d.c,
-          ix:s.x+Math.cos(a)*r,iy:s.y+Math.sin(a)*r*.6,
-          ox:d.x+(d.x-36)*(.25+Math.random()*.35)+Math.cos(a)*4,oy:d.y+(d.y-15)*(.3+Math.random()*.4)+Math.sin(a)*3,
-          d1:Math.random()*500,d2:Math.abs(d.x-s.x)*12+Math.random()*350,d3:Math.random()*450,
-          arc:(Math.random()*1.6+.6)*(d.y<15?1:-1),ph:Math.random()*Math.PI*2})})}
-    pair(code,list(page));pair(mkt,list(pageM));
-
-    /* timeline (ms) */
-    var T_IN=2900,T_HOLD1=4400,T_MOVE=6900,T_HOLD2=10900,T_OUT=12300,LOOP=12800;
-    function eo(t){return 1-Math.pow(1-t,3)}function eio(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}function ei(t){return t*t*t}
-    function clamp(t){return t<0?0:t>1?1:t}
-
-    var cell=10,dpr=1,running=false,start=0,visible=true,last=0;
-    function size(){var w=cv.clientWidth;dpr=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(w*dpr);cv.height=Math.round(w*30/72*dpr);cell=cv.width/COLS}
-    function px(x,y,c,a){if(a<=0.01)return;var g=Math.max(1,cell*.14);
-      ctx.fillStyle='rgba('+Math.round(c[0])+','+Math.round(c[1])+','+Math.round(c[2])+','+a.toFixed(3)+')';
-      ctx.fillRect(Math.round(x)*cell+g/2,Math.round(y)*cell+g/2,cell-g,cell-g)}
-    function grid(){var r=Math.max(1,cell*.07);ctx.fillStyle=GRID;for(var gx=0;gx<COLS;gx++)for(var gy=0;gy<ROWS;gy++)ctx.fillRect(gx*cell+cell/2-r/2,gy*cell+cell/2-r/2,r,r)}
-    var ARROW=['#','##','###','.##'];
-    function arrow(x,y,a){ARROW.forEach(function(r,dy){for(var dx=0;dx<r.length;dx++)if(r[dx]==='#')px(x+dx,y+dy,C.ink,a*.85)})}
-
-    /* source appearance: code is typed, icons gather, bars grow */
-    function srcAlpha(p,t){var s=p.s;
-      if(s.ord!==undefined)return t>=TYPE_START+s.ord*TYPE_STEP?1:0;
-      if(s.kind==='bar')return t>=s.rt?1:0;
-      return eo(clamp((t-p.d1)/900))}
-    function srcPos(p,t){if(p.s.kind!=='icon')return [p.sx,p.sy];var k=eo(clamp((t-p.d1)/900));return [p.ix+(p.sx-p.ix)*k,p.iy+(p.sy-p.iy)*k]}
-
-    function frameAt(t){
-      last=t;if(!cv.width)return;
-      ctx.clearRect(0,0,cv.width,cv.height);grid();
-      var clickT=T_MOVE+2200,flash=t>clickT&&t<clickT+420;
-      for(var i=0;i<parts.length;i++){var p=parts[i],x,y,c,a=1;
-        if(t<T_HOLD1){var sp=srcPos(p,t);x=sp[0];y=sp[1];c=p.sc;a=srcAlpha(p,t)}
-        else if(t<T_MOVE){var k=eio(clamp((t-T_HOLD1-p.d2*.6)/1500));x=p.sx+(p.dx-p.sx)*k;y=p.sy+(p.dy-p.sy)*k-Math.sin(Math.PI*k)*p.arc;c=mix(p.sc,p.dc,k)}
-        else if(t<T_HOLD2){x=p.dx;y=p.dy;c=p.dc;
-          if(flash&&p.dx>=CTA.x0&&p.dx<=CTA.x1&&p.dy>=CTA.y0&&p.dy<=CTA.y1)c=C.flash}
-        else{var k3=ei(clamp((t-T_HOLD2-p.d3)/950));x=p.dx+(p.ox-p.dx)*k3;y=p.dy+(p.oy-p.dy)*k3;c=p.dc;a=1-k3}
-        px(x,y,c,a)}
-      if(t<T_HOLD1){
-        /* typing cursor */
-        var n=Math.min(code.length-1,Math.max(0,Math.floor((t-TYPE_START)/TYPE_STEP))),cur=code[n],done=t>TYPE_START+code.length*TYPE_STEP;
-        if(Math.floor(t/(done?420:140))%2===0)px(cur.x+(done?2:1),cur.y,C.deep,.9);
-        /* live metrics: the top of each bar ticks up and down */
-        if(t>2600)bars.forEach(function(b,bi){var on=Math.sin(t/300+bi*1.7)>.2;if(on)px(b.x,b.top-1,C.hot,.55)})}
-      if(t>=T_MOVE&&t<T_HOLD2){
-        /* a pointer glides to the call to action and clicks it */
-        var mv=eio(clamp((t-T_MOVE-500)/1600)),fx=56,fy=27,tx=CTA.x0+4,ty=CTA.y0+1,ax=fx+(tx-fx)*mv,ay=fy+(ty-fy)*mv-Math.sin(Math.PI*mv)*3;
-        var aa=clamp((t-T_MOVE-300)/300)*(1-clamp((t-(T_HOLD2-500))/400));
-        if(flash){var r=Math.min(1,Math.floor((t-clickT)/180));for(var rx=CTA.x0-1-r;rx<=CTA.x1+1+r;rx++){px(rx,CTA.y0-1-r,C.flash,.5-r*.15);px(rx,CTA.y1+1+r,C.flash,.5-r*.15)}}
-        arrow(ax,ay,aa)}
-    }
-    function loop(now){if(!running)return;if(!start)start=now;frameAt((now-start)%LOOP);requestAnimationFrame(loop)}
-    function play(){if(reduce||running||!visible||document.hidden)return;running=true;requestAnimationFrame(loop)}
-    function stop(){running=false}
-    var STILL=T_MOVE+300;
-    function resized(){size();if(!running)frameAt(reduce?STILL:last)}
-    if('ResizeObserver' in window){new ResizeObserver(resized).observe(cv)}else{window.addEventListener('resize',resized)}
-    size();
-    if(reduce){frameAt(STILL)}else{frameAt(0);play()}
-    if('IntersectionObserver' in window){new IntersectionObserver(function(es){visible=es[0].isIntersecting;visible?play():stop()}).observe(fig)}
-    document.addEventListener('visibilitychange',function(){document.hidden?stop():play()});
-    window.__pxFrame=function(t){stop();frameAt(t)};
-  })();
   document.getElementById('year').textContent=new Date().getFullYear();
   route();
 })();
