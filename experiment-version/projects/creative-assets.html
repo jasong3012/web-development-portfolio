@@ -15,8 +15,9 @@
 <meta property="og:url" content="https://jasong3012.github.io/web-development-portfolio/experiment-version/projects/creative-assets">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/experiment/site.css">
+<link rel="preload" href="../../assets/experiment/core.js" as="script">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -49,11 +50,13 @@
       <div class="label"><b>07</b> — projects by discipline</div>
       <div class="lede"><p>Visual and written content across social media, email marketing automation and video, plus full-length articles published on the web.</p></div>
     </div>
-    <div class="figure">
-      <div class="figure-bar"><span><b>FIG. 07</b> · creative assets</span><span id="disc-count"></span></div>
-      <nav class="tabs" aria-label="Projects by discipline"><a class="tab" href="web-development">Web development</a><a class="tab" href="web-analytics">Web analytics</a><a class="tab" href="seo-performance">SEO Performance</a><a class="tab" href="automation">Automated Workflows</a><a class="tab" href="chatbot-development">AI Chatbots</a><a class="tab" href="ai-content-creation">AI Content Creation</a><a class="tab" href="creative-assets" aria-current="page">Creative Assets</a><a class="tab" href="games">Browser Games</a></nav>
-      <div class="tab-panel"><div class="work-grid" id="disc-grid"></div><div class="tab-foot" id="disc-foot" hidden></div></div>
-      <p class="caption"><b>Fig. 07</b> — Creative Assets. Select a project to see the details.</p>
+    <div class="proj-layout">
+      <div class="figure">
+        <div class="figure-bar"><span><b>FIG. 07</b> · creative assets</span><span>4 projects</span></div>
+        <div class="tab-panel"><div class="work-grid" id="disc-grid"><button class="work-card" type="button" data-item="6:0"><div class="work-visual"><img src="../../assets/images/disciplines/software-company-social-media-posts-card.webp" alt="Social Media Content" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 0.1</b> · Social graphics · Animation · 11 images</span><h3>Social Media Content</h3><p>Graphics and animated visuals created and shared across social media platforms.</p><div class="tags"><span class="tag">Social media</span><span class="tag">Animation</span><span class="tag">Design</span></div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-item="6:1"><div class="work-visual"><img src="../../assets/images/disciplines/hubspot-marketingautomation-flow-card.webp" alt="Email Marketing Automation Campaigns" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 0.2</b> · HubSpot · MoEngage · 6 images</span><h3>Email Marketing Automation Campaigns</h3><p>Email marketing automation flows with carefully crafted templates for personalised content.</p><div class="tags"><span class="tag">Email automation</span><span class="tag">HubSpot</span><span class="tag">MoEngage</span></div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-item="6:2"><div class="work-visual"><img src="../../assets/images/disciplines/youtube-cpxtc_7qokc-card.webp" alt="Video Edits" loading="lazy" decoding="async"></div><div class="work-body"><span class="work-fig"><b>FIG. 0.3</b> · Premiere Pro</span><h3>Video Edits</h3><p>Video editing work, mostly done in Premiere Pro.</p><div class="tags"><span class="tag">Premiere Pro</span><span class="tag">Video editing</span></div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button><button class="work-card" type="button" data-item="6:3"><div class="work-visual poster"><ul><li>Improving User Experience with Gen AI File Upload Tools</li><li>How to Upload Files using JavaScript - Simplified</li><li>Web Form vs. API: Which is Best for Seamless File Uploads?</li><li>Full Landing Page: Award-winning SEO Service Provider</li></ul><i>8 published pieces</i></div><div class="work-body"><span class="work-fig"><b>FIG. 0.4</b> · Copywriting · SEO</span><h3>Written Blog Articles</h3><p>Full-length articles and landing page copy published on the web.</p><div class="tags"><span class="tag">Copywriting</span><span class="tag">SEO</span><span class="tag">B2B</span></div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button></div><div class="tab-foot" hidden></div></div>
+        <p class="caption"><b>Fig. 07</b> — Creative Assets. Select a project to see the details.</p>
+      </div>
+      <aside class="proj-side" aria-label="Project categories"><p class="side-title">Projects</p><ul><li><a href="./">All projects<span>28</span></a></li><li><a href="web-development">Web development<span>7</span></a></li><li><a href="web-analytics">Web analytics<span>3</span></a></li><li><a href="seo-performance">SEO Performance<span>6</span></a></li><li><a href="automation">Automated Workflows<span>5</span></a></li><li><a href="chatbot-development">AI Chatbots<span>soon</span></a></li><li><a href="ai-content-creation">AI Content Creation<span>3</span></a></li><li><a href="creative-assets" aria-current="page">Creative Assets<span>4</span></a></li><li><a href="games">Browser Games<span>soon</span></a></li></ul></aside>
     </div>
   </div>
 </section>
@@ -70,7 +73,6 @@
     </div>
   </div>
 </footer>
-
 <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="dialog-title">
   <button class="dialog-close" id="dialog-close" type="button" aria-label="Close details">×</button>
   <div class="dialog-visual" id="dialog-visual"><img id="dialog-image" alt="" width="1440" height="800" decoding="async"></div>
@@ -87,14 +89,7 @@
     </div>
   </div>
 </dialog>
-
 <script src="../../assets/experiment/core.js"></script>
-<script>
-(function(){
-  var J=window.JG,n=J.TABS.findIndex(function(t){return t.id==='creative-assets'}),grid=document.getElementById('disc-grid');
-  document.getElementById('disc-count').textContent=J.renderTab(J.TABS[n],n,grid,document.getElementById('disc-foot'));
-  grid.addEventListener('click',J.gridClick);
-})();
-</script>
+<script>document.getElementById('disc-grid').addEventListener('click',JG.gridClick)</script>
 </body>
 </html>

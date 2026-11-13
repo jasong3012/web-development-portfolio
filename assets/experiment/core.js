@@ -3,6 +3,8 @@
 (function(){
   'use strict';
   var BASE=document.documentElement.getAttribute('data-base')||'';
+  /* grids load small *-card.webp covers; the dialog loads the full image */
+  function thumb(src){return src.replace(/\.webp$/,'-card.webp')}
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   var PROJECTS=[
     {name:'Electrolux (Sweden)',kicker:'Enterprise · Ecommerce · EU',featured:true,url:'https://www.electrolux.se/discover/saphirmatt-induction-hobs/',img:BASE+'assets/images/elx-eu-web-dev-mockup.webp',
@@ -30,7 +32,7 @@
   function card(p,i,inTabs){
     var tags=p.features.slice(0,4).map(function(f){return '<span class="tag">'+esc(f)+'</span>'}).join('');
     return '<button class="work-card'+(inTabs?'':' reveal')+(p.featured&&!inTabs?' is-featured':'')+'" type="button" data-project="'+i+'">'+
-      '<div class="work-visual"><img src="'+p.img+'" alt="'+esc(p.name)+' website shown on desktop and mobile" width="1440" height="800" loading="lazy" decoding="async"></div>'+
+      '<div class="work-visual"><img src="'+thumb(p.img)+'" alt="'+esc(p.name)+' website shown on desktop and mobile" width="720" height="400" loading="lazy" decoding="async"></div>'+
       '<div class="work-body"><span class="work-fig"><b>FIG. 2.'+(i+1)+'</b> · '+esc(p.kicker)+'</span>'+(p.prototype?'<span class="badge">Prototype</span>':'')+
       '<h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><div class="tags">'+tags+'</div>'+
       '<span class="work-cta"><span>View stack &amp; details</span><span aria-hidden="true">→</span></span></div></button>';
@@ -79,7 +81,7 @@
     var vis;
     if(it.poster&&it.poster.list){vis='<div class="work-visual poster"><ul>'+it.links.slice(0,4).map(function(l){return '<li>'+esc(l.t)+'</li>'}).join('')+'</ul><i>'+it.links.length+' published pieces</i></div>'}
     else if(it.poster){vis='<div class="work-visual poster"><span class="play" aria-hidden="true"></span><i>'+esc(it.kicker)+'</i><b>'+esc(it.name)+'</b></div>'}
-    else{vis='<div class="work-visual"><img src="'+it.imgs[0]+'" alt="'+esc(it.name)+'" loading="lazy" decoding="async"></div>'}
+    else{vis='<div class="work-visual"><img src="'+thumb(it.imgs[0])+'" alt="'+esc(it.name)+'" loading="lazy" decoding="async"></div>'}
     var tags=(it.tags||[]).slice(0,4).map(function(f){return '<span class="tag">'+esc(f)+'</span>'}).join('');
     var more=it.imgs&&it.imgs.length>1?' · '+it.imgs.length+' images':'';
     return '<button class="work-card" type="button" data-item="'+t+':'+k+'">'+vis+'<div class="work-body"><span class="work-fig"><b>FIG. 0.'+n+'</b> · '+esc(it.kicker)+more+'</span><h3>'+esc(it.name)+'</h3><p>'+esc(it.summary)+'</p><div class="tags">'+tags+'</div><span class="work-cta"><span>View details</span><span aria-hidden="true">→</span></span></div></button>';
@@ -106,7 +108,7 @@
   function openItem(t,k){
     var it=TABS[t].items[k];resetExtras();
     if(it.imgs){visual.classList.add('is-photo');dImg.src=it.imgs[0];dImg.alt=it.name+', image 1';
-      if(it.imgs.length>1){thumbs.hidden=false;thumbs.innerHTML=it.imgs.map(function(src,i){return '<button type="button" aria-pressed="'+(i===0)+'" aria-label="Show image '+(i+1)+' of '+it.imgs.length+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></button>'}).join('');
+      if(it.imgs.length>1){thumbs.hidden=false;thumbs.innerHTML=it.imgs.map(function(src,i){return '<button type="button" aria-pressed="'+(i===0)+'" aria-label="Show image '+(i+1)+' of '+it.imgs.length+'"><img src="'+thumb(src)+'" alt="" loading="lazy" decoding="async"></button>'}).join('');
         thumbs.onclick=function(e){var b=e.target.closest('button');if(!b)return;var i=[].indexOf.call(thumbs.children,b);dImg.src=it.imgs[i];dImg.alt=it.name+', image '+(i+1);[].forEach.call(thumbs.children,function(x,j){x.setAttribute('aria-pressed',String(j===i))})}}}
     else{visual.hidden=true}
     document.getElementById('dialog-kicker').textContent='FIG. 0.'+(k+1)+' · '+it.kicker;
@@ -136,14 +138,17 @@
   }
   /* Mobile menu */
   var toggle=document.querySelector('.menu-toggle'),nav=document.getElementById('main-nav');
+  if(toggle&&nav){
   function setMenu(o){toggle.setAttribute('aria-expanded',String(o));nav.classList.toggle('is-open',o);toggle.textContent=o?'close ×':'menu →'}
   toggle.addEventListener('click',function(){setMenu(toggle.getAttribute('aria-expanded')!=='true')});
   nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  }
 
   /* Theme toggle: light is the default, dark (Midnight IDE) is optional and remembered */
   (function(){
     var btn=document.getElementById('theme-toggle'),root=document.documentElement,meta=document.querySelector('meta[name="theme-color"]');
+    if(!btn)return;
     function apply(dark,save){
       if(dark)root.setAttribute('data-theme','dark');else root.removeAttribute('data-theme');
       btn.title=dark?'Switch to light theme':'Switch to dark theme';btn.setAttribute('aria-checked',String(dark));
@@ -154,7 +159,14 @@
     btn.addEventListener('click',function(){apply(root.getAttribute('data-theme')!=='dark',true)});
   })();
 
+  function counts(T){return T.projects?PROJECTS.length:T.items?T.items.length:0}
+  function categoryCard(T,i){
+    var n=counts(T),cover=T.projects?PROJECTS[0].img:(T.items&&T.items[0].imgs?T.items[0].imgs[0]:null);
+    var vis=cover?'<div class="work-visual"><img src="'+thumb(cover)+'" alt="" loading="lazy" decoding="async"></div>':'<div class="work-visual poster"><i>'+(n?'Projects':'Coming soon')+'</i><b>'+esc(T.label)+'</b></div>';
+    var intro=T.intro||'Live, non-confidential sites across enterprise and open-source CMS platforms.';
+    return '<a class="work-card" href="'+T.id+'">'+vis+'<div class="work-body"><span class="work-fig"><b>FIG. 0'+(i+1)+'</b> · '+(n?n+(n===1?' project':' projects'):'coming soon')+'</span><h3>'+esc(T.label)+'</h3><p>'+esc(intro)+'</p><span class="work-cta"><span>Open page</span><span aria-hidden="true">→</span></span></div></a>';
+  }
   var yr=document.getElementById('year');if(yr)yr.textContent=new Date().getFullYear();
-  window.JG={BASE:BASE,PROJECTS:PROJECTS,TABS:TABS,esc:esc,card:card,itemCard:itemCard,phCard:phCard,linkList:linkList,renderTab:renderTab,gridClick:gridClick,
+  window.JG={BASE:BASE,thumb:thumb,counts:counts,categoryCard:categoryCard,PROJECTS:PROJECTS,TABS:TABS,esc:esc,card:card,itemCard:itemCard,phCard:phCard,linkList:linkList,renderTab:renderTab,gridClick:gridClick,
     openProject:openProject,openItem:openItem,show:show,close:close,resetExtras:resetExtras,setVisit:setVisit,specRow:specRow,visual:visual};
 })();

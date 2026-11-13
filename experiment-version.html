@@ -14,7 +14,7 @@
 <title>Jason Grant — Portfolio (Version B)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/experiment/site.css">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
@@ -42,7 +42,7 @@
 <main id="main">
 
 <!-- ============ HOME (gateway) ============ -->
-<div class="view" id="home" data-view="home">
+<div class="view is-active" id="home" data-view="home">
   <section class="gateway" aria-label="Welcome">
     <div class="eyebrow">Portfolio · Version B</div>
     <figure class="venn" aria-label="Venn diagram: Agentic Web Development overlaps with MarTech and Automation, and I work where they meet">
@@ -352,6 +352,7 @@ branch protection), stop and report it.</span></code></pre>
 </article>
 
 </main>
+<script>/* show the view named in the URL before first paint (avoids a layout shift) */(function(){var t=document.getElementById(location.hash.slice(1)),v=t&&(t.classList.contains('view')?t:t.closest('.view'));if(v&&v.id!=='home'){document.getElementById('home').classList.remove('is-active');v.classList.add('is-active')}})();</script>
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
@@ -425,7 +426,7 @@ branch protection), stop and report it.</span></code></pre>
   selectTab(0,false);
   var gal=document.getElementById('gallery');
   gal.innerHTML=GALLERY.map(function(g,i){
-    return '<button class="gallery-item reveal" type="button" data-gallery="'+i+'"><div class="g-img"><img src="'+g.src+'" alt="'+esc(g.alt)+'" width="2000" height="1545" loading="lazy" decoding="async"></div>'+
+    return '<button class="gallery-item reveal" type="button" data-gallery="'+i+'"><div class="g-img"><img src="'+J.thumb(g.src)+'" alt="'+esc(g.alt)+'" width="720" height="556" loading="lazy" decoding="async"></div>'+
       '<h3>'+esc(g.title)+'</h3><p class="caption"><b>Fig. 3.'+(i+1)+'</b> — '+esc(g.alt)+'.</p></button>';
   }).join('');
 
@@ -443,12 +444,11 @@ branch protection), stop and report it.</span></code></pre>
     var changed=!view.classList.contains('is-active');
     views.forEach(function(v){v.classList.toggle('is-active',v===view)});
     var key=view.dataset.view;
-    setActive(key==='post'?'blog':key==='discipline'?'work':(key==='home'&&(id==='work'||id==='contact')?id:key));
-    [].forEach.call(document.querySelectorAll('.subnav a'),function(a){if(a.getAttribute('href')==='#'+view.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    setActive(key==='post'?'blog':(key==='home'&&(id==='work'||id==='contact')?id:key));
     if(target===view){window.scrollTo({top:0,behavior:changed?'auto':'smooth'})}
     else{requestAnimationFrame(function(){target.scrollIntoView({behavior:changed?'auto':'smooth'})})}
     if(changed)observeReveals(view);
-    document.title=key==='discipline'?view.dataset.title:key==='post'?'Building this portfolio with an AI agent — Jason Grant':key==='blog'?'Blog — Jason Grant':'Jason Grant — Portfolio (Version B)';
+    document.title=key==='post'?'Building this portfolio with an AI agent — Jason Grant':key==='blog'?'Blog — Jason Grant':'Jason Grant — Portfolio (Version B)';
   }
   function setActive(r){navLinks.forEach(function(a){a.classList.toggle('is-active',a.dataset.route===r)})}
   window.addEventListener('hashchange',route);
