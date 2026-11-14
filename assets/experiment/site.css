@@ -241,14 +241,19 @@ p{margin:0 0 1em}
 .disc-panel{border:1px solid var(--line);border-top:0;padding:28px 24px 32px}
 .disc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px 24px}
 .disc-grid>*{min-width:0}
-.disc-card{display:flex;flex-direction:column}
 .disc-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center}
 .disc-media>span{font:500 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .disc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
-.disc-card:hover .disc-media img{transform:scale(1.035)}
-.disc-card .work-body{flex:1}
-.disc-card .btn{align-self:flex-start;margin-top:auto}
-.disc-card .work-body p{margin-bottom:10px}
+.disc-card{display:flex;flex-direction:column;margin:-12px;padding:12px;color:inherit;text-decoration:none;border-radius:4px;transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-color .3s}
+.disc-card .work-body{flex:1;padding-bottom:4px}
+.disc-card h3{transition:color .25s}
+.disc-card .disc-media{transition:border-color .3s}
+.disc-card:hover,.disc-card:focus-visible{transform:translateY(-8px);background:var(--panel);box-shadow:0 22px 44px -18px rgba(43,26,150,.35),0 0 0 1px var(--line)}
+:root[data-theme="dark"] .disc-card:hover,:root[data-theme="dark"] .disc-card:focus-visible{box-shadow:0 22px 44px -18px rgba(0,0,0,.8),0 0 0 1px var(--line)}
+.disc-card:hover h3,.disc-card:focus-visible h3{color:var(--accent)}
+.disc-card:hover .disc-media,.disc-card:focus-visible .disc-media{border-color:var(--accent)}
+.disc-card:hover .disc-media img,.disc-card:focus-visible .disc-media img{transform:scale(1.05)}
+.disc-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (max-width:1023px){.disc-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.disc-grid{grid-template-columns:1fr;gap:32px}.disc-panel{padding:20px 16px 24px}}
 .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 24px}
