@@ -456,7 +456,7 @@ branch protection), stop and report it.</span></code></pre>
           t='matrix('+[A,B,B,D,E,F].map(function(n){return n.toFixed(4)}).join(' ')+')';
       o.els.forEach(function(el){el.setAttribute('transform',t)})}
     function tick(now){var dt=Math.min(.032,(now-(last||now))/1000)||.016;last=now;var busy=false;
-      S.forEach(function(o){var k=down?260:170,damp=down?16:9;
+      S.forEach(function(o){var k=down?200:105,damp=down?12:4.6;
         o.vx+=(k*(o.tx-o.x)-damp*o.vx)*dt;o.vy+=(k*(o.ty-o.y)-damp*o.vy)*dt;o.x+=o.vx*dt;o.y+=o.vy*dt;
         if(Math.abs(o.tx-o.x)+Math.abs(o.ty-o.y)+Math.abs(o.vx)+Math.abs(o.vy)>1e-4)busy=true;apply(o)});
       raf=busy?requestAnimationFrame(tick):0;if(!busy)last=0}
