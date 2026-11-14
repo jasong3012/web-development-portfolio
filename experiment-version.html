@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/experiment/site.css?v=445ed1c33a">
+<link rel="stylesheet" href="assets/experiment/site.css?v=c32aeec80e">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -71,19 +71,9 @@
         <g class="c-right"><circle cx="390" cy="180" r="150" fill="url(#vg-shade)"/><g clip-path="url(#vc-r)"><circle cx="390" cy="180" r="146" fill="none" stroke="url(#vg-back)" stroke-width="16" filter="url(#vg-blur6)"/></g><ellipse class="spec spec-r" cx="332" cy="96" rx="66" ry="30" transform="rotate(-32 332 96)" fill="url(#vg-spec)" filter="url(#vg-soft)"/><circle cx="390" cy="180" r="149.3" fill="none" stroke="url(#vg-rim)" stroke-width="1.4"/></g>
         <g class="grain" clip-path="url(#vc-u)"><rect x="80" y="30" width="460" height="300" filter="url(#vg-grain)"/></g>
       </svg>
-      <span class="venn-label l">Web<br>Developer<small class="v-hint"><span class="h-m">Hover</span><span class="h-t">Tap</span> to run</small></span>
-      <span class="venn-label r">MarTech<br>Specialist<small class="v-hint"><span class="h-m">Hover</span><span class="h-t">Tap</span> to run</small></span>
-      <button class="venn-hit l" type="button" data-side="l" aria-pressed="false" aria-label="Web Developer: play a coding terminal animation"></button>
-      <button class="venn-hit r" type="button" data-side="r" aria-pressed="false" aria-label="MarTech Specialist: play an automated email flow animation"></button>
+      <span class="venn-label l">Web<br>Developer</span>
+      <span class="venn-label r">MarTech<br>Specialist</span>
       <button class="venn-core" type="button" aria-describedby="venn-me"><span class="sr-only">Where the two meet</span><span class="venn-tip" id="venn-me" role="tooltip">Me</span></button>
-      <div class="vp vp-term" aria-hidden="true">
-        <div class="vp-bar"><i></i><i></i><i></i><span>~/portfolio — zsh</span></div>
-        <div class="vp-body"><span class="ln" style="--n:31;--d:0.35s;--t:0.70s"><b>$</b> claude &quot;build a landing page&quot;</span><span class="ln out" style="--n:19;--d:1.20s;--t:0.22s">› planning sections</span><span class="ln out" style="--n:23;--d:1.55s;--t:0.22s">› writing index.html  ✓</span><span class="ln out" style="--n:23;--d:1.90s;--t:0.22s">› running checks      ✓</span><span class="ln" style="--n:22;--d:2.35s;--t:0.70s"><b>$</b> git push origin main</span><span class="ln ok" style="--n:26;--d:3.15s;--t:0.22s">✓ deployed to GitHub Pages</span><span class="ln cur" style="--n:2;--d:3.6s;--t:.05s"><b>$</b> </span></div>
-      </div>
-      <div class="vp vp-flow" aria-hidden="true">
-        <div class="vp-bar"><i></i><i></i><i></i><span>Welcome journey</span></div>
-        <div class="vp-body"><ol class="flow"><li style="--i:0"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span><span class="ft"><b>Trigger</b>Form submitted</span></li><li style="--i:1"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="ft"><b>Wait</b>1 day</span></li><li style="--i:2"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span><span class="ft"><b>Send</b>Welcome email</span></li><li style="--i:3"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="7" r="2.2"/><path d="M6 7.2v9.6M18 9.2c0 4.5-6 4-11 7.6"/></svg></span><span class="ft"><b>If opened</b>Nurture series</span></li></ol><span class="flow-pkt"></span></div>
-      </div>
       </div>
     </figure>
     <p class="gateway-name"><strong>Jason Grant</strong>Web developer · MarTech specialist · Agentic AI workflows</p>
@@ -449,25 +439,10 @@ branch protection), stop and report it.</span></code></pre>
   var EMAIL='jasong3012@gmail.com';
   var J=window.JG,TABS=J.TABS,esc=J.esc,renderTab=J.renderTab,gridClick=J.gridClick;
 
-  /* Hero Venn: hover (or tap) a side to play its demo; gentle 3D tilt follows the mouse */
+  /* Hero Venn: gentle 3D tilt follows the mouse */
   (function(){
     var v=document.querySelector('.venn'),stage=v&&v.querySelector('.venn-stage');if(!stage)return;
-    var hits=[].slice.call(v.querySelectorAll('.venn-hit')),still=matchMedia('(prefers-reduced-motion: reduce)').matches,mouse=false;
-    function set(side){
-      if((v.getAttribute('data-active')||null)===side)return;
-      if(side)v.setAttribute('data-active',side);else v.removeAttribute('data-active');
-      hits.forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-side')===side))});
-    }
-    hits.forEach(function(b){
-      var side=b.getAttribute('data-side');
-      b.addEventListener('pointerenter',function(e){mouse=e.pointerType==='mouse';if(mouse)set(side)});
-      b.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')set(null)});
-      b.addEventListener('pointerdown',function(e){mouse=e.pointerType==='mouse'});
-      b.addEventListener('click',function(e){if(mouse&&e.detail)set(side);else set(v.getAttribute('data-active')===side?null:side)});
-    });
-    document.addEventListener('click',function(e){if(!v.contains(e.target))set(null)});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape')set(null)});
-    if(still)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     v.addEventListener('pointermove',function(e){
       if(e.pointerType!=='mouse')return;
       var r=v.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
