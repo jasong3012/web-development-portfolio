@@ -237,6 +237,7 @@ p{margin:0 0 1em}
 
 /* Work */
 /* Homepage FIG. 00: discipline cards, 3 x 2 */
+.intro-fig{margin-top:56px}
 .disc-panel{border:1px solid var(--line);border-top:0;padding:28px 24px 32px}
 .disc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px 24px}
 .disc-grid>*{min-width:0}
