@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/experiment/site.css?v=00e7181648">
+<link rel="stylesheet" href="assets/experiment/site.css?v=445ed1c33a">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -49,19 +49,27 @@
       <div class="venn-stage">
       <svg viewBox="0 0 620 360" aria-hidden="true" focusable="false">
         <defs>
-          <linearGradient id="vg-left" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--venn-l-top)"/><stop offset="1" style="stop-color:var(--venn-l-bot)"/></linearGradient>
-          <linearGradient id="vg-right" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--venn-r-top)"/><stop offset="1" style="stop-color:var(--venn-r-bot)"/></linearGradient>
-          <radialGradient id="vg-shade-l" cx=".42" cy=".36" r=".7"><stop offset=".5" stop-color="#140B4A" stop-opacity="0"/><stop offset="1" stop-color="#140B4A" stop-opacity=".45"/></radialGradient>
-          <radialGradient id="vg-shade-r" cx=".42" cy=".36" r=".7"><stop offset=".5" style="stop-color:var(--venn-r-rim)" stop-opacity="0"/><stop offset="1" style="stop-color:var(--venn-r-rim)" stop-opacity=".42"/></radialGradient>
-          <radialGradient id="vg-spec" cx=".34" cy=".22" r=".36"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset=".55" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-          <linearGradient id="vg-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
-          <radialGradient id="vg-lens" cx=".5" cy=".28" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-          <clipPath id="vc-l"><circle cx="230" cy="180" r="150"/></clipPath>
+          <radialGradient id="vg-left" cx=".36" cy=".3" r=".78"><stop offset="0" style="stop-color:var(--venn-l-top)"/><stop offset=".75" style="stop-color:var(--venn-l-bot)"/><stop offset="1" style="stop-color:var(--venn-l-bot)"/></radialGradient>
+          <radialGradient id="vg-right" cx=".36" cy=".3" r=".78"><stop offset="0" style="stop-color:var(--venn-r-top)"/><stop offset=".75" style="stop-color:var(--venn-r-bot)"/><stop offset="1" style="stop-color:var(--venn-r-bot)"/></radialGradient>
+          <!-- body shading: deep at the lower-left edge, like light falling from the top left -->
+          <radialGradient id="vg-shade" cx=".6" cy=".36" r=".72"><stop offset=".35" stop-color="#0E0838" stop-opacity="0"/><stop offset=".85" stop-color="#0E0838" stop-opacity=".38"/><stop offset="1" stop-color="#0E0838" stop-opacity=".55"/></radialGradient>
+          <!-- back light: a bright rim that gathers on the lower-right edge -->
+          <linearGradient id="vg-back" x1=".15" y1=".1" x2=".85" y2=".95"><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset=".82" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity=".85"/></linearGradient>
+          <!-- glossy specular highlight, top left -->
+          <radialGradient id="vg-spec"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <linearGradient id="vg-rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".3" stop-color="#fff" stop-opacity="0"/><stop offset=".8" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".7"/></linearGradient>
+          <!-- the overlap reads as two glass bodies stacked: deeper colour -->
+          <radialGradient id="vg-lens" cx=".5" cy=".42" r=".62"><stop offset="0" stop-color="#0B0630" stop-opacity=".42"/><stop offset="1" stop-color="#0B0630" stop-opacity=".62"/></radialGradient>
+          <filter id="vg-soft" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="4"/></filter><filter id="vg-blur6" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="6"/></filter>
+          <filter id="vg-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+          <clipPath id="vc-l"><circle cx="230" cy="180" r="150"/></clipPath><clipPath id="vc-r"><circle cx="390" cy="180" r="150"/></clipPath>
+          <clipPath id="vc-u"><circle cx="230" cy="180" r="150"/><circle cx="390" cy="180" r="150"/></clipPath>
         </defs>
-        <g class="c-left"><circle cx="230" cy="180" r="150" fill="url(#vg-left)"/><circle cx="230" cy="180" r="150" fill="url(#vg-shade-l)"/><circle cx="230" cy="180" r="150" fill="url(#vg-spec)"/><circle cx="230" cy="180" r="149" fill="none" stroke="url(#vg-rim)" stroke-width="1.5"/></g>
+        <g class="c-left"><circle cx="230" cy="180" r="150" fill="url(#vg-left)"/><circle cx="230" cy="180" r="150" fill="url(#vg-shade)"/><g clip-path="url(#vc-l)"><circle cx="230" cy="180" r="146" fill="none" stroke="url(#vg-back)" stroke-width="16" filter="url(#vg-blur6)"/></g><ellipse class="spec" cx="172" cy="96" rx="66" ry="30" transform="rotate(-32 172 96)" fill="url(#vg-spec)" filter="url(#vg-soft)"/><circle cx="230" cy="180" r="149.3" fill="none" stroke="url(#vg-rim)" stroke-width="1.4"/></g>
         <g class="c-right c-blend"><circle cx="390" cy="180" r="150" fill="url(#vg-right)"/></g>
-        <g class="c-right"><circle cx="390" cy="180" r="150" fill="url(#vg-shade-r)"/><circle class="spec-r" cx="390" cy="180" r="150" fill="url(#vg-spec)"/><circle cx="390" cy="180" r="149" fill="none" stroke="url(#vg-rim)" stroke-width="1.5"/></g>
         <g class="lens"><circle cx="390" cy="180" r="150" clip-path="url(#vc-l)" fill="url(#vg-lens)"/></g>
+        <g class="c-right"><circle cx="390" cy="180" r="150" fill="url(#vg-shade)"/><g clip-path="url(#vc-r)"><circle cx="390" cy="180" r="146" fill="none" stroke="url(#vg-back)" stroke-width="16" filter="url(#vg-blur6)"/></g><ellipse class="spec spec-r" cx="332" cy="96" rx="66" ry="30" transform="rotate(-32 332 96)" fill="url(#vg-spec)" filter="url(#vg-soft)"/><circle cx="390" cy="180" r="149.3" fill="none" stroke="url(#vg-rim)" stroke-width="1.4"/></g>
+        <g class="grain" clip-path="url(#vc-u)"><rect x="80" y="30" width="460" height="300" filter="url(#vg-grain)"/></g>
       </svg>
       <span class="venn-label l">Web<br>Developer<small class="v-hint"><span class="h-m">Hover</span><span class="h-t">Tap</span> to run</small></span>
       <span class="venn-label r">MarTech<br>Specialist<small class="v-hint"><span class="h-m">Hover</span><span class="h-t">Tap</span> to run</small></span>
