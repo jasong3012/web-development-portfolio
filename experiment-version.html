@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/experiment/site.css?v=8b5427db43">
+<link rel="stylesheet" href="assets/experiment/site.css?v=db2097d1c8">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -63,12 +63,12 @@
           <filter id="vg-soft" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="4"/></filter><filter id="vg-blur6" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="6"/></filter>
           <filter id="vg-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
           <clipPath id="vc-l"><circle cx="230" cy="180" r="150"/></clipPath><clipPath id="vc-r"><circle cx="390" cy="180" r="150"/></clipPath>
-          <clipPath id="vc-u"><circle cx="230" cy="180" r="150"/><circle cx="390" cy="180" r="150"/></clipPath>
+          <clipPath id="vc-u"><circle data-sq="0" cx="230" cy="180" r="150"/><circle data-sq="1" cx="390" cy="180" r="150"/></clipPath><clipPath id="vc-lens"><circle data-sq="0" cx="230" cy="180" r="150"/></clipPath>
         </defs>
-        <g class="c-left"><circle cx="230" cy="180" r="150" fill="url(#vg-left)"/><circle cx="230" cy="180" r="150" fill="url(#vg-shade)"/><g clip-path="url(#vc-l)"><circle cx="230" cy="180" r="146" fill="none" stroke="url(#vg-back)" stroke-width="16" filter="url(#vg-blur6)"/></g><ellipse class="spec" cx="172" cy="96" rx="66" ry="30" transform="rotate(-32 172 96)" fill="url(#vg-spec)" filter="url(#vg-soft)"/><circle cx="230" cy="180" r="149.3" fill="none" stroke="url(#vg-rim)" stroke-width="1.4"/></g>
-        <g class="c-right c-blend"><circle cx="390" cy="180" r="150" fill="url(#vg-right)"/></g>
-        <g class="lens"><circle cx="390" cy="180" r="150" clip-path="url(#vc-l)" fill="url(#vg-lens)"/></g>
-        <g class="c-right"><circle cx="390" cy="180" r="150" fill="url(#vg-shade)"/><g clip-path="url(#vc-r)"><circle cx="390" cy="180" r="146" fill="none" stroke="url(#vg-back)" stroke-width="16" filter="url(#vg-blur6)"/></g><ellipse class="spec spec-r" cx="332" cy="96" rx="66" ry="30" transform="rotate(-32 332 96)" fill="url(#vg-spec)" filter="url(#vg-soft)"/><circle cx="390" cy="180" r="149.3" fill="none" stroke="url(#vg-rim)" stroke-width="1.4"/></g>
+        <g class="c-left"><g data-sq="0"><circle cx="230" cy="180" r="150" fill="url(#vg-left)"/><circle cx="230" cy="180" r="150" fill="url(#vg-shade)"/><g clip-path="url(#vc-l)"><circle cx="230" cy="180" r="146" fill="none" stroke="url(#vg-back)" stroke-width="16" filter="url(#vg-blur6)"/></g><ellipse class="spec" cx="172" cy="96" rx="66" ry="30" transform="rotate(-32 172 96)" fill="url(#vg-spec)" filter="url(#vg-soft)"/><circle cx="230" cy="180" r="149.3" fill="none" stroke="url(#vg-rim)" stroke-width="1.4"/></g></g>
+        <g class="c-right c-blend"><g data-sq="1"><circle cx="390" cy="180" r="150" fill="url(#vg-right)"/></g></g>
+        <g class="lens" clip-path="url(#vc-lens)"><g data-sq="1"><circle cx="390" cy="180" r="150" fill="url(#vg-lens)"/></g></g>
+        <g class="c-right"><g data-sq="1"><circle cx="390" cy="180" r="150" fill="url(#vg-shade)"/><g clip-path="url(#vc-r)"><circle cx="390" cy="180" r="146" fill="none" stroke="url(#vg-back)" stroke-width="16" filter="url(#vg-blur6)"/></g><ellipse class="spec spec-r" cx="332" cy="96" rx="66" ry="30" transform="rotate(-32 332 96)" fill="url(#vg-spec)" filter="url(#vg-soft)"/><circle cx="390" cy="180" r="149.3" fill="none" stroke="url(#vg-rim)" stroke-width="1.4"/></g></g>
         <g class="grain" clip-path="url(#vc-u)"><rect x="80" y="30" width="460" height="300" filter="url(#vg-grain)"/></g>
       </svg>
       <span class="venn-label l">Web<br>Developer</span>
@@ -438,6 +438,37 @@ branch protection), stop and report it.</span></code></pre>
   'use strict';
   var EMAIL='jasong3012@gmail.com';
   var J=window.JG,TABS=J.TABS,esc=J.esc,renderTab=J.renderTab,gridClick=J.gridClick;
+
+  /* Hero Venn: squishy bubbles. Each sphere is a damped spring: the pointer presses a
+     dent in it, a press or tap squashes it, and releasing lets it wobble back. */
+  (function(){
+    var v=document.querySelector('.venn'),svg=v&&v.querySelector('svg');if(!svg)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var R=150,S=[{cx:230,cy:180},{cx:390,cy:180}];
+    S.forEach(function(o,i){o.els=[].slice.call(svg.querySelectorAll('[data-sq="'+i+'"]'));o.x=0;o.y=0;o.vx=0;o.vy=0;o.tx=0;o.ty=0});
+    var pt=null,down=false,raf=0,last=0;
+    function local(e){var m=svg.getScreenCTM();if(!m)return null;var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(m.inverse())}
+    function targets(){S.forEach(function(o){o.tx=o.ty=0;if(!pt)return;var dx=(pt.x-o.cx)/R,dy=(pt.y-o.cy)/R,d=Math.sqrt(dx*dx+dy*dy);
+      if(d>1.06)return;var ux=d>.05?dx/d:0,uy=d>.05?dy/d:1,amt=down?.17:.045+.05*Math.min(d,1);o.tx=ux*amt;o.ty=uy*amt})}
+    function apply(o){var m=Math.sqrt(o.x*o.x+o.y*o.y),c=1,sn=0;if(m>1e-4){c=o.x/m;sn=o.y/m}
+      var a=1-m,b=1+m*.75,A=a*c*c+b*sn*sn,B=(a-b)*c*sn,D=a*sn*sn+b*c*c,sh=-26*m,
+          E=o.cx-(A*o.cx+B*o.cy)+c*sh,F=o.cy-(B*o.cx+D*o.cy)+sn*sh,
+          t='matrix('+[A,B,B,D,E,F].map(function(n){return n.toFixed(4)}).join(' ')+')';
+      o.els.forEach(function(el){el.setAttribute('transform',t)})}
+    function tick(now){var dt=Math.min(.032,(now-(last||now))/1000)||.016;last=now;var busy=false;
+      S.forEach(function(o){var k=down?260:170,damp=down?16:9;
+        o.vx+=(k*(o.tx-o.x)-damp*o.vx)*dt;o.vy+=(k*(o.ty-o.y)-damp*o.vy)*dt;o.x+=o.vx*dt;o.y+=o.vy*dt;
+        if(Math.abs(o.tx-o.x)+Math.abs(o.ty-o.y)+Math.abs(o.vx)+Math.abs(o.vy)>1e-4)busy=true;apply(o)});
+      raf=busy?requestAnimationFrame(tick):0;if(!busy)last=0}
+    function kick(){if(!raf){last=0;raf=requestAnimationFrame(tick)}}
+    v.addEventListener('pointermove',function(e){pt=local(e);targets();kick()});
+    v.addEventListener('pointerdown',function(e){pt=local(e);down=true;targets();
+      S.forEach(function(o){var m=Math.sqrt(o.tx*o.tx+o.ty*o.ty);if(m){o.vx+=o.tx/m*1.6;o.vy+=o.ty/m*1.6}});kick()});
+    function up(){if(!down)return;down=false;targets();kick()}
+    window.addEventListener('pointerup',up);window.addEventListener('pointercancel',function(){down=false;pt=null;targets();kick()});
+    v.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){pt=null;down=false;targets();kick()}});
+    v.addEventListener('pointerup',function(e){if(e.pointerType!=='mouse'){setTimeout(function(){pt=null;targets();kick()},120)}});
+  })();
 
   /* Hero Venn: gentle 3D tilt follows the mouse */
   (function(){
