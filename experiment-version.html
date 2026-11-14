@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/experiment/site.css?v=e783438664">
+<link rel="stylesheet" href="assets/experiment/site.css?v=a256aa00b4">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -107,12 +107,66 @@
       <div class="reveal"><h2 id="projects-h">Projects.</h2></div>
     </div>
     <div class="figure reveal" id="work">
-      <div class="figure-bar"><span><b>FIG. 00</b> · projects by discipline</span><span id="tab-count"></span></div>
-      <div class="tabs" role="tablist" aria-label="Projects by discipline" id="work-tabs"></div>
-      <div class="tab-panel" role="tabpanel" id="work-tabpanel" tabindex="0">
-        <div class="work-grid" id="tab-grid"></div>
+      <div class="figure-bar"><span><b>FIG. 00</b> · projects by discipline</span><span>6 disciplines</span></div>
+      <div class="disc-panel">
+        <div class="disc-grid">
+        <article class="disc-card" aria-labelledby="dc-web-development">
+          <div class="disc-media" data-slot="web-development"><span>Image · 16:9</span></div>
+          <div class="work-body">
+            <span class="work-fig"><b>FIG. 0.1</b> · <span data-count="web-development">Projects</span></span>
+            <h3 id="dc-web-development">Web development</h3>
+            <p>Live, non-confidential sites across enterprise and open-source CMS platforms, from enterprise ecommerce to SEO-led service pages.</p>
+            <a class="btn btn-solid" href="experiment-version/projects/web-development" aria-label="See all Web development projects"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>
+          </div>
+        </article>
+        <article class="disc-card" aria-labelledby="dc-web-analytics">
+          <div class="disc-media" data-slot="web-analytics"><span>Image · 16:9</span></div>
+          <div class="work-body">
+            <span class="work-fig"><b>FIG. 0.2</b> · <span data-count="web-analytics">Projects</span></span>
+            <h3 id="dc-web-analytics">Web analytics</h3>
+            <p>Custom-built, automated dashboards that integrate GA4 and Google Search Console to reveal traffic sources, user behaviour and key events, so website improvements are backed by data.</p>
+            <a class="btn btn-solid" href="experiment-version/projects/web-analytics" aria-label="See all Web analytics projects"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>
+          </div>
+        </article>
+        <article class="disc-card" aria-labelledby="dc-seo-performance">
+          <div class="disc-media" data-slot="seo-performance"><span>Image · 16:9</span></div>
+          <div class="work-body">
+            <span class="work-fig"><b>FIG. 0.3</b> · <span data-count="seo-performance">Projects</span></span>
+            <h3 id="dc-seo-performance">SEO Performance</h3>
+            <p>On-page and off-page SEO strategies, with high-quality website enhancements that help businesses climb the search results and grow organic visibility.</p>
+            <a class="btn btn-solid" href="experiment-version/projects/seo-performance" aria-label="See all SEO Performance projects"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>
+          </div>
+        </article>
+        <article class="disc-card" aria-labelledby="dc-automation">
+          <div class="disc-media" data-slot="automation"><span>Image · 16:9</span></div>
+          <div class="work-body">
+            <span class="work-fig"><b>FIG. 0.4</b> · <span data-count="automation">Projects</span></span>
+            <h3 id="dc-automation">Automated Workflows</h3>
+            <p>Low-code workflow automations with n8n and Make.com that connect APIs, handle webhooks and integrate with platforms like Airtable, Supabase and Pipedrive, cutting repetitive work so teams move faster.</p>
+            <a class="btn btn-solid" href="experiment-version/projects/automation" aria-label="See all Automated Workflows projects"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>
+          </div>
+        </article>
+        <article class="disc-card" aria-labelledby="dc-chatbot-development">
+          <div class="disc-media" data-slot="chatbot-development"><span>Image · 16:9</span></div>
+          <div class="work-body">
+            <span class="work-fig"><b>FIG. 0.5</b> · <span data-count="chatbot-development">Projects</span></span>
+            <h3 id="dc-chatbot-development">AI Chatbots</h3>
+            <p>Conversational AI chatbots and voice agents. Case studies are on the way.</p>
+            <a class="btn btn-solid" href="experiment-version/projects/chatbot-development" aria-label="See all AI Chatbots projects"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>
+          </div>
+        </article>
+        <article class="disc-card" aria-labelledby="dc-ai-content-creation">
+          <div class="disc-media" data-slot="ai-content-creation"><span>Image · 16:9</span></div>
+          <div class="work-body">
+            <span class="work-fig"><b>FIG. 0.6</b> · <span data-count="ai-content-creation">Projects</span></span>
+            <h3 id="dc-ai-content-creation">AI Content Creation</h3>
+            <p>AI-powered visual storytelling for social media: short videos and image carousels made with prompt engineering and a creative eye, built to educate, entertain and inspire.</p>
+            <a class="btn btn-solid" href="experiment-version/projects/ai-content-creation" aria-label="See all AI Content Creation projects"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>
+          </div>
+        </article>
+        </div>
       </div>
-      <p class="caption"><b>Fig. 00</b> — Projects by discipline. Select a project to see its full stack.</p>
+      <p class="caption"><b>Fig. 00</b> — Projects by discipline. Open a discipline to see all its projects.</p>
       <div class="spec-strip">
         <div><span>WordPress</span><strong>5+</strong><em>years in WordPress</em></div>
         <div><span>Platforms</span><strong>10+</strong><em>CMS &amp; web platforms</em></div>
@@ -431,29 +485,10 @@ branch protection), stop and report it.</span></code></pre>
     v.addEventListener('pointerleave',function(){stage.style.removeProperty('--rx');stage.style.removeProperty('--ry')});
   })();
 
-  /* FIG. 00 tabs: work by discipline. Content from jasong3012.github.io/portfolio discipline pages. */
-  var tabList=document.getElementById('work-tabs'),tabPanel=document.getElementById('work-tabpanel'),tabGrid=document.getElementById('tab-grid'),tabCount=document.getElementById('tab-count');
-  tabList.innerHTML=TABS.map(function(t,i){return '<button class="tab" type="button" role="tab" id="tab-'+t.id+'" aria-controls="work-tabpanel" aria-selected="'+(i===0)+'" tabindex="'+(i===0?0:-1)+'">'+esc(t.label)+'</button>'}).join('');
-  var tabs=[].slice.call(tabList.querySelectorAll('.tab'));
-  /* homepage preview: two projects per tab, then a button to the category's landing page */
-  var tabCta=document.createElement('div');tabCta.className='tab-cta';
-  tabCta.innerHTML='<a class="btn btn-solid" href="experiment-version/projects/"><span class="swap"><span class="col"><span class="t">See all projects</span><span class="t">See all projects</span></span></span><span class="arr">→</span></a>';
-  tabPanel.appendChild(tabCta);var tabOpen=tabCta.firstChild;
-  function selectTab(n,focus){
-    var T=TABS[n];
-    tabs.forEach(function(b,i){b.setAttribute('aria-selected',String(i===n));b.tabIndex=i===n?0:-1});
-    tabPanel.setAttribute('aria-labelledby',tabs[n].id);
-    tabCount.textContent=renderTab(T,n,tabGrid,null,2);
-    tabOpen.href='experiment-version/projects/'+T.id;tabOpen.setAttribute('aria-label','See all '+T.label+' projects');
-    tabGrid.style.animation='none';void tabGrid.offsetWidth;tabGrid.style.animation='';
-    if(focus){tabs[n].focus();tabs[n].scrollIntoView({block:'nearest',inline:'nearest'})}
-  }
-  tabList.addEventListener('click',function(e){var b=e.target.closest('.tab');if(b)selectTab(tabs.indexOf(b),false)});
-  tabList.addEventListener('keydown',function(e){var n=tabs.indexOf(document.activeElement);if(n<0)return;
-    var k=e.key,to=k==='ArrowRight'?(n+1)%tabs.length:k==='ArrowLeft'?(n-1+tabs.length)%tabs.length:k==='Home'?0:k==='End'?tabs.length-1:-1;
-    if(to>-1){e.preventDefault();selectTab(to,true)}});
-  tabGrid.addEventListener('click',gridClick);
-  selectTab(0,false);
+  /* FIG. 00: discipline cards link to their landing pages; fill in the live project counts */
+  [].forEach.call(document.querySelectorAll('[data-count]'),function(el){
+    for(var i=0;i<TABS.length;i++){if(TABS[i].id===el.getAttribute('data-count')){var n=J.counts(TABS[i]);el.textContent=n?n+(n===1?' project':' projects'):'Coming soon';break}}
+  });
 
   /* Router: hash selects a view; hashes for sections inside a view show that view and scroll to them */
   var views=[].slice.call(document.querySelectorAll('.view'));
