@@ -285,6 +285,8 @@ p{margin:0 0 1em}
 .sh-v p{margin:0;color:var(--text)}
 .sh-v h3{font-size:20px}
 .sh-v strong{font-weight:600;color:var(--ink)}
+.chapter-body .muted{color:var(--muted)}
+.sh-v code{font:400 .88em var(--mono);color:var(--ink)}
 .sh-mono{font:400 12px/1.6 var(--mono);color:var(--muted)}
 /* vertical tabs (FAQ) */
 .sheet-v{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
@@ -325,6 +327,7 @@ p{margin:0 0 1em}
   .ss-row{padding:14px 16px}
   .sheet-cards{padding:20px 16px 24px}
   .sheet-v{grid-template-columns:1fr}
+  #workflow .sheet-tab:last-child{grid-column:1/-1}
   .sheet-v .sheet-tabs{border-right:0;border-bottom:1px solid var(--line)}
   .sheet-v .sheet-tab{padding:13px 16px;font-size:14px}
   .sheet-v .sheet-tab[aria-selected="true"]{border-right:0}
