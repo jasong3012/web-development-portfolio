@@ -102,7 +102,8 @@ p{margin:0 0 1em}
 .venn{position:relative;width:min(620px,90vw);margin:0;container-type:inline-size}
 .venn-stage{position:relative;transform:perspective(1200px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .6s var(--ease);animation:vFloat 7s ease-in-out infinite}
 @keyframes vFloat{50%{translate:0 -8px}}
-.venn svg{display:block;width:100%;height:auto;overflow:visible}
+.venn svg{display:block;width:100%;height:auto;overflow:visible;cursor:grab;-webkit-tap-highlight-color:transparent}
+.venn svg:active{cursor:grabbing}
 .venn .c-left,.venn .c-right{transform-box:fill-box;transform-origin:center;animation:vennIn 1.6s var(--ease) both;transition:translate .5s var(--ease),filter .5s var(--ease)}
 .venn .c-left{--from:translateX(33%);filter:drop-shadow(0 18px 22px rgba(43,26,150,.28))}
 .venn .c-right{--from:translateX(-33%)}
