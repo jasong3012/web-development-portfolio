@@ -340,8 +340,11 @@ p{margin:0 0 1em}
 .disc-grid>*{min-width:0}
 .disc-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center}
 .disc-media>span{font:500 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.disc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.disc-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .7s var(--ease)}
 .disc-card{display:flex;flex-direction:column;margin:-12px;padding:12px;color:inherit;text-decoration:none;border-radius:4px;transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-color .3s}
+.disc-media.is-soon{border-style:dashed}
+.disc-card .work-body .disc-feat{margin:0;font:400 11.5px/1.5 var(--mono);color:var(--ink);letter-spacing:.02em}
+.disc-feat span{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;font-size:10px;margin-right:8px}
 .disc-card .work-body{flex:1;padding-bottom:4px}
 .disc-card h3{transition:color .25s}
 .disc-card .disc-media{transition:border-color .3s}
