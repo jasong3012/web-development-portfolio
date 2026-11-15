@@ -97,36 +97,20 @@ p{margin:0 0 1em}
 .gateway{padding:0 0 64px;text-align:center}
 .hero-banner{position:relative;height:clamp(300px,70vh,720px);overflow:hidden;background:#2A2477}
 .hb-sky{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hs-stars circle{fill:#fff;opacity:.8}
-.hs-stars .tw{animation:hsTwinkle 3.2s ease-in-out infinite}
-.hs-stars .tw:nth-child(6n){animation-delay:-1.1s}.hs-stars .tw:nth-child(9n){animation-delay:-2.2s}
-@keyframes hsTwinkle{50%{opacity:.25}}
-.hs-grain{opacity:.12;mix-blend-mode:overlay;pointer-events:none}
-.sh{stroke-width:2;stroke-linecap:round;opacity:0}
-.sh1{animation:hsShoot 6s linear infinite;--x0:1080px;--y0:40px}
-.sh2{animation:hsShoot 7.5s linear 1.8s infinite;--x0:1300px;--y0:90px}
-.sh3{animation:hsShoot 8s linear 3.6s infinite;--x0:620px;--y0:10px}
-.sh4{animation:hsShoot 9s linear 5.4s infinite;--x0:1420px;--y0:180px}
-@keyframes hsShoot{0%{transform:translate(var(--x0),var(--y0));opacity:0}3%{opacity:.95}14%{transform:translate(calc(var(--x0) - 340px),calc(var(--y0) + 204px));opacity:0}100%{transform:translate(calc(var(--x0) - 340px),calc(var(--y0) + 204px));opacity:0}}
-/* isometric site: the grid draws, windows rise in, the card settles, everything floats, then it all fades and repeats (12 s) */
-.iso-face{fill:url(#hs-face)}
-.iso-edge{fill:#4B3BC9}
-.iso-bar{fill:#7C6CF0}
-.iso-dot{fill:#F4F1FF}
-.iso-dot2{fill:#4B3BC9}
-.iso-btn{fill:#6A5AE8}
-.iso-grid path{fill:none;stroke:#E3DEFF;stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:isoDraw 12s ease-in-out infinite}
-.iso-grid path:nth-child(2n){animation-delay:.08s}
-@keyframes isoDraw{0%{stroke-dashoffset:1;opacity:1}14%{stroke-dashoffset:0}88%{stroke-dashoffset:0;opacity:1}97%,100%{stroke-dashoffset:0;opacity:0}}
-.iso-a{opacity:0;animation:12s cubic-bezier(.2,.7,.2,1) infinite}
-.iso-w1{animation-name:isoIn1}.iso-w2{animation-name:isoIn2}.iso-w3{animation-name:isoIn3}.iso-card{animation-name:isoCard}
-@keyframes isoIn1{0%,10%{opacity:0;transform:translateY(40px)}22%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
-@keyframes isoIn2{0%,16%{opacity:0;transform:translateY(40px)}28%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
-@keyframes isoIn3{0%,22%{opacity:0;transform:translateY(40px)}34%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
-@keyframes isoCard{0%,28%{opacity:0;transform:translateY(-60px)}42%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
-.iso-f{animation:isoFloat 6s ease-in-out infinite}
-.iso-w2 .iso-f{animation-delay:-1.5s}.iso-w3 .iso-f{animation-delay:-3s}.iso-card .iso-f{animation-delay:-4.5s}
-@keyframes isoFloat{50%{transform:translateY(-8px)}}
+.hs-stars circle{fill:#fff}
+.hs-stars .tw{animation:hsTwinkle 3s ease-in-out infinite}
+.hs-stars .tw:nth-child(4n){animation-delay:-1s}.hs-stars .tw:nth-child(7n){animation-delay:-2s}
+@keyframes hsTwinkle{50%{opacity:.2}}
+.hs-shoot line{stroke-width:2.2;stroke-linecap:round;opacity:0;animation:hsShoot var(--d,7s) linear var(--w,0s) infinite}
+@keyframes hsShoot{0%{transform:translate(var(--x),var(--y));opacity:0}4%{opacity:1}16%,100%{transform:translate(calc(var(--x) - 420px),calc(var(--y) + 250px));opacity:0}}
+.hs-cl{animation:hsDrift 18s ease-in-out infinite alternate}.hs-cl2{animation-duration:24s;animation-direction:alternate-reverse}
+@keyframes hsDrift{to{transform:translateX(60px)}}
+.hs-grain{opacity:.13;mix-blend-mode:overlay;pointer-events:none}
+.hs-scene{transform:translate(720px,428px) scale(.8) translate(-720px,-380px)}
+.hs-float{animation:hsFloat 6s ease-in-out -1s infinite}
+@keyframes hsFloat{50%{transform:translateY(-10px)}}
+.hs-spin{transform-box:fill-box;transform-origin:center;animation:hsSpin 6s linear infinite}.hs-spin.hs-rev{animation-direction:reverse;animation-duration:4s}
+@keyframes hsSpin{to{transform:rotate(360deg)}}
 .is-paused *{animation-play-state:paused!important}
 .hb-pause{position:absolute;right:var(--gutter);bottom:18px;z-index:2}
 
@@ -513,11 +497,10 @@ a.work-card{text-decoration:none}
   .page-intro{padding-top:60px}
   .cta{flex-direction:column;align-items:center;gap:18px}
   .hero-banner{height:clamp(300px,56vh,460px)}
+  .hs-scene{transform:translate(720px,405px) scale(.82) translate(-720px,-405px)}
     .gateway-body{gap:22px;padding-top:28px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .reveal-on .reveal:not(.is-visible){opacity:1;transform:none}
-  .iso-a{opacity:1}
-  .iso-grid path{stroke-dashoffset:0}
 }
