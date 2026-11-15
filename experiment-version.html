@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/images/hero/growth-chart.webp" imagesrcset="assets/images/hero/growth-chart-800.webp 800w, assets/images/hero/growth-chart.webp 1440w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/experiment/site.css?v=b79c91ea84">
+<link rel="stylesheet" href="assets/experiment/site.css?v=5808908e44">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -59,8 +59,7 @@
       </div>
     </div>
     <div class="gateway-body">
-      <div class="eyebrow">Portfolio · Version B</div>
-      <p class="gateway-name"><strong>Jason Grant</strong>Web developer · MarTech specialist · Agentic AI workflows</p>
+      <p class="gateway-name"><strong>Jason Grant</strong><span class="eyebrow">Portfolio · Version B</span>Web developer · MarTech specialist · Agentic AI workflows</p>
       <div class="cta">
         <a class="btn" href="#approach"><span class="swap"><span class="col"><span class="t">Approach</span><span class="t">Approach</span></span></span><span class="arr">→</span></a>
         <a class="btn" href="#work"><span class="swap"><span class="col"><span class="t">Selected work</span><span class="t">Selected work</span></span></span><span class="arr">→</span></a>
@@ -424,23 +423,22 @@ branch protection), stop and report it.</span></code></pre>
   var EMAIL='jasong3012@gmail.com';
   var J=window.JG,TABS=J.TABS,esc=J.esc,renderTab=J.renderTab,gridClick=J.gridClick;
 
-  /* Hero carousel: cross-fades every 10 s. The active tab's bar is the timer (CSS
-     animation); hover, focus, a hidden tab or the pause button hold it. */
+  /* Hero carousel: cross-fades every 5 s. The active tab's bar is the timer (CSS
+     animation); it keeps running on hover and tap, and only the pause button or a
+     hidden browser tab stops it. */
   (function(){
     var root=document.querySelector('.hero-banner');if(!root)return;
     var slides=[].slice.call(root.querySelectorAll('.hb-slide')),tabs=[].slice.call(root.querySelectorAll('.hb-tab')),
-        pauseBtn=root.querySelector('.hb-pause'),i=0,user=false,hold=0;
+        pauseBtn=root.querySelector('.hb-pause'),i=0,user=false;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){user=true;root.classList.add('is-paused');pauseBtn.setAttribute('aria-pressed','true');pauseBtn.setAttribute('aria-label','Play slideshow')}
     function show(n){i=(n+slides.length)%slides.length;
       slides.forEach(function(s,k){var on=k===i;s.classList.toggle('is-active',on);if(on)s.removeAttribute('aria-hidden');else s.setAttribute('aria-hidden','true')});
       tabs.forEach(function(t,k){var on=k===i;t.classList.toggle('is-active',on);if(on)t.setAttribute('aria-current','true');else t.removeAttribute('aria-current');
         var f=t.querySelector('.hb-fill');f.style.animation='none';void f.offsetWidth;f.style.animation=''})}
-    function sync(){root.classList.toggle('is-paused',user||hold>0||document.hidden)}
+    function sync(){root.classList.toggle('is-paused',user||document.hidden)}
     tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k)});
       t.querySelector('.hb-fill').addEventListener('animationend',function(){if(t.classList.contains('is-active'))show(i+1)})});
     pauseBtn.addEventListener('click',function(){user=!user;pauseBtn.setAttribute('aria-pressed',String(user));pauseBtn.setAttribute('aria-label',user?'Play slideshow':'Pause slideshow');sync()});
-    root.addEventListener('mouseenter',function(){hold++;sync()});root.addEventListener('mouseleave',function(){hold=Math.max(0,hold-1);sync()});
-    root.addEventListener('focusin',function(){hold++;sync()});root.addEventListener('focusout',function(){hold=Math.max(0,hold-1);sync()});
     document.addEventListener('visibilitychange',sync);
     var x0=null,y0=0;root.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'){x0=e.clientX;y0=e.clientY}});
     root.addEventListener('pointerup',function(e){if(x0===null)return;var dx=e.clientX-x0,dy=e.clientY-y0;x0=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))show(i+(dx<0?1:-1))});
