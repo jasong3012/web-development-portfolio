@@ -15,8 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/images/hero/content-flow.webp" imagesrcset="assets/images/hero/content-flow-800.webp 800w, assets/images/hero/content-flow.webp 1440w" imagesizes="100vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/experiment/site.css?v=5ac96872b5">
+<link rel="stylesheet" href="assets/experiment/site.css?v=70eb3c8362">
 <style>/* gradient fills must reference same-document defs, so they stay inline */.jg-fill{fill:url(#jg-grad)}.jg-tfill{fill:url(#jg-term-grad)}</style>
 </head>
 <body>
@@ -45,24 +44,30 @@
 <!-- ============ HOME (gateway) ============ -->
 <div class="view is-active" id="home" data-view="home">
   <section class="gateway" aria-label="Welcome">
-    <div class="hero-banner" role="region" aria-roledescription="carousel" aria-label="Featured illustrations">
-      <div class="hb-slides" id="hb-slides" aria-live="off">
-        <figure class="hb-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 5"><img src="assets/images/hero/content-flow.webp" srcset="assets/images/hero/content-flow-800.webp 800w, assets/images/hero/content-flow.webp 1440w" sizes="100vw" width="1440" height="1024" alt="Illustration of cubes passing through a crystal prism and emerging as a row of glowing panels under a starry sky" fetchpriority="high" decoding="async"></figure>
-        <figure class="hb-slide" role="group" aria-roledescription="slide" aria-label="2 of 5" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/images/hero/automation-conveyor.webp" data-srcset="assets/images/hero/automation-conveyor-800.webp 800w, assets/images/hero/automation-conveyor.webp 1440w" sizes="100vw" width="1440" height="1024" alt="Illustration of cubes moving along conveyor belts and gears, floating above the clouds" decoding="async"></figure>
-        <figure class="hb-slide" role="group" aria-roledescription="slide" aria-label="3 of 5" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/images/hero/strategy-ascent.webp" data-srcset="assets/images/hero/strategy-ascent-800.webp 800w, assets/images/hero/strategy-ascent.webp 1440w" sizes="100vw" width="1440" height="1024" alt="Illustration of light passing through a prism and lens onto a pillar on top of a stepped pyramid" decoding="async"></figure>
-        <figure class="hb-slide" role="group" aria-roledescription="slide" aria-label="4 of 5" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/images/hero/growth-curve.webp" data-srcset="assets/images/hero/growth-curve-800.webp 800w, assets/images/hero/growth-curve.webp 1440w" sizes="100vw" width="1440" height="1024" alt="Illustration of rising 3D bar charts and an exponential growth curve on a grid above the clouds" decoding="async"></figure>
-        <figure class="hb-slide" role="group" aria-roledescription="slide" aria-label="5 of 5" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/images/hero/web-interface-stack.webp" data-srcset="assets/images/hero/web-interface-stack-800.webp 800w, assets/images/hero/web-interface-stack.webp 1440w" sizes="100vw" width="1440" height="1024" alt="Isometric illustration of browser windows and a layout grid assembling into a website" decoding="async"></figure>
-      </div>
-      <div class="hb-bar">
-        <div class="hb-tabs" role="group" aria-label="Choose a slide">
-          <button class="hb-tab is-active" type="button" aria-controls="hb-slides" aria-current="true" data-slide="0" aria-label="Show slide 1: Content creation"><span class="hb-track"><span class="hb-fill"></span></span></button>
-          <button class="hb-tab" type="button" aria-controls="hb-slides" data-slide="1" aria-label="Show slide 2: Automation"><span class="hb-track"><span class="hb-fill"></span></span></button>
-          <button class="hb-tab" type="button" aria-controls="hb-slides" data-slide="2" aria-label="Show slide 3: Strategy"><span class="hb-track"><span class="hb-fill"></span></span></button>
-          <button class="hb-tab" type="button" aria-controls="hb-slides" data-slide="3" aria-label="Show slide 4: Growth"><span class="hb-track"><span class="hb-fill"></span></span></button>
-          <button class="hb-tab" type="button" aria-controls="hb-slides" data-slide="4" aria-label="Show slide 5: Web development"><span class="hb-track"><span class="hb-fill"></span></span></button>
-        </div>
-        <button class="hb-pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="i-pause" d="M5 3.5v9M11 3.5v9"/><path class="i-play" d="M5 3.2v9.6L12.6 8z"/></svg></button>
-      </div>
+    <div class="hero-banner" role="img" aria-label="Animated illustration: browser windows and a layout grid assembling into a website under a starry night sky">
+      <svg class="hb-sky" viewBox="0 0 1440 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="hs-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E0C2E"/><stop offset=".45" stop-color="#2A2477"/><stop offset=".72" stop-color="#5A4BD8"/><stop offset="1" stop-color="#B9B1EE"/></linearGradient>
+          <radialGradient id="hs-cloud"><stop offset="0" stop-color="#C8C1F5" stop-opacity=".85"/><stop offset="1" stop-color="#C8C1F5" stop-opacity="0"/></radialGradient>
+          <linearGradient id="hs-face" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F1FF"/><stop offset="1" stop-color="#B9AFEF"/></linearGradient>
+          <linearGradient id="hs-shoot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <filter id="hs-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+          <filter id="hs-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="22"/></filter>
+        </defs>
+        <rect width="1440" height="640" fill="url(#hs-sky)"/>
+        <g class="hs-stars"><circle class="st tw" cx="60" cy="40" r="1.6"/><circle class="st" cx="140" cy="90" r="1.1"/><circle class="st" cx="230" cy="30" r="1.4"/><circle class="st tw" cx="320" cy="70" r="1.0"/><circle class="st" cx="410" cy="25" r="1.8"/><circle class="st" cx="520" cy="60" r="1.2"/><circle class="st tw" cx="610" cy="35" r="1.5"/><circle class="st" cx="700" cy="85" r="1.0"/><circle class="st" cx="780" cy="30" r="1.4"/><circle class="st tw" cx="860" cy="70" r="1.2"/><circle class="st" cx="950" cy="40" r="1.7"/><circle class="st" cx="1040" cy="95" r="1.0"/><circle class="st tw" cx="1120" cy="30" r="1.4"/><circle class="st" cx="1210" cy="65" r="1.1"/><circle class="st" cx="1300" cy="40" r="1.6"/><circle class="st tw" cx="1380" cy="85" r="1.2"/><circle class="st" cx="90" cy="140" r="1.0"/><circle class="st" cx="470" cy="130" r="1.2"/><circle class="st tw" cx="820" cy="150" r="1.0"/><circle class="st" cx="1180" cy="140" r="1.3"/><circle class="st" cx="1340" cy="170" r="1.0"/></g>
+        <g class="hs-shoot" stroke="url(#hs-shoot)"><line class="sh sh1" x1="0" y1="0" x2="-150" y2="90"/><line class="sh sh2" x1="0" y1="0" x2="-150" y2="90"/><line class="sh sh3" x1="0" y1="0" x2="-150" y2="90"/><line class="sh sh4" x1="0" y1="0" x2="-150" y2="90"/></g>
+        <g class="hs-clouds" filter="url(#hs-soft)"><ellipse cx="150" cy="560" rx="380" ry="120" fill="url(#hs-cloud)"/><ellipse cx="760" cy="640" rx="620" ry="130" fill="url(#hs-cloud)"/><ellipse cx="1330" cy="520" rx="360" ry="140" fill="url(#hs-cloud)"/><ellipse cx="1200" cy="360" rx="220" ry="70" fill="#7C6CF0" opacity=".45"/><ellipse cx="220" cy="380" rx="240" ry="70" fill="#7C6CF0" opacity=".4"/></g>
+        <g class="iso" transform="translate(720 300)">
+          <g class="iso-grid"><g transform="matrix(0.866 0.5 -0.866 0.5 0 0) translate(-60 -40)"><path pathLength="1" d="M0 0V180"/><path pathLength="1" d="M0 0H180"/><path pathLength="1" d="M36 0V180"/><path pathLength="1" d="M0 36H180"/><path pathLength="1" d="M72 0V180"/><path pathLength="1" d="M0 72H180"/><path pathLength="1" d="M108 0V180"/><path pathLength="1" d="M0 108H180"/><path pathLength="1" d="M144 0V180"/><path pathLength="1" d="M0 144H180"/><path pathLength="1" d="M180 0V180"/><path pathLength="1" d="M0 180H180"/></g></g>
+          <g class="iso-a iso-w1"><g class="iso-f"><g transform="translate(-250 -130) matrix(0.866 -0.5 0 1 0 0)"><rect class="iso-edge" x="5" y="7" width="210" height="240" rx="9"/><rect class="iso-face" width="210" height="240" rx="9"/><path class="iso-bar" d="M9 0H201A9 9 0 0 1 210 9V18H0V9A9 9 0 0 1 9 0Z"/><circle class="iso-dot" cx="14" cy="9" r="3"/><circle class="iso-dot" cx="25" cy="9" r="3"/><circle class="iso-dot" cx="36" cy="9" r="3"/></g></g></g>
+          <g class="iso-a iso-w2"><g class="iso-f"><g transform="translate(130 -150) matrix(0.866 0.5 0 1 0 0)"><rect class="iso-edge" x="5" y="7" width="170" height="150" rx="9"/><rect class="iso-face" width="170" height="150" rx="9"/><path class="iso-bar" d="M9 0H161A9 9 0 0 1 170 9V18H0V9A9 9 0 0 1 9 0Z"/><circle class="iso-dot" cx="14" cy="9" r="3"/><circle class="iso-dot" cx="25" cy="9" r="3"/><circle class="iso-dot" cx="36" cy="9" r="3"/></g></g></g>
+          <g class="iso-a iso-w3"><g class="iso-f"><g transform="translate(40 40) matrix(0.866 -0.5 0 1 0 0)"><rect class="iso-edge" x="5" y="7" width="170" height="150" rx="9"/><rect class="iso-face" width="170" height="150" rx="9"/><circle class="iso-dot2" cx="40" cy="55" r="3"/></g></g></g>
+          <g class="iso-a iso-card"><g class="iso-f"><g transform="translate(0 -150) matrix(0.866 0.5 -0.866 0.5 0 0)"><rect class="iso-edge" x="4" y="4" width="230" height="160" rx="12" transform="translate(-115 -80)"/><rect class="iso-face" width="230" height="160" rx="12" transform="translate(-115 -80)"/><rect class="iso-btn" x="10" y="25" width="85" height="34" rx="6"/></g></g></g>
+        </g>
+        <rect class="hs-grain" width="1440" height="640" filter="url(#hs-grain)"/>
+      </svg>
+      <button class="hb-pause" type="button" aria-label="Pause animation" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path class="i-pause" d="M5 3.5v9M11 3.5v9"/><path class="i-play" d="M5 3.2v9.6L12.6 8z"/></svg></button>
     </div>
     <div class="gateway-body">
       <p class="gateway-name"><strong>Jason Grant</strong><span class="eyebrow">Portfolio · Version B</span>Web developer · MarTech specialist · Agentic AI workflows</p>
@@ -429,30 +434,11 @@ branch protection), stop and report it.</span></code></pre>
   var EMAIL='jasong3012@gmail.com';
   var J=window.JG,TABS=J.TABS,esc=J.esc,renderTab=J.renderTab,gridClick=J.gridClick;
 
-  /* Hero carousel: cross-fades every 5 s. The active tab's bar is the timer (CSS
-     animation); it keeps running on hover and tap, and only the pause button or a
-     hidden browser tab stops it. */
+  /* Hero animation: a pause/play toggle (looping motion must be stoppable) */
   (function(){
-    var root=document.querySelector('.hero-banner');if(!root)return;
-    var slides=[].slice.call(root.querySelectorAll('.hb-slide')),tabs=[].slice.call(root.querySelectorAll('.hb-tab')),
-        pauseBtn=root.querySelector('.hb-pause'),i=0,user=false;
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){user=true;root.classList.add('is-paused');pauseBtn.setAttribute('aria-pressed','true');pauseBtn.setAttribute('aria-label','Play slideshow')}
-    function load(k){var img=slides[(k+slides.length)%slides.length].querySelector('img[data-src]');if(!img)return;
-      img.srcset=img.getAttribute('data-srcset');img.src=img.getAttribute('data-src');img.removeAttribute('data-srcset');img.removeAttribute('data-src')}
-    function show(n){i=(n+slides.length)%slides.length;load(i);load(i+1);
-      slides.forEach(function(s,k){var on=k===i;s.classList.toggle('is-active',on);if(on)s.removeAttribute('aria-hidden');else s.setAttribute('aria-hidden','true')});
-      tabs.forEach(function(t,k){var on=k===i;t.classList.toggle('is-active',on);if(on)t.setAttribute('aria-current','true');else t.removeAttribute('aria-current');
-        var f=t.querySelector('.hb-fill');f.style.animation='none';void f.offsetWidth;f.style.animation=''})}
-    function sync(){root.classList.toggle('is-paused',user||document.hidden)}
-    tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k)});
-      t.querySelector('.hb-fill').addEventListener('animationend',function(){if(t.classList.contains('is-active'))show(i+1)})});
-    pauseBtn.addEventListener('click',function(){user=!user;pauseBtn.setAttribute('aria-pressed',String(user));pauseBtn.setAttribute('aria-label',user?'Play slideshow':'Pause slideshow');sync()});
-    document.addEventListener('visibilitychange',sync);
-    var x0=null,y0=0;root.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'){x0=e.clientX;y0=e.clientY}});
-    root.addEventListener('pointerup',function(e){if(x0===null)return;var dx=e.clientX-x0,dy=e.clientY-y0;x0=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))show(i+(dx<0?1:-1))});
-    root.addEventListener('pointercancel',function(){x0=null});
-    if(document.readyState==='complete')load(1);else addEventListener('load',function(){load(1)});
-    sync();
+    var root=document.querySelector('.hero-banner'),btn=root&&root.querySelector('.hb-pause');if(!btn)return;
+    btn.addEventListener('click',function(){var on=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',String(on));
+      btn.setAttribute('aria-label',on?'Play animation':'Pause animation');root.classList.toggle('is-paused',on)});
   })();
 
   /* Section sheets: ARIA tabs (arrow / Home / End keys) */
