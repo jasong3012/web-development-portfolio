@@ -95,7 +95,7 @@ p{margin:0 0 1em}
 
 /* Gateway (home) */
 .gateway{padding:0 0 64px;text-align:center}
-.hero-banner{position:relative;height:clamp(300px,70vh,720px);overflow:hidden;background:#2A2477}
+.hero-banner{position:relative;height:clamp(260px,52vh,520px);overflow:hidden;background:#2A2477}
 .hb-sky{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hs-stars circle{fill:#fff}
 .hs-stars .tw{animation:hsTwinkle 3s ease-in-out infinite}
@@ -106,7 +106,7 @@ p{margin:0 0 1em}
 .hs-cl{animation:hsDrift 18s ease-in-out infinite alternate}.hs-cl2{animation-duration:24s;animation-direction:alternate-reverse}
 @keyframes hsDrift{to{transform:translateX(60px)}}
 .hs-grain{opacity:.13;mix-blend-mode:overlay;pointer-events:none}
-.hs-scene{transform:translate(720px,428px) scale(.8) translate(-720px,-380px)}
+.hs-scene{transform:translate(720px,410px) scale(.7) translate(-720px,-345px)}
 .hs-float{animation:hsFloat 6s ease-in-out -1s infinite}
 @keyframes hsFloat{50%{transform:translateY(-10px)}}
 .hs-spin{transform-box:fill-box;transform-origin:center;animation:hsSpin 6s linear infinite}.hs-spin.hs-rev{animation-direction:reverse;animation-duration:4s}
@@ -496,7 +496,7 @@ a.work-card{text-decoration:none}
   .chapter{padding:72px 0}
   .page-intro{padding-top:60px}
   .cta{flex-direction:column;align-items:center;gap:18px}
-  .hero-banner{height:clamp(300px,56vh,460px)}
+  .hero-banner{height:clamp(240px,40vh,340px)}
   .hs-scene{transform:translate(720px,405px) scale(.82) translate(-720px,-405px)}
     .gateway-body{gap:22px;padding-top:28px}
 }
