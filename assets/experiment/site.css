@@ -498,7 +498,7 @@ a.work-card{text-decoration:none}
   .chapter{padding:72px 0}
   .page-intro{padding-top:60px}
   .cta{flex-direction:column;align-items:center;gap:14px}
-  .hero-banner{height:clamp(240px,40vh,340px)}
+  .hero-banner{height:clamp(200px,28vh,250px)}
   .hs-scene{transform:translate(720px,405px) scale(.82) translate(-720px,-405px)}
     .gateway-body{gap:22px;padding-top:28px}
 }
